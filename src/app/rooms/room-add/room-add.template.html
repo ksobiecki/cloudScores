@@ -1,38 +1,45 @@
-<form (ngSubmit)="onSubmit(form)" #form="ngForm">
-  <div>
-    <label class="label" for="id">Id</label>
-    <input
-      type="text"
-      id="id"
-      ngModel
-      name="id"
-      #name="ngModel"
-      placeholder="Enter id"
-    />
-  </div>
-  <div>
-    <label class="label" for="name">Name</label>
-    <input
-      type="text"
-      id="name"
-      ngModel
-      name="name"
-      #name="ngModel"
-      placeholder="Enter room name"
-    />
-  </div>
-  <div>
-    <label class="label" for="author">Author</label>
-    <input
-      type="text"
-      id="author"
-      ngModel
-      name="author"
-      #author="ngModel"
-      placeholder="Enter author name"
-    />
-  </div>
-  <div class="button-container">
-    <button type="submit" class="btn btn-success">ADD + ADD MORE</button>
-  </div>
-</form>
+<div mat-dialog-content class="modal-container">
+  <form (ngSubmit)="onSubmit(form)" #form="ngForm">
+    <mat-form-field appearance="fill">
+      <mat-label class="label" for="id">Id</mat-label>
+      <input
+        matInput
+        type="text"
+        id="id"
+        ngModel
+        name="id"
+        #name="ngModel"
+        placeholder="Enter id"
+      />
+    </mat-form-field>
+    <mat-form-field appearance="fill">
+      <mat-label class="label" for="name">Name</mat-label>
+      <input
+        matInput
+        type="text"
+        id="name"
+        ngModel
+        name="name"
+        #name="ngModel"
+        placeholder="Enter room name"
+      />
+    </mat-form-field>
+    <mat-form-field appearance="fill">
+      <mat-label class="label" for="author">Author</mat-label>
+      <input
+        matInput
+        type="text"
+        id="author"
+        ngModel
+        name="author"
+        #author="ngModel"
+        placeholder="Enter author name"
+      />
+    </mat-form-field>
+    <div class="button-container mat-dialog-actions">
+      <button mat-button mat-dialog-close type="submit" class="btn btn-success">
+        ADD
+      </button>
+    </div>
+  </form>
+</div>

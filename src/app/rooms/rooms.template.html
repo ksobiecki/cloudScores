@@ -1,7 +1,13 @@
-<div>ROOMS</div>
-<ul>
-  <li *ngFor="let room of rooms; let i = index">
-    <app-room [room]=room></app-room>
+<h1 class="rooms-header">Rooms</h1>
+<ul class="rooms-list">
+  <li class="rooms-element col-xs-12 col-sm-6 col-md-4 col-lg-3" *ngFor="let room of rooms">
+    <app-room [room]="room"></app-room>
+  </li>
+  <li class="rooms-element add-room col-xs-12 col-sm-6 col-md-4 col-lg-3">
+    <div>
+      <button (click)="openDialog()">
+        <span>+</span>
+      </button>
+    </div>
   </li>
 </ul>
-<app-room-add></app-room-add>

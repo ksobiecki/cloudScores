@@ -15,6 +15,7 @@ export class RoomAddComponent {
   onSubmit(form: NgForm) {
     const room: Room = form.value;
     this.roomsService.addRoom(room);
+
   }
 
 }
