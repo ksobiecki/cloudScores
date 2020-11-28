@@ -1,23 +1,29 @@
-import { Component } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
+import { Subscription } from 'rxjs';
 import { Room } from './room/room.model';
+import { RoomsService } from './rooms.service';
 
 @Component({
   selector: 'app-rooms',
   templateUrl: './rooms.template.html',
   styleUrls: ['./rooms.less'],
 })
-export class RoomsComponent {
-  rooms: Room[] = [
-    { id: 1111, name: 'Room1', author: 'Krzyś' },
-    { id: 2222, name: 'Room2', author: 'Piter' },
-    { id: 3333, name: 'Room3', author: 'Pyć' },
-  ];
+export class RoomsComponent implements OnInit, OnDestroy {
+  rooms: Room[] = [];
+  private roomsSubscription: Subscription;
 
-  onSubmit(form: NgForm) {
-    const room: Room = form.value;
-    console.log(form.value);
-    this.rooms.push(room);
+  constructor(private roomsService: RoomsService) {}
+
+  ngOnInit(): void {
+    this.rooms = this.roomsService.getRooms();
+    this.roomsSubscription = this.roomsService
+      .getRoomsUpdateListener()
+      .subscribe((rooms: Room[]) => (this.rooms = rooms));
+  }
+
+  ngOnDestroy(): void {
+   this.roomsSubscription.unsubscribe();
   }
 
 }
