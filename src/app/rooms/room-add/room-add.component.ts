@@ -26,6 +26,7 @@ export class RoomAddComponent {
   filteredUsers: Observable<string[]>;
   users: string[] = [];
   allUsers: string[] = ['Krzyś', 'Piter', 'Pyć'];
+  autocompleteUserList: string[] = [...this.allUsers];
 
   @ViewChild('userInput') userInput: ElementRef<HTMLInputElement>;
   @ViewChild('auto') matAutocomplete: MatAutocomplete;
@@ -33,16 +34,21 @@ export class RoomAddComponent {
   constructor(private roomsService: RoomsService) {
     this.filteredUsers = this.userCtrl.valueChanges.pipe(
       startWith(null),
-      map((fruit: string | null) => fruit ? this._filter(fruit) : this.allUsers.slice()));
+      map((user: string | null) => user ? this._filter(user) : null)); // this.autocompleteUserList.slice()));
   }
 
   add(event: MatChipInputEvent): void {
     const input = event.input;
     const value = event.value;
 
-    // Add our fruit
+    // Add our user
     if ((value || '').trim()) {
       this.users.push(value.trim());
+
+      const index = this.autocompleteUserList.indexOf(value);
+      if(index >= 0) {
+        this.autocompleteUserList.splice(index, 1);
+      }
     }
 
     // Reset the input value
@@ -53,8 +59,11 @@ export class RoomAddComponent {
     this.userCtrl.setValue(null);
   }
 
-  remove(fruit: string): void {
-    const index = this.users.indexOf(fruit);
+  remove(user: string): void {
+    const index = this.users.indexOf(user);
+    if(this.allUsers.indexOf(user) >= 0) {
+      this.autocompleteUserList.push(user);
+    }
 
     if (index >= 0) {
       this.users.splice(index, 1);
@@ -65,12 +74,15 @@ export class RoomAddComponent {
     this.users.push(event.option.viewValue);
     this.userInput.nativeElement.value = '';
     this.userCtrl.setValue(null);
+
+    const index = this.autocompleteUserList.indexOf(event.option.value);
+    this.autocompleteUserList.splice(index, 1);
   }
 
   private _filter(value: string): string[] {
     const filterValue = value.toLowerCase();
 
-    return this.allUsers.filter(fruit => fruit.toLowerCase().indexOf(filterValue) === 0);
+    return this.autocompleteUserList.filter(user => user.toLowerCase().indexOf(filterValue) === 0);
   }
 
   onSubmit(form: NgForm) {
