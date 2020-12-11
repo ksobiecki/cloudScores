@@ -11,7 +11,6 @@
         #name="ngModel"
       />
     </mat-form-field>
-    <br>
     <mat-form-field class="input-field" appearance="standard">
       <mat-label for="name">Name</mat-label>
       <input
@@ -23,7 +22,6 @@
         #name="ngModel"
       />
     </mat-form-field>
-    <br>
     <mat-form-field class="input-field" appearance="standard">
       <mat-label for="author">Author</mat-label>
       <input
@@ -37,27 +35,25 @@
     </mat-form-field>
 
 
-    <br>
-    <br>
     <mat-form-field class="chip-list">
       <mat-label for="chipList">Add users</mat-label>
-      <mat-chip-list #chipList aria-label="Fruit selection">
-        <mat-chip
-          *ngFor="let user of users"
-          [selectable]="selectable"
-          [removable]="removable"
-          (removed)="remove(user)">
-          {{user}}
-          <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
-        </mat-chip>
-        <input
-          #userInput
-          [formControl]="userCtrl"
-          [matAutocomplete]="auto"
-          [matChipInputFor]="chipList"
-          [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
-          (matChipInputTokenEnd)="add($event)">
-      </mat-chip-list>
+        <mat-chip-list #chipList aria-label="Fruit selection">
+          <mat-chip
+            *ngFor="let user of users"
+            [selectable]="selectable"
+            [removable]="removable"
+            (removed)="remove(user)">
+            {{user}}
+            <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+          </mat-chip>
+          <input
+            #userInput
+            [formControl]="userCtrl"
+            [matAutocomplete]="auto"
+            [matChipInputFor]="chipList"
+            [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+            (matChipInputTokenEnd)="add($event)">
+        </mat-chip-list>
       <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selected($event)">
         <mat-option *ngFor="let user of filteredUsers | async" [value]="user">
           {{user}}
