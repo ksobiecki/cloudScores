@@ -29,7 +29,6 @@ export class RoomsComponent implements OnInit, OnDestroy {
 
   openDialog() {
     const dialogRef = this.dialog.open(RoomAddComponent);
-
   }
 
 }

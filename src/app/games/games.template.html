@@ -1,7 +1,17 @@
-<a routerLink="/rooms">Back to Rooms</a>
-<div>GAMES</div>
-<ul>
-  <li *ngFor="let game of games; let i = index">
-    <app-game></app-game>
+<a class="callback" routerLink="/rooms">Back to Rooms</a>
+<h1 class="games-header">{{currentRoom.name}}</h1>
+<ul class="games-list">
+  <li
+    class="games-element col-xs-12 col-sm-6 col-md-4 col-lg-3"
+    *ngFor="let game of games"
+  >
+    <app-game [game]="game"></app-game>
+  </li>
+  <li class="games-element add-game col-xs-12 col-sm-6 col-md-4 col-lg-3">
+    <div>
+      <!-- <button (click)="openDialog()"> -->
+      <span>+</span>
+      <!-- </button> -->
+    </div>
   </li>
 </ul>
