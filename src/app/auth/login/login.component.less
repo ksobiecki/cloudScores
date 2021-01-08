@@ -6,6 +6,14 @@
   align-items: center;
 }
 
+.spinner-container {
+  height: 50vh;
+  width: 400px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .card {
   background-color: white;
   max-width: 500px;
@@ -21,10 +29,10 @@
 
 mat-form-field {
   width: 100%;
-}
-
-.passwordInput {
   margin-top: 2ch;
+  mat-label, input {
+    font-size: small;
+  }
 }
 
 mat-spinner {

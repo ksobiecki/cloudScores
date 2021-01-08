@@ -14,9 +14,10 @@ import { AppRoutingModule } from './app-routing.module';
 import { GamesComponent } from './games/games.component';
 import { GameComponent } from './games/game/game.component';
 import { RoomAddComponent } from './rooms/room-add/room-add.component';
-import {LoginComponent} from './auth/login/login.component';
-import {MatCardModule} from '@angular/material/card';
-import {SignupComponent} from './auth/signup/signup.component';
+import { LoginComponent } from './auth/login/login.component';
+import { MatCardModule } from '@angular/material/card';
+import { SignupComponent } from './auth/signup/signup.component';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 @NgModule({
   declarations: [
@@ -39,7 +40,8 @@ import {SignupComponent} from './auth/signup/signup.component';
     MatButtonModule,
     MatDialogModule,
     MatFormFieldModule,
-    MatCardModule
+    MatCardModule,
+    MatProgressSpinnerModule
   ],
   providers: [],
   bootstrap: [AppComponent]

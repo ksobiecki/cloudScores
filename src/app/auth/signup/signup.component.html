@@ -1,8 +1,10 @@
 <div class="container">
   <div class="card">
-    <h2 class="title">Cloud Scores</h2>
-    <h5 class="header">Let's start gaming!</h5>
-    <mat-spinner *ngIf="isLoading"></mat-spinner>
+    <h2 *ngIf="!isLoading" class="title">Cloud Scores</h2>
+    <h5 *ngIf="!isLoading" class="header">Let's start gaming!</h5>
+    <div *ngIf="isLoading" class="spinner-container">
+      <mat-progress-spinner mode="indeterminate"></mat-progress-spinner>
+    </div>
     <form (submit)="onSignup(signupForm)" #signupForm="ngForm" *ngIf="!isLoading">
       <mat-form-field>
         <mat-label>First Name</mat-label>
@@ -26,7 +28,7 @@
       </mat-form-field>
       <button mat-raised-button color="accent" type="submit">Sign Up</button>
     </form>
-    <div class="inline">
+    <div *ngIf="!isLoading" class="inline">
       <h5>Already have an account?</h5>
       <a routerLink="/login">Log in!</a>
     </div>

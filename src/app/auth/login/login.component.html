@@ -1,15 +1,19 @@
 <div class="container">
   <div class="card">
-    <h2 class="title">Cloud Scores</h2>
-    <h5 class="header">Let's start gaming!</h5>
-    <mat-spinner *ngIf="isLoading"></mat-spinner>
+    <h2 *ngIf="!isLoading" class="title">Cloud Scores</h2>
+    <h5 *ngIf="!isLoading" class="header">Let's start gaming!</h5>
+    <div *ngIf="isLoading" class="spinner-container">
+      <mat-progress-spinner mode="indeterminate"></mat-progress-spinner>
+    </div>
     <form (submit)="onLogin(loginForm)" #loginForm="ngForm" *ngIf="!isLoading">
       <mat-form-field>
-        <input matInput name="email" ngModel type="email" placeholder="E-Mail" #emailInput="ngModel" required email>
+        <mat-label>E-mail</mat-label>
+        <input matInput name="email" ngModel #emailInput="ngModel" type="email" required email>
         <mat-error *ngIf="emailInput.invalid">Please enter a valid email</mat-error>
       </mat-form-field>
-      <mat-form-field class="passwordInput">
-        <input type="password" name="password" ngModel matInput placeholder="Password" #passwordInput="ngModel" required>
+      <mat-form-field>
+        <mat-label>Password</mat-label>
+        <input matInput name="password" ngModel #passwordInput="ngModel" type="password" required>
         <mat-error *ngIf="passwordInput.invalid">Please enter a valid password</mat-error>
       </mat-form-field>
       <div id="forgotPassword">
@@ -17,9 +21,9 @@
       </div>
       <button mat-raised-button color="accent" type="submit">Login</button>
     </form>
-    <div class="inline">
+    <div *ngIf="!isLoading" class="inline">
       <h5>Don't have an account?</h5>
-      <a>Sign up!</a>
+      <a routerLink="/signup">Sign up!</a>
     </div>
   </div>
 </div>
