@@ -41,22 +41,24 @@ export class RoomAddComponent {
     const input = event.input;
     const value = event.value;
 
-    // Add our user
+    // User chose some username from list or wrote something
     if ((value || '').trim()) {
-      this.users.push(value.trim());
-
+      // In case user wrote something, check if it maches any username
+      // that hasn't been chosen yet
       const index = this.autocompleteUserList.indexOf(value);
       if(index >= 0) {
+        // Valid username - add them
+        this.users.push(value.trim());
+        // Remove added usenrma from autocomplete list
         this.autocompleteUserList.splice(index, 1);
+        // Clear input
+        if (input) {
+          input.value = '';
+        }
+        // Hide autocomplete list
+        this.userCtrl.setValue(null);
       }
     }
-
-    // Reset the input value
-    if (input) {
-      input.value = '';
-    }
-
-    this.userCtrl.setValue(null);
   }
 
   remove(user: string): void {
@@ -71,8 +73,11 @@ export class RoomAddComponent {
   }
 
   selected(event: MatAutocompleteSelectedEvent): void {
+    // Add user chosen from list
     this.users.push(event.option.viewValue);
+    // Clear input
     this.userInput.nativeElement.value = '';
+    // Hide autocomplete list
     this.userCtrl.setValue(null);
 
     const index = this.autocompleteUserList.indexOf(event.option.value);
@@ -82,10 +87,11 @@ export class RoomAddComponent {
   private _filter(value: string): string[] {
     const filterValue = value.toLowerCase();
 
-    return this.autocompleteUserList.filter(user => user.toLowerCase().indexOf(filterValue) === 0);
+    return this.autocompleteUserList.filter(
+      user => (user.toLowerCase().indexOf(filterValue)) === 0 && (user.length - filterValue.length <= 3));
   }
 
-  onSubmit(form: NgForm) {
+  onSubmit(form: NgForm): void {
     const room: Room = form.value;
     this.roomsService.addRoom(room);
 
