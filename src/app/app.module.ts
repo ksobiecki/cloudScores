@@ -16,6 +16,7 @@ import { GameComponent } from './games/game/game.component';
 import { RoomAddComponent } from './rooms/room-add/room-add.component';
 import {LoginComponent} from './auth/login/login.component';
 import {MatCardModule} from '@angular/material/card';
+import {SignupComponent} from './auth/signup/signup.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,8 @@ import {MatCardModule} from '@angular/material/card';
     GamesComponent,
     GameComponent,
     RoomAddComponent,
-    LoginComponent
+    LoginComponent,
+    SignupComponent
   ],
   imports: [
     BrowserModule,
