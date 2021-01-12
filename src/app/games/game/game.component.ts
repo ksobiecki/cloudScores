@@ -1,4 +1,5 @@
 import { Component, Input } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Game } from './game.model';
 
 @Component ({
@@ -9,5 +10,11 @@ import { Game } from './game.model';
 export class GameComponent {
 
   @Input() game: Game;
+
+  constructor(private router: Router, private route: ActivatedRoute) {}
+
+  onGameClick() {
+      this.router.navigate([this.game.id], {relativeTo: this.route} )
+  }
 
 }

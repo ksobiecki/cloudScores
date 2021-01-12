@@ -14,6 +14,8 @@ import { AppRoutingModule } from './app-routing.module';
 import { GamesComponent } from './games/games.component';
 import { GameComponent } from './games/game/game.component';
 import { RoomAddComponent } from './rooms/room-add/room-add.component';
+import { StatisticsComponent } from './statistics/statistics.component';
+import { GameAddComponent } from './games/game-add/game-add.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +24,9 @@ import { RoomAddComponent } from './rooms/room-add/room-add.component';
     RoomComponent,
     GamesComponent,
     GameComponent,
-    RoomAddComponent
+    RoomAddComponent,
+    StatisticsComponent,
+    GameAddComponent
   ],
   imports: [
     BrowserModule,

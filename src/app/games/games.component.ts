@@ -1,15 +1,20 @@
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
+import { ActivatedRoute, Router } from '@angular/router';
+import { Subscription } from 'rxjs';
 import { Room } from '../rooms/room/room.model';
 import { RoomsService } from '../rooms/rooms.service';
+import { GameAddComponent } from './game-add/game-add.component';
+import { Game } from './game/game.model';
 
 @Component({
   selector: 'app-games',
   templateUrl: './games.template.html',
   styleUrls: ['./games.less'],
 })
-export class GamesComponent implements OnInit {
+export class GamesComponent implements OnInit, OnDestroy {
   currentRoom: Room;
+  private gamesSubscription: Subscription;
   games = [
     {
       id: 1,
@@ -29,10 +34,27 @@ export class GamesComponent implements OnInit {
     },
   ];
 
-  constructor(private roomsService: RoomsService, private route: ActivatedRoute) {}
+  constructor(
+    private roomsService: RoomsService,
+    private route: ActivatedRoute,
+    public dialog: MatDialog
+  ) {}
 
   ngOnInit(): void {
-    this.currentRoom = this.roomsService.getRoom(this.route.snapshot.params['name']);
+    this.currentRoom = this.roomsService.getRoom(
+      this.route.snapshot.params['name']
+    );
     this.games = this.roomsService.getGames(this.route.snapshot.params['name']);
+    this.gamesSubscription = this.roomsService
+      .getGamesUpdateListener()
+      .subscribe((games: Game[]) => (this.games = games));
+  }
+
+  ngOnDestroy(): void {
+    this.gamesSubscription.unsubscribe();
+  }
+
+  openDialog() {
+    const dialogRef = this.dialog.open(GameAddComponent);
   }
 }

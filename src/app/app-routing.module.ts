@@ -1,14 +1,14 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { GamesComponent } from './games/games.component';
-import { GameComponent } from './games/game/game.component';
 import { RoomsComponent } from './rooms/rooms.component';
+import { StatisticsComponent } from './statistics/statistics.component';
 
 const appRoutes: Routes = [
   { path: '', redirectTo: '/rooms', pathMatch: 'full' },
   { path: 'rooms', component: RoomsComponent },
   { path: 'room/:name/games', component: GamesComponent },
-  { path: 'room/:name/games/game:id', component: GameComponent },
+  { path: 'room/:name/games/:id', component: StatisticsComponent },
 ];
 
 @NgModule({
