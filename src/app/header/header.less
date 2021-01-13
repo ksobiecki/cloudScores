@@ -1,43 +1,50 @@
 .header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    height: 10vh;
-    background-color: white;
-    padding: 0 40px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 10vh;
+  background-color: white;
+  padding: 0 40px;
+
+  -webkit-box-shadow: 0px 0px 9px 3px rgba(41, 41, 41, 0.25);
+  -moz-box-shadow: 0px 0px 9px 3px rgba(41, 41, 41, 0.25);
+  box-shadow: 0px 0px 9px 3px rgba(41, 41, 41, 0.25);
 }
 
 .title {
+  display: flex;
+
+  a > div {
     display: flex;
+    align-items: center;
 
-    a > div {
-        display: flex;
-        align-items: center;
-
-        > span {
-            font-size: 30px;
-        }
+    > span {
+      font-size: 30px;
     }
+  }
+
+  a:hover {
+    text-decoration: none;
+  }
 }
 
 .logo {
-    padding-left: 10px;
-    height: 50px;
+  padding-left: 10px;
+  height: 50px;
 }
 
 .info {
-    display: flex;
-    align-items: center;
+  display: flex;
+  align-items: center;
+  font-size: 25px;
+
+  i {
     font-size: 25px;
+  }
 
-    i {
-        font-size: 25px;
-    }
-
-    a {
-        font-size: 25px;
-        padding-left: 20px;
-        text-decoration: underline;
-    }
+  a {
+    font-size: 25px;
+    padding-left: 20px;
+    text-decoration: underline;
+  }
 }
-
