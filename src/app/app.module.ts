@@ -16,10 +16,12 @@ import { GameComponent } from './games/game/game.component';
 import { RoomAddComponent } from './rooms/room-add/room-add.component';
 import { StatisticsComponent } from './statistics/statistics.component';
 import { GameAddComponent } from './games/game-add/game-add.component';
+import { HeaderComponent } from './header/header.component';
 
 @NgModule({
   declarations: [
     AppComponent,
+    HeaderComponent,
     RoomsComponent,
     RoomComponent,
     GamesComponent,
