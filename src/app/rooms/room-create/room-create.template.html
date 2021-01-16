@@ -1,0 +1,72 @@
+<div mat-dialog-content class="modal-container">
+  <form (ngSubmit)="onSubmit(form)" #form="ngForm">
+    <mat-form-field class="input-field" appearance="standard">
+      <mat-label for="id">Id</mat-label>
+      <input
+        matInput
+        type="text"
+        id="id"
+        ngModel
+        name="id"
+        #name="ngModel"
+      />
+    </mat-form-field>
+    <mat-form-field class="input-field" appearance="standard">
+      <mat-label for="name">Name</mat-label>
+      <input
+        matInput
+        type="text"
+        id="name"
+        ngModel
+        name="name"
+        #name="ngModel"
+      />
+    </mat-form-field>
+    <mat-form-field class="input-field" appearance="standard">
+      <mat-label for="author">Author</mat-label>
+      <input
+        matInput
+        type="text"
+        id="author"
+        ngModel
+        name="author"
+        #author="ngModel"
+      />
+    </mat-form-field>
+
+
+    <mat-form-field class="chip-list">
+      <mat-label for="chipList">Add users</mat-label>
+        <mat-chip-list #chipList aria-label="User selection">
+          <mat-chip
+            *ngFor="let user of users"
+            [selectable]="selectable"
+            [removable]="removable"
+            (removed)="remove(user)">
+            {{user}}
+            <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+          </mat-chip>
+          <input
+            #userInput
+            [formControl]="userCtrl"
+            [matAutocomplete]="auto"
+            [matChipInputFor]="chipList"
+            [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+            (matChipInputTokenEnd)="add($event)">
+        </mat-chip-list>
+      <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selected($event)">
+        <mat-option *ngFor="let user of filteredUsers | async" [value]="user">
+          {{user}}
+        </mat-option>
+      </mat-autocomplete>
+    </mat-form-field>
+
+
+
+    <div class="button-container mat-dialog-actions">
+      <button mat-button mat-dialog-close type="submit" class="btn btn-success">
+        CREATE
+      </button>
+    </div>
+  </form>
+</div>
