@@ -3,6 +3,7 @@ import { RoomsService } from '../rooms.service';
 
 import {RoomCreateComponent} from '../room-create/room-create.component';
 import {MatDialog} from '@angular/material/dialog';
+import {RoomJoinComponent} from '../room-join/room-join.component';
 
 @Component({
   selector: 'app-room-add',
@@ -15,6 +16,10 @@ export class RoomAddComponent {
 
   openCreateRoom(): void {
     const dialogRef = this.dialog.open(RoomCreateComponent);
+  }
+
+  openJoinRoom(): void {
+    const dialogRef = this.dialog.open(RoomJoinComponent);
   }
 
 }

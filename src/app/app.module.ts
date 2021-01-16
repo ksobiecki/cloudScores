@@ -22,6 +22,7 @@ import { MatCardModule } from '@angular/material/card';
 import { SignupComponent } from './auth/signup/signup.component';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import {RoomCreateComponent} from './rooms/room-create/room-create.component';
+import {RoomJoinComponent} from './rooms/room-join/room-join.component';
 
 @NgModule({
   declarations: [
@@ -32,6 +33,7 @@ import {RoomCreateComponent} from './rooms/room-create/room-create.component';
     GameComponent,
     RoomAddComponent,
     RoomCreateComponent,
+    RoomJoinComponent,
     LoginComponent,
     SignupComponent
   ],

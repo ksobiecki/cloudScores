@@ -1,0 +1,20 @@
+<div mat-dialog-content class="modal-container">
+  <form (ngSubmit)="onSubmit(form)" #form="ngForm">
+    <mat-form-field class="input-field" appearance="standard">
+      <mat-label for="id">Id</mat-label>
+      <input
+        matInput
+        type="text"
+        id="id"
+        ngModel
+        name="id"
+        #name="ngModel"
+      />
+    </mat-form-field>
+    <div class="button-container mat-dialog-actions">
+      <button mat-button mat-dialog-close type="submit" class="btn btn-success">
+        JOIN
+      </button>
+    </div>
+  </form>
+</div>
