@@ -4,6 +4,7 @@ import { Room } from './room/room.model';
 import { RoomsService } from './rooms.service';
 import { MatDialog } from '@angular/material/dialog';
 import { RoomAddComponent } from './room-add/room-add.component';
+import {RoomCreateComponent} from './room-create/room-create.component';
 
 @Component({
   selector: 'app-rooms',
@@ -27,7 +28,7 @@ export class RoomsComponent implements OnInit, OnDestroy {
    this.roomsSubscription.unsubscribe();
   }
 
-  openDialog() {
+  openDialog(): void {
     const dialogRef = this.dialog.open(RoomAddComponent);
   }
 
