@@ -17,6 +17,7 @@ import { RoomAddComponent } from './rooms/room-add/room-add.component';
 import { StatisticsComponent } from './statistics/statistics.component';
 import { GameAddComponent } from './games/game-add/game-add.component';
 import { HeaderComponent } from './header/header.component';
+import { FilterPipe } from '../shared/pipes/filter.pipe';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,8 @@ import { HeaderComponent } from './header/header.component';
     GameComponent,
     RoomAddComponent,
     StatisticsComponent,
-    GameAddComponent
+    GameAddComponent,
+    FilterPipe
   ],
   imports: [
     BrowserModule,
@@ -38,7 +40,7 @@ import { HeaderComponent } from './header/header.component';
     MatInputModule,
     MatButtonModule,
     MatDialogModule,
-    MatFormFieldModule
+    MatFormFieldModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

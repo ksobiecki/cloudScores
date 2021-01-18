@@ -13,6 +13,7 @@ import { RoomAddComponent } from './room-add/room-add.component';
 export class RoomsComponent implements OnInit, OnDestroy {
   rooms: Room[] = [];
   private roomsSubscription: Subscription;
+  searchText: string = '';
 
   constructor(private roomsService: RoomsService, public dialog: MatDialog) {}
 
