@@ -17,7 +17,7 @@ export class RoomsComponent implements OnInit, OnDestroy {
   constructor(private roomsService: RoomsService, public dialog: MatDialog) {}
 
   ngOnInit(): void {
-    this.rooms = this.roomsService.getRooms();
+    this.roomsService.getRooms();
     this.roomsSubscription = this.roomsService
       .getRoomsUpdateListener()
       .subscribe((rooms: Room[]) => (this.rooms = rooms));
