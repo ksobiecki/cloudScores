@@ -3,7 +3,38 @@
 .rooms-header {
   text-align: center;
   font-size: 6rem;
-  margin: 6rem 0 2rem;
+  line-height: 6rem;
+  margin: 12rem 0 3rem;
+}
+
+.search-container {
+  position: relative;
+  width: 500px;
+  margin: 0 auto;
+}
+
+.search-container-input {
+  height: 40px;
+  width: 500px;
+  border-radius: 10px;
+  border: none;
+  padding-left: 20px;
+  font-size: 2rem;
+}
+
+.search-container-input:active,
+.search-container-input:focus {
+  outline: none;
+}
+
+.search-icon {
+  position: absolute;
+  top: 12px;
+  right: 20px;
+
+  > fa-icon {
+    font-size: 16px;
+  }
 }
 
 .rooms-list {

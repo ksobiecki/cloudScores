@@ -22,7 +22,7 @@ import { LoginComponent } from './auth/login/login.component';
 import { MatCardModule } from '@angular/material/card';
 import { SignupComponent } from './auth/signup/signup.component';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
-
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 @NgModule({
   declarations: [
@@ -50,7 +50,8 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
     MatDialogModule,
     MatFormFieldModule,
     MatCardModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    FontAwesomeModule
   ],
   providers: [],
   bootstrap: [AppComponent]

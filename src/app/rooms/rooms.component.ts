@@ -4,6 +4,7 @@ import { Room } from './room/room.model';
 import { RoomsService } from './rooms.service';
 import { MatDialog } from '@angular/material/dialog';
 import { RoomAddComponent } from './room-add/room-add.component';
+import { faSearch } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-rooms',
@@ -11,6 +12,8 @@ import { RoomAddComponent } from './room-add/room-add.component';
   styleUrls: ['./rooms.less'],
 })
 export class RoomsComponent implements OnInit, OnDestroy {
+  faSearch = faSearch;
+
   rooms: Room[] = [];
   private roomsSubscription: Subscription;
   searchText: string = '';
