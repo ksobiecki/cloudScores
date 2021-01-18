@@ -14,19 +14,28 @@ import { AppRoutingModule } from './app-routing.module';
 import { GamesComponent } from './games/games.component';
 import { GameComponent } from './games/game/game.component';
 import { RoomAddComponent } from './rooms/room-add/room-add.component';
+import { StatisticsComponent } from './statistics/statistics.component';
+import { GameAddComponent } from './games/game-add/game-add.component';
+import { HeaderComponent } from './header/header.component';
+import { FilterPipe } from '../shared/pipes/filter.pipe';
 import { LoginComponent } from './auth/login/login.component';
 import { MatCardModule } from '@angular/material/card';
 import { SignupComponent } from './auth/signup/signup.component';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
+
 @NgModule({
   declarations: [
     AppComponent,
+    HeaderComponent,
     RoomsComponent,
     RoomComponent,
     GamesComponent,
     GameComponent,
     RoomAddComponent,
+    StatisticsComponent,
+    GameAddComponent,
+    FilterPipe
     LoginComponent,
     SignupComponent
   ],

@@ -1,10 +1,12 @@
 import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs';
+import { Game } from '../games/game/game.model';
 import { Room } from './room/room.model';
 
 @Injectable({ providedIn: 'root' })
 export class RoomsService {
   private roomsUpdated = new Subject<Room[]>();
+  private gamesUpdated = new Subject<Game[]>();
   rooms: Room[] = [
     {
       id: 1,
@@ -46,5 +48,20 @@ export class RoomsService {
     for (let room of this.rooms) {
       if (room.name === name) return [...room.games];
     }
+  }
+
+  addGame(currentRoom: Room, game: Game) {
+    for (let room of this.rooms) {
+      if( room === currentRoom) {
+        room.games.push(game);
+        console.log(room.games.length);
+        this.gamesUpdated.next([... room.games]);
+
+      }
+    }
+  }
+
+  getGamesUpdateListener() {
+    return this.gamesUpdated.asObservable();
   }
 }
