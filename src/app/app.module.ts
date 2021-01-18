@@ -35,7 +35,7 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
     RoomAddComponent,
     StatisticsComponent,
     GameAddComponent,
-    FilterPipe
+    FilterPipe,
     LoginComponent,
     SignupComponent
   ],

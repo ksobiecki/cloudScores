@@ -11,7 +11,6 @@ const appRoutes: Routes = [
   { path: 'rooms', component: RoomsComponent },
   { path: 'room/:name/games', component: GamesComponent },
   { path: 'room/:name/games/:id', component: StatisticsComponent },
-  { path: 'room/:name/games/game:id', component: GameComponent },
   { path: 'login', component: LoginComponent },
   { path: 'signup', component: SignupComponent },
 ];
