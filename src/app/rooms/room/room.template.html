@@ -1,6 +1,9 @@
 <a [routerLink]="['/room', room.name, 'games']">
   <h2>{{room.name}}</h2>
-  <span>by {{room.author}}</span>
+  <div>
+    <span>by {{room.author}}</span>
+  </div>
+  <img src="{{room.imgSrc}}" alt="Room Image">
 </a>
 
 

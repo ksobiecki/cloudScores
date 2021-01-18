@@ -12,6 +12,7 @@ export class RoomsService {
       id: 1,
       name: 'Room1',
       author: 'Krzyś',
+      imgSrc: '../../assets/img/avatar1.png',
       games: [
         {
           id: 1,
@@ -20,9 +21,10 @@ export class RoomsService {
             'https://files.rebel.pl/products/100/1437/_107584/gra-imprezowa-mdr-gierki-malzenskie-kalambury-pudelko-1200x900-ffffff.png',
         },
       ],
+      players: ['Krzyś'],
     },
-    { id: 2, name: 'Room2', author: 'Piter', games: [] },
-    { id: 3, name: 'Room3', author: 'Pyć', games: [] },
+    { id: 2, name: 'Room2', author: 'Piter', imgSrc: '../../assets/img/avatar11.png', games: [], players: [] },
+    { id: 3, name: 'Room3', author: 'Pyć', imgSrc: '../../assets/img/avatar13.png', games: [], players: [] },
   ];
 
   getRoom(name: string) {
@@ -52,11 +54,10 @@ export class RoomsService {
 
   addGame(currentRoom: Room, game: Game) {
     for (let room of this.rooms) {
-      if( room === currentRoom) {
+      if (room === currentRoom) {
         room.games.push(game);
         console.log(room.games.length);
-        this.gamesUpdated.next([... room.games]);
-
+        this.gamesUpdated.next([...room.games]);
       }
     }
   }
