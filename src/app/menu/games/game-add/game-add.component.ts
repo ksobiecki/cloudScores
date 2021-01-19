@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { Room } from 'src/app/rooms/room/room.model';
-import { RoomsService } from 'src/app/rooms/rooms.service';
+import { RoomsService } from 'src/shared/services/rooms.service';
 import { Game } from '../../../../shared/models/game.model';
 
 @Component({

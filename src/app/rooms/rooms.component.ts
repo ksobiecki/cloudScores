@@ -1,7 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { Room } from './room/room.model';
-import { RoomsService } from './rooms.service';
+import { RoomsService } from '../../shared/services/rooms.service';
 import { MatDialog } from '@angular/material/dialog';
 import { RoomAddComponent } from './room-add/room-add.component';
 import { faSearch } from '@fortawesome/free-solid-svg-icons';

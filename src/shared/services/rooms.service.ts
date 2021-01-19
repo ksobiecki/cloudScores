@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs';
-import { Game } from '../games/game/game.model';
-import { Room } from './room/room.model';
+import { Game } from '../models/game.model';
+import { Room } from '../../app/rooms/room/room.model';
 
 @Injectable({ providedIn: 'root' })
 export class RoomsService {

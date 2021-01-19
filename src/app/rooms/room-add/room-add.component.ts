@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Room } from '../room/room.model';
-import { RoomsService } from '../rooms.service';
+import { RoomsService } from '../../../shared/services/rooms.service';
 
 @Component({
   selector: 'app-room-add',

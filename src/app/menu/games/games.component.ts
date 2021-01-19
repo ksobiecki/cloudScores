@@ -3,7 +3,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { Room } from '../../rooms/room/room.model';
-import { RoomsService } from '../../rooms/rooms.service';
+import { RoomsService } from '../../../shared/services/rooms.service';
 import { GameAddComponent } from './game-add/game-add.component';
 import { Game } from '../../../shared/models/game.model';
 
