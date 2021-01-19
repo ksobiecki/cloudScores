@@ -1,6 +1,9 @@
 <div mat-dialog-content class="modal-container">
+  <div class="close-button-container">
+    <button class="close-button" (click)="closeModal()">X</button>
+  </div>
   <form (ngSubmit)="onSubmit(form)" #form="ngForm">
-    <mat-form-field class="input-field" appearance="standard">
+    <!-- <mat-form-field class="input-field" appearance="standard">
       <mat-label for="id">Id</mat-label>
       <input
         matInput
@@ -10,7 +13,7 @@
         name="id"
         #name="ngModel"
       />
-    </mat-form-field>
+    </mat-form-field> -->
     <mat-form-field class="input-field" appearance="standard">
       <mat-label for="name">Name</mat-label>
       <input
@@ -22,7 +25,7 @@
         #name="ngModel"
       />
     </mat-form-field>
-    <mat-form-field class="input-field" appearance="standard">
+    <!-- <mat-form-field class="input-field" appearance="standard">
       <mat-label for="author">Author</mat-label>
       <input
         matInput
@@ -59,12 +62,12 @@
           {{user}}
         </mat-option>
       </mat-autocomplete>
-    </mat-form-field>
+    </mat-form-field> -->
 
 
 
     <div class="button-container mat-dialog-actions">
-      <button mat-button mat-dialog-close type="submit" class="btn btn-success">
+      <button mat-button mat-dialog-close type="submit" class="btn btn-success submit-button">
         CREATE
       </button>
     </div>

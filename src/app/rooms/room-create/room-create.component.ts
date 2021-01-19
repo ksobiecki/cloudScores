@@ -10,6 +10,8 @@ import {MatAutocompleteSelectedEvent, MatAutocomplete} from '@angular/material/a
 import {MatChipInputEvent} from '@angular/material/chips';
 import {Observable} from 'rxjs';
 import {map, startWith} from 'rxjs/operators';
+import {$} from 'protractor';
+import {MatDialog, MatDialogRef} from '@angular/material/dialog';
 
 @Component({
   selector: 'app-room-create',
@@ -18,7 +20,7 @@ import {map, startWith} from 'rxjs/operators';
 })
 export class RoomCreateComponent {
 
-  visible = true;
+  isHidden = true;
   selectable = true;
   removable = true;
   separatorKeysCodes: number[] = [ENTER, COMMA];
@@ -31,7 +33,7 @@ export class RoomCreateComponent {
   @ViewChild('userInput') userInput: ElementRef<HTMLInputElement>;
   @ViewChild('auto') matAutocomplete: MatAutocomplete;
 
-  constructor(private roomsService: RoomsService) {
+  constructor(private dialog: MatDialog, private roomsService: RoomsService) {
     this.filteredUsers = this.userCtrl.valueChanges.pipe(
       startWith(null),
       map((user: string | null) => user ? this._filter(user) : null)); // this.autocompleteUserList.slice()));
@@ -95,6 +97,10 @@ export class RoomCreateComponent {
     const room: Room = form.value;
     this.roomsService.addRoom(room);
 
+  }
+
+  closeModal(): void {
+    const thisDialogRef = this.dialog.closeAll();
   }
 
 }

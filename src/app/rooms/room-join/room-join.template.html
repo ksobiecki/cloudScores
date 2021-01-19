@@ -1,4 +1,7 @@
 <div mat-dialog-content class="modal-container">
+  <div class="close-button-container">
+    <button class="close-button" (click)="closeModal()">X</button>
+  </div>
   <form (ngSubmit)="onSubmit(form)" #form="ngForm">
     <mat-form-field class="input-field" appearance="standard">
       <mat-label for="id">Id</mat-label>
@@ -12,9 +15,10 @@
       />
     </mat-form-field>
     <div class="button-container mat-dialog-actions">
-      <button mat-button mat-dialog-close type="submit" class="btn btn-success">
+      <button mat-button mat-dialog-close type="submit" class="btn btn-success submit-button">
         JOIN
       </button>
     </div>
   </form>
+
 </div>

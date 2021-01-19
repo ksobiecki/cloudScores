@@ -15,11 +15,17 @@ export class RoomAddComponent {
   constructor(private roomsService: RoomsService, public dialog: MatDialog) {}
 
   openCreateRoom(): void {
+    const thisDialogRef = this.dialog.closeAll();
     const dialogRef = this.dialog.open(RoomCreateComponent);
   }
 
   openJoinRoom(): void {
+    const thisDialogRef = this.dialog.closeAll();
     const dialogRef = this.dialog.open(RoomJoinComponent);
+  }
+
+  closeModal(): void {
+    const thisDialogRef = this.dialog.closeAll();
   }
 
 }
