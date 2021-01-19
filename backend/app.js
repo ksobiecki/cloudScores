@@ -26,22 +26,23 @@ app.get('/api/rooms',(req, res, next)=>{
 
   const rooms=[
     {
-      id: 'room1',
-      name: 'room1',
-      author: 'room1',
-      games:[
+      id: 1,
+      name: 'Room1',
+      author: 'Krzyś',
+      imgSrc: '../../assets/img/avatar1.png',
+      games: [
         {
-          id: 'sth',
-          name: 'sth',
-          imgUrl: 'sth'
+          id: 1,
+          name: 'Kalambury',
+          imgUrl:
+            'https://files.rebel.pl/products/100/1437/_107584/gra-imprezowa-mdr-gierki-malzenskie-kalambury-pudelko-1200x900-ffffff.png',
         },
-        {
-          id: 'sth2',
-          name: 'sth2',
-          imgUrl: 'sth2'
-        }
-    ]
-    }
+      ],
+      players: ['Krzyś'],
+    },
+    { id: 2, name: 'Room2', author: 'Piter', imgSrc: '../../assets/img/avatar11.png', games: [], players: [] },
+    { id: 3, name: 'Room3', author: 'Pyć', imgSrc: '../../assets/img/avatar13.png', games: [], players: [] }
+
   ]
   res.status(200).json({
     message: 'testowe posty',

@@ -8,25 +8,7 @@ import {HttpClient} from '@angular/common/http';
 export class RoomsService {
   private roomsUpdated = new Subject<Room[]>();
   private gamesUpdated = new Subject<Game[]>();
-  rooms: Room[] = [
-    {
-      id: 1,
-      name: 'Room1',
-      author: 'Krzyś',
-      imgSrc: '../../assets/img/avatar1.png',
-      games: [
-        {
-          id: 1,
-          name: 'Kalambury',
-          imgUrl:
-            'https://files.rebel.pl/products/100/1437/_107584/gra-imprezowa-mdr-gierki-malzenskie-kalambury-pudelko-1200x900-ffffff.png',
-        },
-      ],
-      players: ['Krzyś'],
-    },
-    { id: 2, name: 'Room2', author: 'Piter', imgSrc: '../../assets/img/avatar11.png', games: [], players: [] },
-    { id: 3, name: 'Room3', author: 'Pyć', imgSrc: '../../assets/img/avatar13.png', games: [], players: [] },
-  ];
+  rooms: Room[];
 
   constructor(private http:HttpClient){}
   getRooms(){
