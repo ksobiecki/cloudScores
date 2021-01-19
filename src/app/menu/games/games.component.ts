@@ -2,7 +2,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
-import { Room } from '../../rooms/room/room.model';
+import { Room } from '../../../shared/models/room.model';
 import { RoomsService } from '../../../shared/services/rooms.service';
 import { GameAddComponent } from './game-add/game-add.component';
 import { Game } from '../../../shared/models/game.model';

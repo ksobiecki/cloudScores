@@ -1,5 +1,5 @@
 import { Component, Input } from "@angular/core";
-import { Room } from './room.model';
+import { Room } from '../../../shared/models/room.model';
 
 @Component({
   selector: 'app-room',

@@ -1,4 +1,4 @@
-import { Game } from 'src/app/games/game/game.model';
+import { Game } from "./game.model";
 
 export interface Room {
   id: number;

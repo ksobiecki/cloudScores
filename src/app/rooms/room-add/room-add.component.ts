@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { Room } from '../room/room.model';
+import { Room } from '../../../shared/models/room.model';
 import { RoomsService } from '../../../shared/services/rooms.service';
 
 @Component({
@@ -15,7 +15,6 @@ export class RoomAddComponent {
   onSubmit(form: NgForm) {
     const room: Room = form.value;
     this.roomsService.addRoom(room);
-
   }
 
 }

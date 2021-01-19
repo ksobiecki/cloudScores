@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs';
 import { Game } from '../models/game.model';
-import { Room } from '../../app/rooms/room/room.model';
+import { Room } from '../models/room.model';
 
 @Injectable({ providedIn: 'root' })
 export class RoomsService {
@@ -42,6 +42,7 @@ export class RoomsService {
   }
 
   addRoom(room: Room) {
+    console.log(room);
     this.rooms.push(room);
     this.roomsUpdated.next([...this.rooms]);
   }
