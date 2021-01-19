@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Game } from './game.model';
+import { Game } from '../../../../shared/models/game.model';
 
 @Component ({
   selector: 'app-game',

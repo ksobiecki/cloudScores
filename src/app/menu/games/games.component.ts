@@ -2,10 +2,10 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
-import { Room } from '../rooms/room/room.model';
-import { RoomsService } from '../rooms/rooms.service';
+import { Room } from '../../rooms/room/room.model';
+import { RoomsService } from '../../rooms/rooms.service';
 import { GameAddComponent } from './game-add/game-add.component';
-import { Game } from './game/game.model';
+import { Game } from '../../../shared/models/game.model';
 
 @Component({
   selector: 'app-games',

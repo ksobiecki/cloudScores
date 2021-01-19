@@ -3,7 +3,7 @@ import { NgForm } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { Room } from 'src/app/rooms/room/room.model';
 import { RoomsService } from 'src/app/rooms/rooms.service';
-import { Game } from '../game/game.model';
+import { Game } from '../../../../shared/models/game.model';
 
 @Component({
   selector: 'app-game-add',
