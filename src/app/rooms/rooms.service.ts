@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs';
 import { Game } from '../games/game/game.model';
 import { Room } from './room/room.model';
+import {HttpClient} from '@angular/common/http';
 
 @Injectable({ providedIn: 'root' })
 export class RoomsService {
@@ -27,29 +28,35 @@ export class RoomsService {
     { id: 3, name: 'Room3', author: 'Pyć', imgSrc: '../../assets/img/avatar13.png', games: [], players: [] },
   ];
 
+  constructor(private http:HttpClient){}
+  getRooms(){
+      this.http.get<{message: string, rooms: Room[]}>('http://localhost:3000/api/rooms').subscribe((postData) => {
+        this.rooms = postData.rooms
+        this.roomsUpdated.next([...this.rooms]);
+      });
+  }
   getRoom(name: string) {
     for (let room of this.rooms) {
       if (room.name === name) return room;
     }
   }
 
-  getRooms() {
+  /*getRooms() {
     return [...this.rooms];
-  }
+  }*/
 
   getRoomsUpdateListener() {
     return this.roomsUpdated.asObservable();
   }
 
   addRoom(room: Room) {
-    this.rooms.push(room);
-    this.roomsUpdated.next([...this.rooms]);
-  }
+    this.http.post<{message: string}>('http://localhost:3000/api/rooms', room)
+      .subscribe((responseData) => {
+        console.log(responseData.message);
+        this.rooms.push(room);
+        this.roomsUpdated.next([...this.rooms]);
+      });
 
-  getGames(name: string) {
-    for (let room of this.rooms) {
-      if (room.name === name) return [...room.games];
-    }
   }
 
   addGame(currentRoom: Room, game: Game) {
@@ -59,6 +66,12 @@ export class RoomsService {
         console.log(room.games.length);
         this.gamesUpdated.next([...room.games]);
       }
+    }
+  }
+
+  getGames(name: string) {
+    for (let room of this.rooms) {
+      if (room.name === name) return [...room.games];
     }
   }
 
