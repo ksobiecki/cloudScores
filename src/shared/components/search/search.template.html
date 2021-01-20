@@ -1,0 +1,13 @@
+<div class="search-container">
+  <input
+    class="search-container-input"
+    type="text"
+    name="search"
+    placeholder="search"
+    [(ngModel)]="searchText"
+    (ngModelChange)="changeSearchText($event)"
+  />
+  <div class="search-icon">
+    <fa-icon [icon]="faSearch"></fa-icon>
+  </div>
+</div>

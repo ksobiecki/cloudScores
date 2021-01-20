@@ -1,17 +1,6 @@
 <div class="header-container">
   <h1 class="rooms-header">Select a room</h1>
-  <div class="search-container">
-    <input
-      class="search-container-input"
-      type="text"
-      name="search"
-      placeholder="search"
-      [(ngModel)]="searchText"
-    />
-    <div class="search-icon">
-      <fa-icon [icon]="faSearch"></fa-icon>
-    </div>
-  </div>
+  <shr-search (newSearchText)="searchText=$event"></shr-search>
 </div>
 <ul class="rooms-list">
   <li

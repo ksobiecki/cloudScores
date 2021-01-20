@@ -6,15 +6,13 @@ import { RoomsService } from '../../../shared/services/rooms.service';
 @Component({
   selector: 'app-room-add',
   templateUrl: './room-add.template.html',
-  styleUrls: ['./room-add.less']
+  styleUrls: ['./room-add.less'],
 })
 export class RoomAddComponent {
-
   constructor(private roomsService: RoomsService) {}
 
   onSubmit(form: NgForm) {
     const room: Room = form.value;
     this.roomsService.addRoom(room);
   }
-
 }

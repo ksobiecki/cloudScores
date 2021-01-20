@@ -1,9 +1,9 @@
-import {Component} from '@angular/core';
-import {NgForm} from '@angular/forms';
+import { Component } from '@angular/core';
+import { NgForm } from '@angular/forms';
 
 @Component({
   templateUrl: 'login.component.html',
-  styleUrls: ['login.component.less']
+  styleUrls: ['login.component.less'],
 })
 export class LoginComponent {
   isLoading = false;

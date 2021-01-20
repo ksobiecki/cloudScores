@@ -1,10 +1,9 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { Room } from '../../shared/models/room.model';
 import { RoomsService } from '../../shared/services/rooms.service';
 import { MatDialog } from '@angular/material/dialog';
 import { RoomAddComponent } from './room-add/room-add.component';
-import { faSearch } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-rooms',
@@ -12,11 +11,9 @@ import { faSearch } from '@fortawesome/free-solid-svg-icons';
   styleUrls: ['./rooms.less'],
 })
 export class RoomsComponent implements OnInit, OnDestroy {
-  faSearch = faSearch;
-
   rooms: Room[] = [];
   private roomsSubscription: Subscription;
-  searchText: string = '';
+  @Input() searchText: string = '';
 
   constructor(private roomsService: RoomsService, public dialog: MatDialog) {}
 
@@ -28,11 +25,10 @@ export class RoomsComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-   this.roomsSubscription.unsubscribe();
+    this.roomsSubscription.unsubscribe();
   }
 
   openDialog() {
     const dialogRef = this.dialog.open(RoomAddComponent);
   }
-
 }
