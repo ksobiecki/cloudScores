@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { RoomsService } from '../rooms.service';
+import { RoomsService } from '../../../shared/services/rooms.service';
 
 import {RoomCreateComponent} from '../room-create/room-create.component';
 import {MatDialog} from '@angular/material/dialog';
@@ -8,7 +8,7 @@ import {RoomJoinComponent} from '../room-join/room-join.component';
 @Component({
   selector: 'app-room-add',
   templateUrl: './room-add.template.html',
-  styleUrls: ['./room-add.less']
+  styleUrls: ['./room-add.less'],
 })
 export class RoomAddComponent {
 
@@ -27,5 +27,4 @@ export class RoomAddComponent {
   closeModal(): void {
     const thisDialogRef = this.dialog.closeAll();
   }
-
 }

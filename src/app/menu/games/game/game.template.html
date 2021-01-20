@@ -1,4 +1,4 @@
-<a routerLink="/games/game/:{{game.id}}">
+<a (click)="onGameClick()">
   <h2>{{game.name}}</h2>
   <img src="{{game.imgUrl}}" alt="Game image" />
 </a>

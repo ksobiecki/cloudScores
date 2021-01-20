@@ -24,8 +24,9 @@
               "src/assets"
             ],
             "styles": [
+              "./node_modules/font-awesome/less/font-awesome.less",
               "./node_modules/@angular/material/prebuilt-themes/deeppurple-amber.css",
-              "node_modules/bootstrap/dist/css/bootstrap.min.css",
+              "node_modules/bootstrap/less/bootstrap.less",
               "src/styles.less"
             ],
             "scripts": []

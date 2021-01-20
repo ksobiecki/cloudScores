@@ -1,0 +1,21 @@
+<div mat-dialog-content class="modal-container">
+  <form (ngSubmit)="onSubmit(form)" #form="ngForm">
+    <mat-form-field appearance="fill">
+      <mat-label class="label" for="name">Name</mat-label>
+      <input
+        matInput
+        type="text"
+        id="name"
+        ngModel
+        name="name"
+        #name="ngModel"
+        placeholder="Enter room name"
+      />
+    </mat-form-field>
+    <div class="button-container mat-dialog-actions">
+      <button mat-button mat-dialog-close type="submit" class="btn btn-success">
+        ADD
+      </button>
+    </div>
+  </form>
+</div>

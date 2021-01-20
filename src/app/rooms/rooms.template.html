@@ -1,6 +1,12 @@
-<h1 class="rooms-header">Rooms</h1>
+<div class="header-container">
+  <h1 class="rooms-header">Select a room</h1>
+  <shr-search (newSearchText)="searchText=$event"></shr-search>
+</div>
 <ul class="rooms-list">
-  <li class="rooms-element col-xs-12 col-sm-6 col-md-4 col-lg-3" *ngFor="let room of rooms">
+  <li
+    class="rooms-element col-xs-12 col-sm-6 col-md-4 col-lg-3"
+    *ngFor="let room of rooms | filter:searchText:'name'"
+  >
     <app-room [room]="room"></app-room>
   </li>
   <li class="rooms-element add-room col-xs-12 col-sm-6 col-md-4 col-lg-3">

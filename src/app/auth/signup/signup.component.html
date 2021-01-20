@@ -5,26 +5,67 @@
     <div *ngIf="isLoading" class="spinner-container">
       <mat-progress-spinner mode="indeterminate"></mat-progress-spinner>
     </div>
-    <form (submit)="onSignup(signupForm)" #signupForm="ngForm" *ngIf="!isLoading">
+    <form
+      (submit)="onSignup(signupForm)"
+      #signupForm="ngForm"
+      *ngIf="!isLoading"
+    >
       <mat-form-field>
         <mat-label>First Name</mat-label>
-        <input matInput name="firstName" ngModel #firstNameInput="ngModel" type="text" required>
-        <mat-error *ngIf="firstNameInput.invalid">First name is required</mat-error>
+        <input
+          matInput
+          name="firstName"
+          ngModel
+          #firstNameInput="ngModel"
+          type="text"
+          required
+        />
+        <mat-error *ngIf="firstNameInput.invalid"
+          >First name is required</mat-error
+        >
       </mat-form-field>
       <mat-form-field>
         <mat-label>Last Name</mat-label>
-        <input matInput name="lastName" ngModel #lastNameInput="ngModel" type="text" required>
-        <mat-error *ngIf="lastNameInput.invalid">Please enter your last name</mat-error>
+        <input
+          matInput
+          name="lastName"
+          ngModel
+          #lastNameInput="ngModel"
+          type="text"
+          required
+        />
+        <mat-error *ngIf="lastNameInput.invalid"
+          >Please enter your last name</mat-error
+        >
       </mat-form-field>
       <mat-form-field>
         <mat-label>E-mail</mat-label>
-        <input matInput name="email" ngModel #emailInput="ngModel" type="email" required email>
-        <mat-error *ngIf="emailInput.invalid">Please enter a valid email</mat-error>
+        <input
+          matInput
+          name="email"
+          ngModel
+          #emailInput="ngModel"
+          type="email"
+          required
+          email
+        />
+        <mat-error *ngIf="emailInput.invalid"
+          >Please enter a valid email</mat-error
+        >
       </mat-form-field>
       <mat-form-field>
         <mat-label>Password</mat-label>
-        <input matInput name="password" ngModel #passwordInput="ngModel" type="password" required>
-        <mat-error *ngIf="passwordInput.invalid">Password is required</mat-error>
+        <input
+          matInput
+          name="password"
+          ngModel
+          #passwordInput="ngModel"
+          type="password"
+          required
+        />
+        <mat-error *ngIf="passwordInput.invalid"
+          >Password is required</mat-error
+        >
       </mat-form-field>
       <button mat-raised-button color="accent" type="submit">Sign Up</button>
     </form>
