@@ -24,6 +24,8 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { HttpClientModule } from '@angular/common/http';
 import { SharedModule } from 'src/shared/shared.module';
+import { MenuSettingsComponent } from './menu/menu-settings/menu-settings.component';
+import { MenuComponent } from './menu/menu.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -37,6 +39,8 @@ import { SharedModule } from 'src/shared/shared.module';
     FilterPipe,
     LoginComponent,
     SignupComponent,
+    MenuComponent,
+    MenuSettingsComponent
   ],
   imports: [
     BrowserModule,

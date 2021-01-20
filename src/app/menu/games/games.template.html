@@ -1,13 +1,14 @@
-<a class="callback" routerLink="/rooms">Back to Rooms</a>
-<h1 class="games-header">{{currentRoom.name}}</h1>
+<h1 class="games-header">What are we playing today?</h1>
+<shr-search (newSearchText)="searchText=$event"></shr-search>
+<span class="separator"></span>
 <ul class="games-list">
   <li
-    class="games-element col-xs-12 col-sm-6 col-md-4 col-lg-3"
-    *ngFor="let game of games"
+    class="games-element"
+    *ngFor="let game of games | filter:searchText:'name'"
   >
     <app-game [game]="game"></app-game>
   </li>
-  <li class="games-element add-game col-xs-12 col-sm-6 col-md-4 col-lg-3">
+  <li class="games-element add-game">
     <div>
       <button (click)="openDialog()">
         <span>+</span>

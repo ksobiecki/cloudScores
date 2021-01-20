@@ -1,29 +1,62 @@
 @main-colour: rgba(29, 161, 242, 1);
 
-.callback {
-  position: absolute;
-  font-size: 2rem;
-  left: 5rem;
-  top: 7rem;
-}
-
 .games-header {
   text-align: center;
+  margin: 3rem 0;
   font-size: 6rem;
-  margin: 12rem 0 3rem;
   line-height: 6rem;
+}
+
+shr-search {
+  display: block;
+  margin-bottom: 3rem;
+}
+
+.separator {
+  display: block;
+  height: 0px;
+  width: 85%;
+  margin: 0 auto 2rem;
+  border-bottom: 2px solid white;
+}
+
+.games-add-button {
+  width: 100px;
+  height: 40px;
+  border-radius: 25px;
+  border: none;
+
+  > span {
+    font-size: 40px;
+    line-height: 40px;
+    color: @main-colour;
+  }
+
+  &.add-game {
+    &:focus,
+    :active {
+      outline: none;
+    }
+  }
 }
 
 .games-list {
   list-style-type: none;
-  width: 100%;
+  width: 85%;
+  height: 600px;
+  margin: 0 auto;
+  overflow-y: auto;
 }
 
 .games-element {
   display: flex;
   justify-content: center;
   align-items: center;
-  margin: 4rem 0;
+  margin: 10px;
+
+  > app-game {
+    width: 100%;
+  }
 
   &.add-game {
     &:focus,
@@ -31,22 +64,21 @@
       outline: none;
     }
 
-    button {
-      background-color: white;
-      width: 300px;
-      height: 300px;
-      border: none;
-      border-radius: 15px;
+    div {
+      width: 100%;
 
-      span {
-        color: @main-colour;
-        font-size: 8rem;
-        line-height: 8rem;
-      }
+      button {
+        background-color: white;
+        width: 100%;
+        height: 80px;
+        border: none;
+        border-radius: 15px;
 
-      &:hover {
-        background-color: azure;
-        box-shadow: inset 0 0 5rem lightgray;
+        span {
+          color: @main-colour;
+          font-size: 6.6rem;
+          line-height: 6.6rem;
+        }
       }
     }
   }

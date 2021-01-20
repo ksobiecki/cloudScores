@@ -13,26 +13,10 @@ import { Game } from '../../../shared/models/game.model';
   styleUrls: ['./games.less'],
 })
 export class GamesComponent implements OnInit, OnDestroy {
-  currentRoom: Room;
   private gamesSubscription: Subscription;
-  games = [
-    {
-      id: 1,
-      name: 'Chińczyk',
-    },
-    {
-      id: 2,
-      name: 'Makao',
-    },
-    {
-      id: 3,
-      name: 'Wojna',
-    },
-    {
-      id: 4,
-      name: 'Casino',
-    },
-  ];
+  currentRoom: Room;
+  searchText: string = '';
+  games = [];
 
   constructor(
     private roomsService: RoomsService,
