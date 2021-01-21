@@ -1,7 +1,5 @@
 import { Component } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { Room } from '../room/room.model';
-import { RoomsService } from '../rooms.service';
 
 import {ElementRef, ViewChild} from '@angular/core';
 import {COMMA, ENTER} from '@angular/cdk/keycodes';
@@ -12,6 +10,8 @@ import {Observable} from 'rxjs';
 import {map, startWith} from 'rxjs/operators';
 import {$} from 'protractor';
 import {MatDialog, MatDialogRef} from '@angular/material/dialog';
+import { Room } from 'src/shared/models/room.model';
+import { RoomsService } from 'src/shared/services/rooms.service';
 
 @Component({
   selector: 'app-room-create',
