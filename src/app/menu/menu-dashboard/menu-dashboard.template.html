@@ -1,17 +1,26 @@
-<div clas="room-info">
-    <h2>Room1</h2>
-    <img src="../../../assets/img/avatar1.png" alt="room image">
-    <p>XG4KM32P</p>
-    <a href="#">change room</a>
-</div>
-<div class="game-info">
-
-</div>
-<div class="button-container">
-    <div class="button-container">
-        <button class="my-stats">My Stats</button>
+<div class="dashboard-container">
+    <div class="info-card">
+        <h2>Room1</h2>
+        <img src="../../../assets/img/avatar1.png" alt="room image">
+        <p>XG4KM32P</p>
+        <a href="#">change room</a>
     </div>
-    <div class="button-container">
-        <button class="game-stats">Game Stats</button>
+    <div class="info-card">
+        <div *ngIf="chosenGame===''; else gameSelectedBlock">
+            <h2>Select a game</h2>
+        </div>
+        <ng-template #gameSelectedBlock>
+            <h2>Among Us</h2>
+            <img src="https://android.com.pl/apps/wp-content/uploads/2020/09/amonguslogo.png" alt="game image">
+            <a href="#">change game</a>
+        </ng-template>
+    </div>
+    <div class="buttons-container">
+        <div class="button-container">
+            <button class="my-stats">My Stats</button>
+        </div>
+        <div class="button-container">
+            <button class="game-stats">Game Stats</button>
+        </div>
     </div>
 </div>
