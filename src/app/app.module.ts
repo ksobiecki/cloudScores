@@ -24,7 +24,7 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { HttpClientModule } from '@angular/common/http';
 import { SharedModule } from 'src/shared/shared.module';
-import { MenuSettingsComponent } from './menu/menu-settings/menu-settings.component';
+import { MenuDashboardComponent } from './menu/menu-dashboard/menu-dashboard.component';
 import { MenuComponent } from './menu/menu.component';
 @NgModule({
   declarations: [
@@ -40,7 +40,7 @@ import { MenuComponent } from './menu/menu.component';
     LoginComponent,
     SignupComponent,
     MenuComponent,
-    MenuSettingsComponent
+    MenuDashboardComponent
   ],
   imports: [
     BrowserModule,
