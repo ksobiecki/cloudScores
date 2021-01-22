@@ -101,6 +101,8 @@ export class RoomCreateComponent {
 
   onSubmit(form: NgForm): void {
     const room: Room = form.value;
+    room.imgSrc = this.images[this.imagePointer];
+    console.log(room);
     this.roomsService.addRoom(room);
 
   }

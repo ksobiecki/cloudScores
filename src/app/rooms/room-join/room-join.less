@@ -8,8 +8,12 @@ input {
   width: 100%;
 }
 
-mat-label {
-  font-size: medium;
+.success-alert {
+  display: block;
+  font-size: small;
+  color: green;
+  text-align: center;
+  margin-top: 50px;
 }
 
 .submit-button {
@@ -35,14 +39,18 @@ form {
 }
 
 ::ng-deep .mat-form-field.mat-focused {
-  .mat-form-field-ripple {
-    background-color: rgba(9, 141, 222, 1);
-  }
-  .mat-form-field-label {
-    color: rgba(9, 141, 222, 1);
-  }
-  .mat-input-element {
-    color: rgba(9, 141, 222, 1);
+  &:not(.mat-form-field-invalid) {
+    .mat-form-field-ripple {
+      background-color: rgba(9, 141, 222, 1);
+    }
+
+    .mat-form-field-label {
+      color: rgba(9, 141, 222, 1);
+    }
+
+    .mat-input-element {
+      color: rgba(9, 141, 222, 1);
+    }
   }
 }
 

@@ -23,7 +23,11 @@
         ngModel
         name="name"
         #name="ngModel"
+        required
       />
+      <mat-error *ngIf="name.invalid"
+      >Name cannot be empty</mat-error
+      >
     </mat-form-field>
     <!-- <mat-form-field class="input-field" appearance="standard">
       <mat-label for="author">Author</mat-label>
@@ -71,7 +75,7 @@
 
 
     <div class="button-container mat-dialog-actions">
-      <button mat-button mat-dialog-close type="submit" class="btn btn-success submit-button">
+      <button [disabled]="!form.valid" mat-button mat-dialog-close type="submit" class="btn btn-success submit-button">
         CREATE
       </button>
     </div>
