@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import {LoginService} from '../shared/services/login.service';
 
 @Component({
   selector: 'app-root',
@@ -8,6 +9,5 @@ import { Router } from '@angular/router';
 })
 export class AppComponent {
   title = 'cloudScores';
-  constructor(public router: Router) {
-  }
+  constructor(public router: Router) {}
 }
