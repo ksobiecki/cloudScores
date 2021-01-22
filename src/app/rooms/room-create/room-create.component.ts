@@ -12,6 +12,7 @@ import {$} from 'protractor';
 import {MatDialog, MatDialogRef} from '@angular/material/dialog';
 import { Room } from 'src/shared/models/room.model';
 import { RoomsService } from 'src/shared/services/rooms.service';
+import {faTimes} from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-room-create',
@@ -19,6 +20,7 @@ import { RoomsService } from 'src/shared/services/rooms.service';
   styleUrls: ['./room-create.less']
 })
 export class RoomCreateComponent {
+  faClose = faTimes;
 
   isHidden = true;
   selectable = true;

@@ -4,6 +4,7 @@ import { RoomsService } from '../../../shared/services/rooms.service';
 import {RoomCreateComponent} from '../room-create/room-create.component';
 import {MatDialog} from '@angular/material/dialog';
 import {RoomJoinComponent} from '../room-join/room-join.component';
+import {faTimes} from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-room-add',
@@ -11,6 +12,7 @@ import {RoomJoinComponent} from '../room-join/room-join.component';
   styleUrls: ['./room-add.less'],
 })
 export class RoomAddComponent {
+  faClose = faTimes;
 
   constructor(private roomsService: RoomsService, public dialog: MatDialog) {}
 

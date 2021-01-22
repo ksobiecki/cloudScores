@@ -1,6 +1,7 @@
 import {Component} from '@angular/core';
 import {NgForm} from '@angular/forms';
 import {MatDialog} from '@angular/material/dialog';
+import {faTimes} from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-room-join',
@@ -8,6 +9,7 @@ import {MatDialog} from '@angular/material/dialog';
   styleUrls: ['./room-join.less']
 })
 export class RoomJoinComponent {
+  faClose = faTimes;
   constructor(private dialog: MatDialog) {}
 
   onSubmit(form: NgForm): void {}
