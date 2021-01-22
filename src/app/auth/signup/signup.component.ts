@@ -11,7 +11,11 @@ import {User} from '../../../shared/models/user.model';
 export class SignupComponent {
   isLoading = false;
 
-  constructor(public loginService: LoginService, public router: Router) {}
+  constructor(public loginService: LoginService, public router: Router) {
+    if(this.loginService.getIsUserLoggedIn() === true){
+      router.navigateByUrl('/rooms');
+    }
+  }
 
   onSignup(form: NgForm): void {
     console.log(form.value);
