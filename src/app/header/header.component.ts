@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import {LoginService} from '../../shared/services/login.service';
 
 @Component({
   selector: 'app-header',
@@ -7,4 +8,9 @@ import { Component } from '@angular/core';
 })
 export class HeaderComponent {
   username: string = 'Krzyś';
+  constructor(private loginService: LoginService) {
+  }
+  logout(): void {
+    this.loginService.logOut();
+  }
 }
