@@ -1,13 +1,15 @@
 <div mat-dialog-content class="modal-container">
-  <div class="close-button-container">
-    <button class="close-button" (click)="closeModal()">X</button>
+  <div class="inner-container">
+    <div class="close-button-container">
+      <button class="close-button" (click)="closeModal()">X</button>
+    </div>
+    <ul class="button-list">
+      <li class="col-xs-12 col-md-6">
+        <button class="open-button" (click)="openJoinRoom()">Join Room</button>
+      </li>
+      <li class="col-xs-12 col-md-6">
+        <button class="open-button" (click)="openCreateRoom()">Create Room</button>
+      </li>
+    </ul>
   </div>
-  <ul class="button-list">
-    <li class="col-xs-12 col-md-6">
-      <button class="open-button" (click)="openJoinRoom()">Join Room</button>
-    </li>
-    <li class="col-xs-12 col-md-6">
-      <button class="open-button" (click)="openCreateRoom()">Create Room</button>
-    </li>
-  </ul>
 </div>
