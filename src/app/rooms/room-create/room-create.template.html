@@ -63,7 +63,11 @@
         </mat-option>
       </mat-autocomplete>
     </mat-form-field> -->
-
+    <div class="image-container">
+      <fa-icon (click)="previousImage()" class="arrow-left" [icon]="faLeft" size="2x"></fa-icon>
+      <img class="avatar-icon" [src]="images[imagePointer]">
+      <fa-icon (click)="nextImage()" class="arrow-right" [icon]="faRight" size="2x"></fa-icon>
+    </div>
 
 
     <div class="button-container mat-dialog-actions">

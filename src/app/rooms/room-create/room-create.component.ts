@@ -12,7 +12,7 @@ import {$} from 'protractor';
 import {MatDialog, MatDialogRef} from '@angular/material/dialog';
 import { Room } from 'src/shared/models/room.model';
 import { RoomsService } from 'src/shared/services/rooms.service';
-import {faTimes} from '@fortawesome/free-solid-svg-icons';
+import {faArrowLeft, faArrowRight, faTimes} from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-room-create',
@@ -21,6 +21,8 @@ import {faTimes} from '@fortawesome/free-solid-svg-icons';
 })
 export class RoomCreateComponent {
   faClose = faTimes;
+  faLeft = faArrowLeft;
+  faRight = faArrowRight;
 
   isHidden = true;
   selectable = true;
@@ -31,6 +33,8 @@ export class RoomCreateComponent {
   users: string[] = [];
   allUsers: string[] = ['Krzyś', 'Piter', 'Pyć'];
   autocompleteUserList: string[] = [...this.allUsers];
+  images: string[] = ['../../../assets/img/avatar1.png', '../../../assets/img/avatar2.png', '../../../assets/img/avatar3.png']
+  imagePointer = 0;
 
   @ViewChild('userInput') userInput: ElementRef<HTMLInputElement>;
   @ViewChild('auto') matAutocomplete: MatAutocomplete;
@@ -103,6 +107,24 @@ export class RoomCreateComponent {
 
   closeModal(): void {
     const thisDialogRef = this.dialog.closeAll();
+  }
+
+  nextImage(): void {
+    if (this.imagePointer < this.images.length - 1) {
+      this.imagePointer += 1;
+    }
+    else {
+      this.imagePointer = 0;
+    }
+  }
+
+  previousImage(): void {
+    if (this.imagePointer > 0) {
+      this.imagePointer -= 1;
+    }
+    else {
+      this.imagePointer = this.images.length - 1;
+    }
   }
 
 }
