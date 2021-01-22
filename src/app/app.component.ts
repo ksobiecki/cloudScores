@@ -8,7 +8,6 @@ import { Router } from '@angular/router';
 })
 export class AppComponent {
   title = 'cloudScores';
-  isHeaderVisible = true;
   constructor(public router: Router) {
   }
 }
