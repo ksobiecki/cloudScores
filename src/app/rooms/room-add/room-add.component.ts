@@ -1,7 +1,9 @@
 import { Component } from '@angular/core';
-import { NgForm } from '@angular/forms';
-import { Room } from '../../../shared/models/room.model';
 import { RoomsService } from '../../../shared/services/rooms.service';
+
+import {RoomCreateComponent} from '../room-create/room-create.component';
+import {MatDialog} from '@angular/material/dialog';
+import {RoomJoinComponent} from '../room-join/room-join.component';
 
 @Component({
   selector: 'app-room-add',
@@ -9,10 +11,20 @@ import { RoomsService } from '../../../shared/services/rooms.service';
   styleUrls: ['./room-add.less'],
 })
 export class RoomAddComponent {
-  constructor(private roomsService: RoomsService) {}
 
-  onSubmit(form: NgForm) {
-    const room: Room = form.value;
-    this.roomsService.addRoom(room);
+  constructor(private roomsService: RoomsService, public dialog: MatDialog) {}
+
+  openCreateRoom(): void {
+    const thisDialogRef = this.dialog.closeAll();
+    const dialogRef = this.dialog.open(RoomCreateComponent);
+  }
+
+  openJoinRoom(): void {
+    const thisDialogRef = this.dialog.closeAll();
+    const dialogRef = this.dialog.open(RoomJoinComponent);
+  }
+
+  closeModal(): void {
+    const thisDialogRef = this.dialog.closeAll();
   }
 }

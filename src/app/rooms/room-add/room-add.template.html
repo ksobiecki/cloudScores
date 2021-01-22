@@ -1,45 +1,13 @@
 <div mat-dialog-content class="modal-container">
-  <form (ngSubmit)="onSubmit(form)" #form="ngForm">
-    <mat-form-field appearance="fill">
-      <mat-label class="label" for="id">Id</mat-label>
-      <input
-        matInput
-        type="text"
-        id="id"
-        ngModel
-        name="id"
-        #name="ngModel"
-        placeholder="Enter id"
-      />
-    </mat-form-field>
-    <mat-form-field appearance="fill">
-      <mat-label class="label" for="name">Name</mat-label>
-      <input
-        matInput
-        type="text"
-        id="name"
-        ngModel
-        name="name"
-        #name="ngModel"
-        placeholder="Enter room name"
-      />
-    </mat-form-field>
-    <mat-form-field appearance="fill">
-      <mat-label class="label" for="author">Author</mat-label>
-      <input
-        matInput
-        type="text"
-        id="author"
-        ngModel
-        name="author"
-        #author="ngModel"
-        placeholder="Enter author name"
-      />
-    </mat-form-field>
-    <div class="button-container mat-dialog-actions">
-      <button mat-button mat-dialog-close type="submit" class="btn btn-success">
-        ADD
-      </button>
-    </div>
-  </form>
+  <div class="close-button-container">
+    <button class="close-button" (click)="closeModal()">X</button>
+  </div>
+  <ul class="button-list">
+    <li class="col-xs-12 col-md-6">
+      <button class="open-button" (click)="openJoinRoom()">Join Room</button>
+    </li>
+    <li class="col-xs-12 col-md-6">
+      <button class="open-button" (click)="openCreateRoom()">Create Room</button>
+    </li>
+  </ul>
 </div>
