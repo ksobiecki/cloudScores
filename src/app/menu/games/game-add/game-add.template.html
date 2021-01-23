@@ -1,6 +1,24 @@
 <div mat-dialog-content class="modal-container">
+  <div class="close-button-container">
+    <fa-icon size="2x" [icon]="faClose" (click)="closeModal()"></fa-icon>
+  </div>
   <form (ngSubmit)="onSubmit(form)" #form="ngForm">
-    <mat-form-field appearance="fill">
+    <mat-form-field class="input-field" appearance="standard">
+      <mat-label for="name">Name</mat-label>
+      <input
+        matInput
+        type="text"
+        id="name"
+        ngModel
+        name="name"
+        #name="ngModel"
+        required
+      />
+      <mat-error *ngIf="name.invalid"
+      >Name cannot be empty</mat-error
+      >
+    </mat-form-field>
+    <!-- <mat-form-field appearance="fill">
       <mat-label class="label" for="name">Name</mat-label>
       <input
         matInput
@@ -11,9 +29,14 @@
         #name="ngModel"
         placeholder="Enter room name"
       />
-    </mat-form-field>
-    <div class="button-container mat-dialog-actions">
+    </mat-form-field> -->
+    <!--<div class="button-container mat-dialog-actions">
       <button mat-button mat-dialog-close type="submit" class="btn btn-success">
+        ADD
+      </button>
+    </div>-->
+    <div class="button-container mat-dialog-actions">
+      <button mat-button mat-dialog-close type="submit" class="btn btn-success submit-button">
         ADD
       </button>
     </div>
