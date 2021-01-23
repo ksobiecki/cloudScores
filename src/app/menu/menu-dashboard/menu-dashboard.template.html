@@ -14,6 +14,8 @@
   <div class="info-card">
     <div *ngIf="chosenGame===''; else gameSelectedBlock" class="gameCardOff">
       <h2>Select a game</h2>
+      <br />
+      <fa-icon [icon]="faGamepad"></fa-icon>
     </div>
     <ng-template #gameSelectedBlock>
       <div class="gameCardOn">
@@ -28,10 +30,16 @@
   </div>
   <div class="buttons-container">
     <div class="button-container">
-      <button class="my-stats">My Stats</button>
+      <button class="my-stats">
+        My Stats
+        <fa-icon [icon]="faMedal"></fa-icon>
+      </button>
     </div>
     <div class="button-container">
-      <button class="game-stats">Game Stats</button>
+      <button class="game-stats" [disabled]="chosenGame===''">
+        Game Stats
+        <fa-icon [icon]="faTrophy"></fa-icon>
+      </button>
     </div>
   </div>
 </div>

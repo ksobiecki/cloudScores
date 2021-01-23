@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { faMedal, faGamepad, faTrophy } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-menu-dashboard',
@@ -6,6 +7,10 @@ import { Component } from '@angular/core';
   styleUrls: ['./menu-dashboard.less'],
 })
 export class MenuDashboardComponent {
-  chosenGame: string = 'f';
+  faMedal = faMedal;
+  faGamepad = faGamepad;
+  faTrophy = faTrophy;
+
+  chosenGame: string = '';
   inviteCode: string = 'XG4KM32P';
 }
