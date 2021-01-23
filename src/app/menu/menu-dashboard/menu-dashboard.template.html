@@ -1,10 +1,18 @@
 <div class="dashboard-container">
   <div class="info-card">
     <h2>Room1</h2>
-    <a href="#" class="change-button">change room</a>
+    <div class="room-management">
+      <a [routerLink]="['/rooms']" class="change-button">change room</a>
+      <span class="separator"> | </span>
+      <a href="#" class="remove-button">
+        <span *ngIf="isRoomAuthor===true; else isNotRoomAuthor"
+          >delete room</span
+        >
+        <ng-template #isNotRoomAuthor> <span>leave room</span> </ng-template>
+      </a>
+    </div>
     <img src="../../../assets/img/avatar17.png" alt="room image" />
     <div (click)="copyCode()" class="invite-container">
-      <input type="text" value="{{inviteCode}}" id="invite-code" />
       <p>
         Click to copy invite code: <br />
         <span>{{inviteCode}}</span>

@@ -1,9 +1,8 @@
-import {Injectable} from '@angular/core';
-import {User} from '../models/user.model';
-import {Observable} from 'rxjs';
-import {Router} from '@angular/router';
+import { Injectable } from '@angular/core';
+import { User } from '../models/user.model';
+import { Router } from '@angular/router';
 
-@Injectable({providedIn: 'root'})
+@Injectable({ providedIn: 'root' })
 export class LoginService {
   users: User[] = [{
     _id: '123',
@@ -15,8 +14,7 @@ export class LoginService {
   currentUser = null;
   isUserLoggedIn = false;
 
-  constructor(public router: Router) {
-  }
+  constructor(public router: Router) {}
 
   public createUser(user: User): number {
     this.users.push(user);
