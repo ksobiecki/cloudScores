@@ -1,0 +1,121 @@
+.dashboard-container {
+  height: 90vh;
+  padding-top: 10%;
+}
+
+.info-card {
+  width: 280px;
+  height: 280px;
+  margin: 0 auto 10%;
+  background-color: white;
+  border-radius: 10px;
+  text-align: center;
+  overflow: hidden;
+
+  -webkit-box-shadow: 0px 10px 13px -7px #000000,
+    5px 5px 20px 0px rgba(241, 110, 0, 0);
+  box-shadow: 0px 10px 13px -7px #000000, 5px 5px 20px 0px rgba(241, 110, 0, 0);
+
+  h2 {
+    margin: 0;
+    padding: 20px 0 5px;
+    font-size: 3rem;
+  }
+
+  .change-button {
+    font-size: 1.5rem;
+    text-decoration: underline;
+    color: #666666;
+  }
+
+  img {
+    display: block;
+    width: 150px;
+    height: 150px;
+    margin: 0 auto;
+    border-radius: 10px;
+  }
+
+  .invite-container {
+    margin: 0;
+    background-color: #f16e00;
+    height: 19%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    p {
+      font-size: 1.2rem;
+      padding-top: 10px;
+
+      span {
+        font-size: 2rem;
+        color: white;
+      }
+    }
+  }
+
+  .invite-container:hover {
+    cursor: pointer;
+  }
+
+  #invite-code {
+    display: none;
+  }
+
+  .gameCardOn {
+    img {
+      margin-top: 20px;
+    }
+  }
+
+  .gameCardOff {
+    opacity: 75%;
+
+    h2 {
+      margin-top: 40px;
+    }
+
+    fa-icon {
+      font-size: 100px;
+    }
+  }
+}
+
+.buttons-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 80%;
+  height: 10%;
+  margin: 0 auto 10%;
+
+  .button-container > button {
+    width: 140px;
+    height: 70px;
+    border-radius: 10px;
+    border: none;
+    color: white;
+    background-color: #f16e00;
+    font-size: 1.8rem;
+
+    -webkit-box-shadow: 0px 10px 13px -7px #000000,
+      5px 5px 20px 0px rgba(241, 110, 0, 0);
+    box-shadow: 0px 10px 13px -7px #000000,
+      5px 5px 20px 0px rgba(241, 110, 0, 0);
+
+    &:disabled {
+      opacity: 0.75;
+    }
+
+    fa-icon {
+      font-size: 2rem;
+    }
+  }
+}
+
+.hidden-input {
+  position: absolute;
+  left: -1000px;
+  top: -1000px;
+}

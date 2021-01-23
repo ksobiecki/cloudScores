@@ -17,12 +17,16 @@ const db = mongoose.connect("mongodb+srv://cloudScores_admin:ZPh5bEUem9Kk08Az@cl
 
 app.use(bodyParser.json());
 
-app.use((req, res, next)=>{
+app.use((req, res, next) => {
   res.setHeader("Access-Control-Allow-Origin", "*");
-  res.setHeader("Access-Control-Allow-Headers",
-  "Origin, X-Requested-With, Content-Type, Accept");
-  res.setHeader("Access-Control-Allow-Methods",
-  "GET, POST, PATCH, DELETE, OPTIONS");
+  res.setHeader(
+    "Access-Control-Allow-Headers",
+    "Origin, X-Requested-With, Content-Type, Accept"
+  );
+  res.setHeader(
+    "Access-Control-Allow-Methods",
+    "GET, POST, PATCH, DELETE, OPTIONS"
+  );
   next();
 });
 
@@ -81,7 +85,5 @@ app.get('/api/rooms',(req, res, next)=>{
 app.post('/api/users', (req, res, next) => {
 
 })
-
-
 
 module.exports = app;
