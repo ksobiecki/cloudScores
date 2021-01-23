@@ -5,7 +5,7 @@ const Room = require('./models/room');
 const gameImport = require('./models/game')
 const Game = gameImport.gameModel;
 const User = require('./models/user');
-
+const shortid = require('shortid')
 
 const app = express();
 
@@ -85,7 +85,7 @@ app.post('/api/users', (req, res, next) => {
       }
 
   });
- 
+
 })
 
 app.post("/api/rooms", (req,res, next) => {
@@ -95,7 +95,8 @@ app.post("/api/rooms", (req,res, next) => {
     author: req.body.author,
     imgSrc: req.body.room.imgSrc,
     games: [],
-    players:[]
+    players:[],
+    code: shortid.generate()
   })
 
   room.save()

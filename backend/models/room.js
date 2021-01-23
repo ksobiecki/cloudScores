@@ -8,7 +8,8 @@ const roomSchema = mongoose.Schema({
     author: {type: String, required: true},
     imgSrc: {type: String, required: true},
     games: {type: [gameSchema]},
-    players:{type: [String]}
+    players:{type: [String]},
+    code: String
 });
 
 module.exports = mongoose.model('Room', roomSchema);
