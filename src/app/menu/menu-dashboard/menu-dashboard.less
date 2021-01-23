@@ -1,20 +1,68 @@
 .dashboard-container {
   height: 90vh;
   padding-top: 10%;
-
 }
 
 .info-card {
-  width: 70%;
-  height: 35%;
+  width: 280px;
+  height: 280px;
   margin: 0 auto 10%;
   background-color: white;
   border-radius: 10px;
+  text-align: center;
+  overflow: hidden;
+
+  h2 {
+    margin: 0;
+    padding: 20px 0 5px;
+    font-size: 3rem;
+  }
+
+  .change-button {
+    font-size: 1.5rem;
+    text-decoration: underline;
+    color: #666666;
+  }
 
   img {
     display: block;
     width: 150px;
     height: 150px;
+    margin: 0 auto;
+    border-radius: 10px;
+  }
+
+  .invite-container {
+    margin: 0;
+    background-color: #f16e00;
+    height: 19%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    p {
+      font-size: 1.2rem;
+      padding-top: 10px;
+
+      span {
+        font-size: 2rem;
+        color: white;
+      }
+    }
+  }
+
+  .invite-container:hover {
+    cursor: pointer;
+  }
+
+  #invite-code {
+    display: none;
+  }
+
+  .gameCardOn {
+    img {
+      margin-top: 20px;
+    }
   }
 }
 
@@ -31,5 +79,6 @@
     height: 70px;
     border-radius: 10px;
     border: none;
+    background-color: white;
   }
 }

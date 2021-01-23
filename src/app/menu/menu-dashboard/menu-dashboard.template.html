@@ -1,26 +1,37 @@
 <div class="dashboard-container">
-    <div class="info-card">
-        <h2>Room1</h2>
-        <img src="../../../assets/img/avatar1.png" alt="room image">
-        <p>XG4KM32P</p>
-        <a href="#">change room</a>
+  <div class="info-card">
+    <h2>Room1</h2>
+    <a href="#" class="change-button">change room</a>
+    <img src="../../../assets/img/avatar1.png" alt="room image" />
+    <div onclick="copyCode()" class="invite-container">
+      <input type="text" value="{{inviteCode}}" id="invite-code" />
+      <p>
+        Click to copy invite code: <br />
+        <span>{{inviteCode}}</span>
+      </p>
     </div>
-    <div class="info-card">
-        <div *ngIf="chosenGame===''; else gameSelectedBlock">
-            <h2>Select a game</h2>
-        </div>
-        <ng-template #gameSelectedBlock>
-            <h2>Among Us</h2>
-            <img src="https://android.com.pl/apps/wp-content/uploads/2020/09/amonguslogo.png" alt="game image">
-            <a href="#">change game</a>
-        </ng-template>
+  </div>
+  <div class="info-card">
+    <div *ngIf="chosenGame===''; else gameSelectedBlock" class="gameCardOff">
+      <h2>Select a game</h2>
     </div>
-    <div class="buttons-container">
-        <div class="button-container">
-            <button class="my-stats">My Stats</button>
-        </div>
-        <div class="button-container">
-            <button class="game-stats">Game Stats</button>
-        </div>
+    <ng-template #gameSelectedBlock>
+      <div class="gameCardOn">
+        <h2>Among Us</h2>
+        <a href="#" class="change-button">change game</a>
+        <img
+          src="https://android.com.pl/apps/wp-content/uploads/2020/09/amonguslogo.png"
+          alt="game image"
+        />
+      </div>
+    </ng-template>
+  </div>
+  <div class="buttons-container">
+    <div class="button-container">
+      <button class="my-stats">My Stats</button>
     </div>
+    <div class="button-container">
+      <button class="game-stats">Game Stats</button>
+    </div>
+  </div>
 </div>
