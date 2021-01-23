@@ -9,5 +9,3 @@ module.exports = {
     gameModel: mongoose.model('Game', gameSchema),
     gameSchema: module.exports = gameSchema
 }
-
-
