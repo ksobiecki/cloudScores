@@ -18,20 +18,52 @@
 
   h2 {
     margin: 0;
-    padding: 20px 0 5px;
+    padding: 20px 0 15px;
     font-size: 3rem;
   }
 
-  .change-button {
-    font-size: 1.5rem;
-    text-decoration: underline;
-    color: #666666;
+  .room-management {
+
+    .separator {
+      font-size: 2rem;
+      padding: 0 5px;
+    };
+
+    .remove-button {
+      text-decoration: underline;
+      color: red;
+
+      &:hover {
+        color: #CC0000;
+      }
+
+      span {
+        font-size: 1.5rem;
+      }
+    }
+
+    .change-button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background-color: #666666;
+      color: white;
+      padding: 4px;
+      border-radius: 10px;
+      text-transform: uppercase;
+      font-size: 1.5rem;
+
+      &:hover {
+        text-decoration: none;
+        background-color: #555555;
+      }
+    }
   }
 
   img {
     display: block;
-    width: 150px;
-    height: 150px;
+    width: 140px;
+    height: 140px;
     margin: 0 auto;
     border-radius: 10px;
   }
@@ -39,7 +71,7 @@
   .invite-container {
     margin: 0;
     background-color: #f16e00;
-    height: 19%;
+    height: 17%;
     display: flex;
     justify-content: center;
     align-items: center;

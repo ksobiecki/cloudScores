@@ -15,8 +15,9 @@ export class MenuDashboardComponent {
   faGamepad = faGamepad;
   faTrophy = faTrophy;
 
-  chosenGame: string = '';
+  chosenGame: string = 'd';
   inviteCode: string = 'XG4KM32P';
+  isRoomAuthor: boolean = true;
 
   copyCode = () => {
     let tempInput = document.createElement("input");
