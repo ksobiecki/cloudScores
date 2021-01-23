@@ -1,7 +1,18 @@
 const express = require('express');
 const bodyParser = require('body-parser');
+const mongoose = require('mongoose');
+const Room = require('./models/room');
+const Game = require('./models/game')
 
 const app = express();
+
+const db = mongoose.connect("mongodb+srv://cloudScores_admin:ZPh5bEUem9Kk08Az@cluster.bq0o1.mongodb.net/cloudScores_db?retryWrites=true&w=majority", { useNewUrlParser: true,  useUnifiedTopology: true})
+.then(() => {
+  console.log('Connected to database!');
+})
+.catch(() => {
+  console.log('Failed to connect database');
+});
 
 app.use(bodyParser.json());
 
@@ -15,14 +26,33 @@ app.use((req, res, next)=>{
 });
 
 app.post("/api/rooms", (req,res, next) => {
-  const post = req.body;
-  console.log(post);
-  res.status(201).json({
-    message: 'Post added successfully'
+  const room = new Room({
+    name: req.body.name,
+    author: "author",
+    imgSrc: req.body.imgSrc,
+    games: [],
+    players:[]
+  })
+
+  room.save()
+  .then(() => {
+    res.status(201).json({
+    message: 'Room added successfully'
+    })
+  })
+  .catch(() => {
+    res.status(401).json({
+    message: 'Unable to add room'
+    });
   });
 });
 
 app.get('/api/rooms',(req, res, next)=>{
+
+  Room.find()
+  .then(documents => {
+    console.log(documents);
+  })
 
   const rooms=[
     {
@@ -45,9 +75,15 @@ app.get('/api/rooms',(req, res, next)=>{
 
   ]
   res.status(200).json({
-    message: 'testowe posty',
+    message: 'testowy get na roomy',
     rooms:rooms,
   });
+
+  console.log('Wywolanie geta /api/rooms');
 });
+
+app.post('/api/users', (req, res, next) => {
+
+})
 
 module.exports = app;
