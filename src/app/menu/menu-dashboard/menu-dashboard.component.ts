@@ -1,5 +1,9 @@
 import { Component } from '@angular/core';
-import { faMedal, faGamepad, faTrophy } from '@fortawesome/free-solid-svg-icons';
+import {
+  faMedal,
+  faGamepad,
+  faTrophy,
+} from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-menu-dashboard',
@@ -13,4 +17,14 @@ export class MenuDashboardComponent {
 
   chosenGame: string = '';
   inviteCode: string = 'XG4KM32P';
+
+  copyCode = () => {
+    let tempInput = document.createElement("input");
+    tempInput.classList.add('hidden-input');
+    tempInput.value = this.inviteCode;
+    document.body.appendChild(tempInput);
+    tempInput.select();
+    document.execCommand("copy");
+    document.body.removeChild(tempInput);
+  };
 }
