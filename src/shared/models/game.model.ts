@@ -1,5 +1,5 @@
 export interface Game {
-  id: number;
+  _id: string;
   name: string;
   imgUrl: string;
 }
