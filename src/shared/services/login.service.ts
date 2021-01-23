@@ -4,9 +4,9 @@ import {User} from '../models/user.model';
 import {Router} from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 
-@Injectable({providedIn: 'root'})
+
+@Injectable({ providedIn: 'root' })
 export class LoginService {
-  users: User[] = []; // tutaj maja byc zaciagnieci z bazy
   currentUser = null;
   isUserLoggedIn = false;
 

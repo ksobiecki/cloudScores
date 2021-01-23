@@ -6,6 +6,7 @@ const gameImport = require('./models/game')
 const Game = gameImport.gameModel;
 const User = require('./models/user');
 
+
 const app = express();
 
 const db = mongoose.connect("mongodb+srv://cloudScores_admin:ZPh5bEUem9Kk08Az@cluster.bq0o1.mongodb.net/cloudScores_db?retryWrites=true&w=majority", { useNewUrlParser: true,  useUnifiedTopology: true})
@@ -18,12 +19,16 @@ const db = mongoose.connect("mongodb+srv://cloudScores_admin:ZPh5bEUem9Kk08Az@cl
 
 app.use(bodyParser.json());
 
-app.use((req, res, next)=>{
+app.use((req, res, next) => {
   res.setHeader("Access-Control-Allow-Origin", "*");
-  res.setHeader("Access-Control-Allow-Headers",
-  "Origin, X-Requested-With, Content-Type, Accept");
-  res.setHeader("Access-Control-Allow-Methods",
-  "GET, POST, PATCH, DELETE, OPTIONS");
+  res.setHeader(
+    "Access-Control-Allow-Headers",
+    "Origin, X-Requested-With, Content-Type, Accept"
+  );
+  res.setHeader(
+    "Access-Control-Allow-Methods",
+    "GET, POST, PATCH, DELETE, OPTIONS"
+  );
   next();
 });
 
@@ -124,7 +129,6 @@ app.post('/api/users/login', (req,res,next) => {
   });
   });
 });
-
 
 
 module.exports = app;

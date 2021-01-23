@@ -29,6 +29,8 @@ import { RoomJoinComponent } from './rooms/room-join/room-join.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { HttpClientModule } from '@angular/common/http';
 import { SharedModule } from 'src/shared/shared.module';
+import { MenuDashboardComponent } from './menu/menu-dashboard/menu-dashboard.component';
+import { MenuComponent } from './menu/menu.component';
 
 @NgModule({
   declarations: [
@@ -45,6 +47,8 @@ import { SharedModule } from 'src/shared/shared.module';
     FilterPipe,
     LoginComponent,
     SignupComponent,
+    MenuComponent,
+    MenuDashboardComponent
   ],
   imports: [
     BrowserModule,

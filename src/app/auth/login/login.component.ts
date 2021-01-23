@@ -18,6 +18,7 @@ export class LoginComponent {
     }
   }
 
+
  onLogin(form: NgForm): void {
     // const email = form.value.email;
     // const password = form.value.password;
@@ -28,6 +29,5 @@ export class LoginComponent {
         this.router.navigateByUrl('/rooms');
       }
     })
-    
   }
 }

@@ -13,7 +13,6 @@ import { Game } from '../../../shared/models/game.model';
   styleUrls: ['./games.less'],
 })
 export class GamesComponent implements OnInit, OnDestroy {
-  currentRoom: Room;
   private gamesSubscription: Subscription;
   games = [];
 

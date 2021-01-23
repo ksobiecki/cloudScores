@@ -1,17 +1,53 @@
-<div clas="room-info">
+<div class="dashboard-container">
+  <div class="info-card">
     <h2>Room1</h2>
-    <img src="../../../assets/img/avatar1.png" alt="room image">
-    <p>XG4KM32P</p>
-    <a href="#">change room</a>
-</div>
-<div class="game-info">
-    <h2></h2>
-</div>
-<div class="button-container">
+    <div class="room-management">
+      <a [routerLink]="['/rooms']" class="change-button">change room</a>
+      <span class="separator"> | </span>
+      <a href="#" class="remove-button">
+        <span *ngIf="isRoomAuthor===true; else isNotRoomAuthor"
+          >delete room</span
+        >
+        <ng-template #isNotRoomAuthor> <span>leave room</span> </ng-template>
+      </a>
+    </div>
+    <img src="../../../assets/img/avatar17.png" alt="room image" />
+    <div (click)="copyCode()" class="invite-container">
+      <p>
+        Click to copy invite code: <br />
+        <span>{{inviteCode}}</span>
+      </p>
+    </div>
+  </div>
+  <div class="info-card">
+    <div *ngIf="chosenGame===''; else gameSelectedBlock" class="gameCardOff">
+      <h2>Select a game</h2>
+      <br />
+      <fa-icon [icon]="faGamepad"></fa-icon>
+    </div>
+    <ng-template #gameSelectedBlock>
+      <div class="gameCardOn">
+        <h2>Among Us</h2>
+        <a href="#" class="change-button">change game</a>
+        <img
+          src="https://android.com.pl/apps/wp-content/uploads/2020/09/amonguslogo.png"
+          alt="game image"
+        />
+      </div>
+    </ng-template>
+  </div>
+  <div class="buttons-container">
     <div class="button-container">
-        <button class="my-stats">My Stats</button>
+      <button class="my-stats">
+        My Stats
+        <fa-icon [icon]="faMedal"></fa-icon>
+      </button>
     </div>
     <div class="button-container">
-        <button class="game-stats">Game Stats</button>
+      <button class="game-stats" [disabled]="chosenGame===''">
+        Game Stats
+        <fa-icon [icon]="faTrophy"></fa-icon>
+      </button>
     </div>
+  </div>
 </div>
