@@ -12,6 +12,7 @@ const appRoutes: Routes = [
   { path: 'signup', component: SignupComponent },
   { path: 'rooms', component: RoomsComponent, canActivate: [AuthGuard] },
   { path: ':name/games', component: MenuComponent, canActivate: [AuthGuard] },
+  { path: ':name/:gameName', component: MenuComponent, canActivate: [AuthGuard] },
 ];
 
 @NgModule({

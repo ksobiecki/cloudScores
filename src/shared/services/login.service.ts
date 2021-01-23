@@ -11,8 +11,14 @@ export class LoginService {
     password: '123',
     rooms_id: []
   }];
-  currentUser = null;
-  isUserLoggedIn = false;
+  currentUser = {
+    _id: '123',
+    username: 'jankowalski',
+    email: '123@123.com',
+    password: '123',
+    rooms_id: []
+  };
+  isUserLoggedIn = true;
 
   constructor(public router: Router) {}
 

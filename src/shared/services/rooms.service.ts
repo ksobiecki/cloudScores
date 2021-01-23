@@ -21,6 +21,7 @@ export class RoomsService {
         this.roomsUpdated.next([...this.rooms]);
       });
   }
+
   getRoom(name: string) {
     for (let room of this.rooms) {
       if (room.name === name) return room;
@@ -56,7 +57,7 @@ export class RoomsService {
           room.games.push(game);
           //console.log(room.games.length);
           this.gamesUpdated.next([...room.games]);
-        });       
+        });
       }
     }
   }

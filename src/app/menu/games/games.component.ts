@@ -16,7 +16,7 @@ export class GamesComponent implements OnInit, OnDestroy {
   private gamesSubscription: Subscription;
   currentRoom: Room;
   searchText: string = '';
-  games = [];
+  games = [{ id: 1, name: 'szachy', imgUrl: 'string' }];
 
   constructor(
     private roomsService: RoomsService,

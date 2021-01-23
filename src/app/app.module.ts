@@ -31,6 +31,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { SharedModule } from 'src/shared/shared.module';
 import { MenuDashboardComponent } from './menu/menu-dashboard/menu-dashboard.component';
 import { MenuComponent } from './menu/menu.component';
+import { GameMenuComponent } from './menu/game-menu/game-menu.component';
 
 @NgModule({
   declarations: [
@@ -48,7 +49,8 @@ import { MenuComponent } from './menu/menu.component';
     LoginComponent,
     SignupComponent,
     MenuComponent,
-    MenuDashboardComponent
+    MenuDashboardComponent,
+    GameMenuComponent
   ],
   imports: [
     BrowserModule,
