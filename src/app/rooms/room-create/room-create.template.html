@@ -1,6 +1,6 @@
 <div mat-dialog-content class="modal-container">
   <div class="close-button-container">
-    <button class="close-button" (click)="closeModal()">X</button>
+    <fa-icon size="2x" [icon]="faClose" (click)="closeModal()"></fa-icon>
   </div>
   <form (ngSubmit)="onSubmit(form)" #form="ngForm">
     <!-- <mat-form-field class="input-field" appearance="standard">
@@ -23,7 +23,11 @@
         ngModel
         name="name"
         #name="ngModel"
+        required
       />
+      <mat-error *ngIf="name.invalid"
+      >Name cannot be empty</mat-error
+      >
     </mat-form-field>
     <!-- <mat-form-field class="input-field" appearance="standard">
       <mat-label for="author">Author</mat-label>
@@ -63,11 +67,15 @@
         </mat-option>
       </mat-autocomplete>
     </mat-form-field> -->
-
+    <div class="image-container">
+      <fa-icon (click)="previousImage()" class="arrow-left" [icon]="faLeft" size="2x"></fa-icon>
+      <img class="avatar-icon" [src]="images[imagePointer]">
+      <fa-icon (click)="nextImage()" class="arrow-right" [icon]="faRight" size="2x"></fa-icon>
+    </div>
 
 
     <div class="button-container mat-dialog-actions">
-      <button mat-button mat-dialog-close type="submit" class="btn btn-success submit-button">
+      <button [disabled]="!form.valid" mat-button mat-dialog-close type="submit" class="btn btn-success submit-button">
         CREATE
       </button>
     </div>

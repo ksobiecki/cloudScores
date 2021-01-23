@@ -1,6 +1,6 @@
 <div mat-dialog-content class="modal-container">
   <div class="close-button-container">
-    <button class="close-button" (click)="closeModal()">X</button>
+    <fa-icon size="2x" [icon]="faClose" (click)="closeModal()"></fa-icon>
   </div>
   <form (ngSubmit)="onSubmit(form)" #form="ngForm">
     <mat-form-field class="input-field" appearance="standard">
@@ -11,14 +11,21 @@
         id="id"
         ngModel
         name="id"
-        #name="ngModel"
+        #id="ngModel"
+        required
       />
+      <mat-error *ngIf="id.invalid"
+      >Id cannot be empty</mat-error
+      >
     </mat-form-field>
     <div class="button-container mat-dialog-actions">
-      <button mat-button mat-dialog-close type="submit" class="btn btn-success submit-button">
+      <button [disabled]="!form.valid" mat-button type="submit" class="btn btn-success submit-button">
         JOIN
       </button>
     </div>
   </form>
+  <mat-label class="success-alert" *ngIf="formSubmitted">
+    Join request has ben sent to the room author!
+  </mat-label>
 
 </div>
