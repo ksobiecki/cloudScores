@@ -21,7 +21,6 @@ export class LoginService {
         )
         .subscribe((responseData) => {
           console.log(responseData.message);
-          console.log('x\n' + 'dziala poscik' + 'x\n')
         });
             return 0; //user created
   }
