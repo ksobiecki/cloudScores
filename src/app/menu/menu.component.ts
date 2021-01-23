@@ -7,6 +7,5 @@ import { Router } from '@angular/router';
   styleUrls: ['./menu.less'],
 })
 export class MenuComponent {
-
   constructor(public router: Router) {}
 }

@@ -50,7 +50,7 @@ import { GameMenuComponent } from './menu/game-menu/game-menu.component';
     SignupComponent,
     MenuComponent,
     MenuDashboardComponent,
-    GameMenuComponent
+    GameMenuComponent,
   ],
   imports: [
     BrowserModule,
