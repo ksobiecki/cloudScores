@@ -15,7 +15,7 @@ export class MenuDashboardComponent {
   faGamepad = faGamepad;
   faTrophy = faTrophy;
 
-  chosenGame: string = 'd';
+  chosenGame: string = '';
   inviteCode: string = 'XG4KM32P';
   isRoomAuthor: boolean = false;
 

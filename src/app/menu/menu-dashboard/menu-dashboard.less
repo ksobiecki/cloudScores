@@ -23,40 +23,39 @@
   }
 
   .room-management {
-
     .separator {
       font-size: 2rem;
       padding: 0 5px;
-    };
+    }
 
     .remove-button {
       text-decoration: underline;
       color: red;
 
       &:hover {
-        color: #CC0000;
+        color: #cc0000;
       }
 
       span {
         font-size: 1.5rem;
       }
     }
+  }
 
-    .change-button {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      background-color: #666666;
-      color: white;
-      padding: 4px;
-      border-radius: 10px;
-      text-transform: uppercase;
-      font-size: 1.5rem;
+  .change-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #666666;
+    color: white;
+    padding: 4px;
+    border-radius: 10px;
+    text-transform: uppercase;
+    font-size: 1.5rem;
 
-      &:hover {
-        text-decoration: none;
-        background-color: #555555;
-      }
+    &:hover {
+      text-decoration: none;
+      background-color: #555555;
     }
   }
 
@@ -128,6 +127,7 @@
     border-radius: 10px;
     border: none;
     color: white;
+    outline: none;
     background-color: #f16e00;
     font-size: 1.8rem;
 
@@ -138,6 +138,20 @@
 
     &:disabled {
       opacity: 0.75;
+    }
+
+    &:hover {
+      background-color: #e05d00;
+    }
+
+    &:disabled:hover {
+      background-color: #f16e00;
+    }
+
+    &:active {
+      background-color: #e05d00;
+      box-shadow: 0 5px #666;
+      transform: translateY(4px);
     }
 
     fa-icon {
