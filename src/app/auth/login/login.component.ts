@@ -18,14 +18,16 @@ export class LoginComponent {
     }
   }
 
-  onLogin(form: NgForm): void {
+
+ onLogin(form: NgForm): void {
     // const email = form.value.email;
     // const password = form.value.password;
     const user: User = form.value;
     console.log(form.value);
-    const result = this.loginService.login(user);
-    if(result === 0) {
-      this.router.navigateByUrl('/rooms');
-    }
+    this.loginService.login(user).then( data => {
+      if(data === 0) {
+        this.router.navigateByUrl('/rooms');
+      }
+    })
   }
 }

@@ -68,6 +68,8 @@ export class RoomsService {
     }
   }
 
+  getAllGames(){}
+
   getGamesUpdateListener() {
     return this.gamesUpdated.asObservable();
   }
