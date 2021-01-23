@@ -4,6 +4,8 @@ import { ActivatedRoute } from '@angular/router';
 import { Room } from 'src/shared/models/room.model';
 import { RoomsService } from 'src/shared/services/rooms.service';
 import { Game } from '../../../../shared/models/game.model';
+import {faTimes} from '@fortawesome/free-solid-svg-icons';
+import {MatDialog} from '@angular/material/dialog';
 
 @Component({
   selector: 'app-game-add',
@@ -11,9 +13,11 @@ import { Game } from '../../../../shared/models/game.model';
   styleUrls: ['./game-add.less'],
 })
 export class GameAddComponent {
+  faClose = faTimes;
   constructor(
     private roomsService: RoomsService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private dialog: MatDialog
   ) {}
 
   ngOnInit(): void {}
@@ -30,5 +34,8 @@ export class GameAddComponent {
     const game: Game = form.value;
 
     this.roomsService.addGame(currentRoom, game);
+  }
+  closeModal(): void {
+    const thisDialogRef = this.dialog.closeAll();
   }
 }

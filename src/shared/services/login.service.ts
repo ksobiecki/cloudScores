@@ -22,7 +22,7 @@ export class LoginService {
         .subscribe((responseData) => {
           console.log(responseData.message);
         });
-            return 0; //user created
+        return 0; // user created
   }
   public login(user: User): Promise<number> {
     return new Promise((resolve, reject) => {
@@ -34,13 +34,13 @@ export class LoginService {
         responseType: 'json'
       }
     )
-    .subscribe((postData: any) => {     
+    .subscribe((postData: any) => {
       if(user.email === postData.user.email && user.password === postData.user.password) {
         this.currentUser = postData.user;
         this.isUserLoggedIn = true;
         resolve(0);
       }
-    }); 
+    });
   });
 }
 
