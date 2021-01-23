@@ -1,9 +1,7 @@
 const mongoose = require('mongoose')
+const gameImport = require('./game');
 
-const gameSchema = mongoose.Schema({
-  name: {type: String, required: true},
-  imgURL: String
-});
+const gameSchema = gameImport.gameSchema;
 
 const roomSchema = mongoose.Schema({
     name: {type: String, required: true},

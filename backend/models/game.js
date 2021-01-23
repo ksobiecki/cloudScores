@@ -5,4 +5,9 @@ const gameSchema = mongoose.Schema({
   imgURL: String
 });
 
-module.exports = mongoose.model('Game', gameSchema);
+module.exports = {
+    gameModel: mongoose.model('Game', gameSchema),
+    gameSchema: module.exports = gameSchema
+}
+
+
