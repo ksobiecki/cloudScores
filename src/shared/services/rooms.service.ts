@@ -23,19 +23,21 @@ export class RoomsService {
       });
   }
 
-  getRooms() {
+  getRooms(): Promise<number> {
     return new Promise((resolve, reject) => {
-      let username = this.loginService.getUsername();
+      let username = this.loginService.getUsername();  
       this.http
       .post<{ message: string }>(
-        'http://localhost:3000/api/rooms/user', {'username': username}
+        'http://localhost:3000/api/rooms/user', {'author': username}
         , {
           observe: 'body',
           responseType: 'json'
         }
       )
-      .subscribe((postData: any) => {     
+      .subscribe((postData: any) => { 
+          console.log(postData);    
           this.rooms = postData.rooms;
+          this.roomsUpdated.next([...this.rooms]);
           resolve(0);
       }); 
     });
