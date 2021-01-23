@@ -4,6 +4,7 @@ const mongoose = require('mongoose');
 const Room = require('./models/room');
 const gameImport = require('./models/game')
 const Game = gameImport.gameModel;
+const User = require('./models/user');
 
 const app = express();
 
@@ -46,6 +47,39 @@ app.post('/api/games', (req,res,next) => {
 
 })
 
+app.post('/api/users', (req, res, next) => {
+  let user = null;
+  User.findOne(
+    { email: req.body.email }
+  ).then(documents => {
+    user = documents
+  });
+  if(user == null)
+  {
+    const user = new User({
+      username: req.body.username,
+      email: req.body.email,
+      password: req.body.password
+    });
+    user.save()
+    .then(() => {
+      res.status(201).json({
+      message: 'User added successfully'
+      })
+    })
+    .catch(() => {
+      res.status(401).json({
+      message: 'Unable to add user'
+      });
+    });
+  }
+  else {
+    res.status(402).json({
+    message: 'User already exists'
+    });
+  }
+})
+
 app.post("/api/rooms", (req,res, next) => {
   const room = new Room({
     name: req.body.name,
@@ -73,14 +107,23 @@ app.get('/api/rooms',(req, res, next)=>{
   .then(documents => {
     res.status(200).json({
       message: 'Get /api/rooms called successfully',
-      rooms:documents,
+      rooms: documents,
     });
   })
 });
 
-app.post('/api/users', (req, res, next) => {
 
-})
+app.post('/api/users/login', (req,res,next) => {
+  console.log(req);
+  User.findOne(
+    { email: req.body.email }
+  ).then(documents => {
+    return res.status(200).json({
+      message: 'Get /api/users/email called successfully',
+      user: documents,
+  });
+  });
+});
 
 
 
