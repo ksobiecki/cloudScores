@@ -12,9 +12,10 @@ export class RoomsService {
   rooms: Room[];
 
   constructor(private http: HttpClient, public loginService: LoginService) {}
-   getAllRooms() {
+
+  getAllRooms() {
     this.http
-      .get<{ message: string; rooms: Room[]}>(
+      .get<{ message: string; rooms: Room[] }>(
         'http://localhost:3000/api/rooms'
       )
       .subscribe((postData) => {
@@ -23,24 +24,22 @@ export class RoomsService {
       });
   }
 
-  getRooms(): Promise<number> {
-    return new Promise((resolve, reject) => {
-      let username = this.loginService.getUsername();  
-      this.http
+  getRooms() {
+    let username = this.loginService.getUsername();
+    this.http
       .post<{ message: string }>(
-        'http://localhost:3000/api/rooms/user', {'author': username}
-        , {
+        'http://localhost:3000/api/rooms/user',
+        { author: username },
+        {
           observe: 'body',
-          responseType: 'json'
+          responseType: 'json',
         }
       )
-      .subscribe((postData: any) => { 
-          console.log(postData);    
-          this.rooms = postData.rooms;
-          this.roomsUpdated.next([...this.rooms]);
-          resolve(0);
-      }); 
-    });
+      .subscribe((postData: any) => {
+        console.log(postData);
+        this.rooms = postData.rooms;
+        this.roomsUpdated.next([...this.rooms]);
+      });
   }
 
   getRoom(name: string) {
@@ -56,25 +55,28 @@ export class RoomsService {
   addRoom(room: Room) {
     let username = this.loginService.getUsername();
     this.http
-      .post<{ message: string }>('http://localhost:3000/api/rooms', {room, 'author': username})
+      .post<{ message: string }>('http://localhost:3000/api/rooms', {
+        room,
+        author: username,
+      })
       .subscribe((responseData) => {
         console.log(responseData.message);
+        this.rooms.push(room);
         this.roomsUpdated.next([...this.rooms]);
       });
-
   }
 
   addGame(currentRoom: Room, game: Game) {
     for (let room of this.rooms) {
       if (room === currentRoom) {
         this.http
-        .post<{ message: string }>('http://localhost:3000/api/games', game)
-        .subscribe((responseData) => {
-          console.log(responseData.message);
-          room.games.push(game);
-          //console.log(room.games.length);
-          this.gamesUpdated.next([...room.games]);
-        });
+          .post<{ message: string }>('http://localhost:3000/api/games', game)
+          .subscribe((responseData) => {
+            console.log(responseData.message);
+            room.games.push(game);
+            //console.log(room.games.length);
+            this.gamesUpdated.next([...room.games]);
+          });
       }
     }
   }
@@ -85,7 +87,7 @@ export class RoomsService {
     }
   }
 
-  getAllGames(){
+  getAllGames() {
     this.http
       .get<{ message: string; rooms: Room[] }>(
         'http://localhost:3000/api/games'

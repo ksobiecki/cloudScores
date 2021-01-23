@@ -4,7 +4,7 @@ import { Room } from '../../shared/models/room.model';
 import { RoomsService } from '../../shared/services/rooms.service';
 import { MatDialog } from '@angular/material/dialog';
 import { RoomAddComponent } from './room-add/room-add.component';
-import { RoomCreateComponent } from './room-create/room-create.component';
+import {RoomCreateComponent} from './room-create/room-create.component';
 
 @Component({
   selector: 'app-rooms',
