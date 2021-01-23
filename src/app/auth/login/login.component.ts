@@ -5,6 +5,7 @@ import {Router} from '@angular/router';
 import {User} from '../../../shared/models/user.model';
 
 @Component({
+  selector: 'app-login',
   templateUrl: 'login.component.html',
   styleUrls: ['login.component.less'],
 })
@@ -18,10 +19,11 @@ export class LoginComponent {
   }
 
   onLogin(form: NgForm): void {
-    const email = form.value.email;
-    const password = form.value.password;
+    // const email = form.value.email;
+    // const password = form.value.password;
+    const user: User = form.value;
     console.log(form.value);
-    const result = this.loginService.login(email, password);
+    const result = this.loginService.login(user);
     if(result === 0) {
       this.router.navigateByUrl('/rooms');
     }

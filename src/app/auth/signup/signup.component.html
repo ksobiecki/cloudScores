@@ -11,31 +11,17 @@
       *ngIf="!isLoading"
     >
       <mat-form-field>
-        <mat-label>First Name</mat-label>
+        <mat-label>Username</mat-label>
         <input
           matInput
-          name="firstName"
+          name="username"
           ngModel
-          #firstNameInput="ngModel"
+          #usernameInput="ngModel"
           type="text"
           required
         />
-        <mat-error *ngIf="firstNameInput.invalid"
-          >First name is required</mat-error
-        >
-      </mat-form-field>
-      <mat-form-field>
-        <mat-label>Last Name</mat-label>
-        <input
-          matInput
-          name="lastName"
-          ngModel
-          #lastNameInput="ngModel"
-          type="text"
-          required
-        />
-        <mat-error *ngIf="lastNameInput.invalid"
-          >Please enter your last name</mat-error
+        <mat-error *ngIf="usernameInput.invalid"
+          >Username is required</mat-error
         >
       </mat-form-field>
       <mat-form-field>

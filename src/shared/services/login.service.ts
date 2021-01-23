@@ -4,23 +4,15 @@ import { Router } from '@angular/router';
 
 @Injectable({ providedIn: 'root' })
 export class LoginService {
-  users: User[] = [
-    {
-      firstName: 'Jan',
-      lastName: 'Kowalski',
-      email: '123@123.com',
-      password: '123',
-    },
-  ];
-  // currentUser = null;
-  // isUserLoggedIn = false;
-  currentUser = {
-    firstName: 'Jan',
-    lastName: 'Kowalski',
+  users: User[] = [{
+    _id: '123',
+    username: 'jankowalski',
     email: '123@123.com',
     password: '123',
-  };
-  isUserLoggedIn = true;
+    rooms_id: []
+  }];
+  currentUser = null;
+  isUserLoggedIn = false;
 
   constructor(public router: Router) {}
 
@@ -28,10 +20,10 @@ export class LoginService {
     this.users.push(user);
     return 0;
   }
-  public login(email: string, password: string): number {
-    for (const user of this.users) {
-      if (user.email === email && user.password === password) {
-        this.currentUser = user;
+  public login(user: User): number {
+    for(const existingUser of this.users) {
+      if(user.email === existingUser.email && user.password === existingUser.password) {
+        this.currentUser = existingUser;
         this.isUserLoggedIn = true;
         return 0;
       }
@@ -40,6 +32,9 @@ export class LoginService {
   }
   public getIsUserLoggedIn(): boolean {
     return this.isUserLoggedIn;
+  }
+  public getUsername(): string {
+    return this.currentUser.username;
   }
   public logOut(): void {
     this.isUserLoggedIn = false;

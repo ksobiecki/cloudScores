@@ -5,6 +5,7 @@ import {Router} from '@angular/router';
 import {User} from '../../../shared/models/user.model';
 
 @Component({
+  selector: 'app-signup',
   templateUrl: 'signup.component.html',
   styleUrls: ['signup.component.less'],
 })
