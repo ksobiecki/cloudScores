@@ -1,6 +1,7 @@
 export interface User {
-  firstName: string;
-  lastName: string;
+  _id: string;
+  username: string;
   email: string;
   password: string;
+  rooms_id: string[];
 }
