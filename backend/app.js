@@ -89,7 +89,6 @@ app.post('/api/users', (req, res, next) => {
 })
 
 app.post("/api/rooms", (req,res, next) => {
-  console.log(req.body);
   const room = new Room({
     name: req.body.room.name,
     author: req.body.author,
@@ -98,11 +97,11 @@ app.post("/api/rooms", (req,res, next) => {
     players:[],
     code: shortid.generate()
   })
-
   room.save()
   .then(() => {
     res.status(201).json({
-    message: 'Room added successfully'
+    message: 'Room added successfully',
+    room: room
     })
   })
   .catch(() => {
