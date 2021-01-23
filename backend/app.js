@@ -122,17 +122,18 @@ app.get('/api/rooms',(req, res, next)=>{
 });
 
 app.post('/api/rooms/user',(req,res,next) => {
-  Room.find({author: req.body.username})
+  //console.log(req.body);
+  Room.find(req.body)
   .then(documents => {
-    res.status(200).json({
-      message: 'Get /api/games called successfully',
+    console.log(documents);
+    return res.status(200).json({
+      message: 'Get /api/rooms/user called successfully',
       rooms: documents,
     });
   })
 })
 
 app.post('/api/users/login', (req,res,next) => {
-  console.log(req);
   User.findOne(
     { email: req.body.email }
   ).then(documents => {
