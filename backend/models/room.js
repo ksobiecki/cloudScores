@@ -1,16 +1,14 @@
 const mongoose = require('mongoose')
+const gameImport = require('./game');
 
-const gameSchema = mongoose.Schema({
-  name: {type: String, required: true},
-  imgURL: String
-});
+const gameSchema = gameImport.gameSchema;
 
 const roomSchema = mongoose.Schema({
     name: {type: String, required: true},
     author: {type: String, required: true},
     imgSrc: {type: String, required: true},
-    games: gameSchema,
-    players:[String]
+    games: {type: [gameSchema]},
+    players:{type: [String]}
 });
 
-module.exports = mongoose.model('Room',roomSchema);
+module.exports = mongoose.model('Room', roomSchema);

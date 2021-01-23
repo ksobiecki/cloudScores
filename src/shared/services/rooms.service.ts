@@ -43,14 +43,20 @@ export class RoomsService {
         this.rooms.push(room);
         this.roomsUpdated.next([...this.rooms]);
       });
+
   }
 
   addGame(currentRoom: Room, game: Game) {
     for (let room of this.rooms) {
       if (room === currentRoom) {
-        room.games.push(game);
-        console.log(room.games.length);
-        this.gamesUpdated.next([...room.games]);
+        this.http
+        .post<{ message: string }>('http://localhost:3000/api/games', game)
+        .subscribe((responseData) => {
+          console.log(responseData.message);
+          room.games.push(game);
+          //console.log(room.games.length);
+          this.gamesUpdated.next([...room.games]);
+        });       
       }
     }
   }
