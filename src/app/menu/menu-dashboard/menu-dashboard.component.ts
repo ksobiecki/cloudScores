@@ -17,6 +17,7 @@ export class MenuDashboardComponent {
 
   chosenGame: string = '';
   inviteCode: string = 'XG4KM32P';
+  isRoomAuthor: boolean = false;
 
   copyCode = () => {
     let tempInput = document.createElement("input");
