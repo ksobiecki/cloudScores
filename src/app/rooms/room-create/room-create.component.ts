@@ -33,13 +33,14 @@ export class RoomCreateComponent {
   users: string[] = [];
   allUsers: string[] = ['Krzyś', 'Piter', 'Pyć'];
   autocompleteUserList: string[] = [...this.allUsers];
-  images: string[] = ['../../../assets/img/avatar1.png', '../../../assets/img/avatar2.png', '../../../assets/img/avatar3.png']
+  images: string[] = [];
   imagePointer = 0;
 
   @ViewChild('userInput') userInput: ElementRef<HTMLInputElement>;
   @ViewChild('auto') matAutocomplete: MatAutocomplete;
 
   constructor(private dialog: MatDialog, private roomsService: RoomsService) {
+    this.getImages();
     this.filteredUsers = this.userCtrl.valueChanges.pipe(
       startWith(null),
       map((user: string | null) => user ? this._filter(user) : null)); // this.autocompleteUserList.slice()));
@@ -126,6 +127,13 @@ export class RoomCreateComponent {
     }
     else {
       this.imagePointer = this.images.length - 1;
+    }
+  }
+
+  getImages(): void {
+    for(let i = 1; i <= 24; i++) {
+      const imageSrc = '../../../assets/img/avatar' + i.toString() + '.png';
+      this.images.push(imageSrc);
     }
   }
 
