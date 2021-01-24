@@ -38,6 +38,11 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatchesComponent } from './menu/matches/matches.component';
 import { MatchesTableComponent } from './menu/matches/matches-table/matches-table.component';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { AuthInterceptor } from './auth/auth-interceptor';
+import { GamesStatsComponent } from './menu/games/games-stats/games-stats.component';
+import { GamesStatsTableComponent } from './menu/games/games-stats/games-stats-table/games-stats-table.component';
+import { MatSortModule } from '@angular/material/sort';
 
 @NgModule({
   declarations: [
@@ -59,7 +64,9 @@ import { MatchesTableComponent } from './menu/matches/matches-table/matches-tabl
     MatchesComponent,
     MyStatsComponent,
     MyStatsTableComponent,
-    MatchesTableComponent
+    GamesStatsComponent,
+    GamesStatsTableComponent,
+    MatchesTableComponent,
   ],
   imports: [
     BrowserModule,
@@ -84,8 +91,11 @@ import { MatchesTableComponent } from './menu/matches/matches-table/matches-tabl
     MatTableModule,
     MatPaginatorModule,
     MatCheckboxModule,
+    MatSortModule,
   ],
-  providers: [],
+  providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
