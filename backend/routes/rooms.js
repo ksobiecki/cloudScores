@@ -1,10 +1,10 @@
 const express = require('express');
 const router = express.Router();
 
-const Room = require('./models/room');
-const gameImport = require('./models/game')
+const Room = require('../models/room');
+const gameImport = require('../models/game');
 const Game = gameImport.gameModel;
-const User = require('./models/user');
+const User = require('../models/user');
 const shortid = require('shortid');
 
  router.post("", (req,res, next) => {
@@ -52,3 +52,12 @@ const shortid = require('shortid');
     })
   })
 
+  router.delete('/:id', (req,res,next)=>{
+    console.log('delete api/rooms/' + req.query.id);
+    Room.deleteOne({_id: req.params.id}).then(result => {
+      console.log(result);
+      res.status(200).json({message: 'Room deleted'});
+    });
+  });
+
+module.exports = router;

@@ -38,14 +38,6 @@ app.use((req, res, next) => {
 
 app.use('/api/rooms', roomsRoutes);
 app.use('/api/games', gamesRoutes);
-app.use('./api/users', usersRoutes);
-
-app.delete('/api/rooms/:id', (req,res,next)=>{
-  console.log('delete api/rooms/' + req.query.id);
-  Room.deleteOne({_id: req.params.id}).then(result => {
-    console.log(result);
-    res.status(200).json({message: 'Room deleted'});
-  });
-});
+app.use('/api/users', usersRoutes);
 
 module.exports = app;
