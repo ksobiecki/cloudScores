@@ -5,7 +5,6 @@ import {
   faGamepad,
   faTrophy,
 } from '@fortawesome/free-solid-svg-icons';
-import { Game } from 'src/shared/models/game.model';
 import { Room } from 'src/shared/models/room.model';
 import { RoomsService } from 'src/shared/services/rooms.service';
 
