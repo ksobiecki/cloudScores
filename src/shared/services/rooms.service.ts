@@ -10,6 +10,7 @@ export class RoomsService {
   private roomsUpdated = new Subject<Room[]>();
   private gamesUpdated = new Subject<Game[]>();
   rooms: Room[];
+  allGames: Game[];
 
   constructor(private http: HttpClient, public loginService: LoginService) {}
 
@@ -81,7 +82,7 @@ export class RoomsService {
     }
   }
 
-  getGames(name: string) {
+  getGamesForRoom(name: string) {
     for (let room of this.rooms) {
       if (room.name === name) return [...room.games];
     }
@@ -93,7 +94,8 @@ export class RoomsService {
         'http://localhost:3000/api/games'
       )
       .subscribe((postData) => {
-        //this.games = postData.games;
+        console.log(postData.games);
+        this.allGames = postData.games;
       });
   }
 
