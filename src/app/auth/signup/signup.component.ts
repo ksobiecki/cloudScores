@@ -23,10 +23,9 @@ export class SignupComponent {
   }
 
   onSignup(form: NgForm): void {
-    // console.log(form.value);
     const user: User = form.value;
     const result = this.loginService.createUser(user);
-    console.log(result);
+    //console.log(result);
     if(result === 0) {
       this.router.navigateByUrl('/');
     }

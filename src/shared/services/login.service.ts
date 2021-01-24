@@ -17,12 +17,16 @@ export class LoginService {
   constructor(public router: Router, private http: HttpClient) {}
 
   public createUser(user: User): number {
+    console.log(user);
     this.http
       .post<{ message: string }>('http://localhost:3000/api/users/signup', user)
       .subscribe((responseData) => {
         console.log(responseData.message);
       });
+      console.log('end of create user');
     return 0; // user created
+
+    
   }
 
   public login(user: User): Promise<number> {
@@ -94,7 +98,7 @@ export class LoginService {
       this.authStatusListener.next(true);
     }
   }
-  
+
   public getCurrentUser(): User {
 
     return this.currentUser;

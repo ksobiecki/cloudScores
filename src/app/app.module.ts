@@ -40,13 +40,10 @@ import { MatchesComponent } from './menu/matches/matches.component';
 import { MatchesTableComponent } from './menu/matches/matches-table/matches-table.component';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AuthInterceptor } from './auth/auth-interceptor';
-<<<<<<< HEAD
 import { GamesStatsComponent } from './menu/games/games-stats/games-stats.component';
 import { GamesStatsTableComponent } from './menu/games/games-stats/games-stats-table/games-stats-table.component';
 import { MatSortModule } from '@angular/material/sort';
-=======
 
->>>>>>> bee5a2e (maly fixik)
 
 @NgModule({
   declarations: [
@@ -94,11 +91,9 @@ import { MatSortModule } from '@angular/material/sort';
     MatProgressSpinnerModule,
     MatTableModule,
     MatPaginatorModule,
-<<<<<<< HEAD
     MatCheckboxModule,
     MatSortModule,
-=======
->>>>>>> bee5a2e (maly fixik)
+
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
