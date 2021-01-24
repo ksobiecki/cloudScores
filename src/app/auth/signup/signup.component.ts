@@ -26,9 +26,9 @@ export class SignupComponent {
     const user: User = form.value;
     const result = this.loginService.createUser(user);
     //console.log(result);
-    if(result === 0) {
-      this.router.navigateByUrl('/');
-    }
+    // if(result === 0) {
+    //   this.router.navigateByUrl('/');
+    // }
   }
 
   verifyInput(): void {
