@@ -81,7 +81,7 @@ router.put("/game", checkAuth, (req, res, next) => {
 });
 
 router.delete("/:id", checkAuth, (req, res, next) => {
-  Room.deleteOne({ _id: req.params.id }).then((result) => {
+  Room.deleteOne({ name: req.params.id }).then((result) => {
     res.status(200).json({ message: "Room deleted" });
   });
 });

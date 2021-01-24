@@ -95,7 +95,7 @@ export class RoomsService {
   deleteRoom(roomName: string){
     this.http.delete('http://localhost:3000/api/rooms/' + roomName)
     .subscribe(() => {
-      console.log('Deleted!');
+      //console.log('Deleted!');
     });
   }
 
