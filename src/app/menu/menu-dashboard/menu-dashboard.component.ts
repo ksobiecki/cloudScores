@@ -46,10 +46,6 @@ export class MenuDashboardComponent implements OnInit {
     }
   }
 
-  onDelete(roomId: string) {
-    this.roomsService.deleteRoom(roomId);
-  }
-
   copyCode = () => {
     let tempInput = document.createElement('input');
     tempInput.classList.add('hidden-input');
@@ -80,5 +76,10 @@ export class MenuDashboardComponent implements OnInit {
     this.currentGame = null;
     this.router.navigate([this.currentRoom.name, 'games']);
     console.log(this.currentRoom, this.currentGame);
+  }
+
+  onDelete(roomId: string) {
+    this.roomsService.deleteRoom(roomId);
+    this.router.navigate(['/rooms']);
   }
 }
