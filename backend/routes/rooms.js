@@ -42,25 +42,36 @@ router.get("", (req, res, next) => {
   });
 });
 
-router.post("/user", checkAuth, (req, res, next) => {
-  Room.find(req.body).then((documents) => {
-    return res.status(200).json({
-      message: "Get /api/rooms/user called successfully",
-      rooms: documents,
-    });
-  });
-});
+  router.post('/user',(req,res,next) => {
+    Room.find(req.body)
+    .then(documents => {
+      return res.status(200).json({
+        message: 'Get /api/rooms/user called successfully',
+        rooms: documents,
+      });
+    })
+  })
 
-router.post("/user/games", checkAuth, (req, res, next) => {
-  Room.find(req.body).then((documents) => {
-    return res.status(200).json({
-      message: "Get dupa called successfully",
-      games: documents.games,
-    });
-  });
-});
+  router.get('/:name/games', (req, res, next) => {
+    Room.find({name: req.params.name}, 'games')
+    .then(documents => {
+      return res.status(200).json({
+        message: 'Get games for room',
+        games: documents
+      })
+    }).catch(err => console.log(err));
+  })
 
-router.put("/:code", (req, res, next) => {
+  router.put('/game', (req,res,next) => {
+        Room.updateOne(
+            {_id: req.body.room._id},
+            { $push: {games: req.body.gameName}}
+        ).then( result => {
+          res.status(200).json({message: 'Game added to room'});
+        })
+    })
+
+ router.put("/:code", (req, res, next) => {
   Room.updateOne(
     { code: req.params.code },
     { $push: { players: req.body.newUser } }
@@ -68,7 +79,7 @@ router.put("/:code", (req, res, next) => {
     .then((result) => {
       res.status(200).json({ message: "User added to room" });
     })
-    .catch((err) => console.log(err));
+    .catch(err => console.log(err));
 });
 
 router.put("/game", checkAuth, (req, res, next) => {
@@ -108,5 +119,15 @@ router.post("/user/leave/:username", checkAuth, (req, res, next) => {
       res.status(402).json({ message: "Unable to leave room" });
     });
 });
+
+  router.get('',(req, res, next)=>{
+      Room.find()
+      .then(documents => {
+        res.status(200).json({
+          message: 'Get /api/rooms called successfully',
+          rooms: documents,
+        });
+      })
+    });
 
 module.exports = router;
