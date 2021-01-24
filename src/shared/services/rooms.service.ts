@@ -4,23 +4,22 @@ import { Game } from '../models/game.model';
 import { Room } from '../models/room.model';
 import { HttpClient } from '@angular/common/http';
 import { LoginService } from './login.service';
-import { ActivatedRoute } from '@angular/router';
+import { User } from '../models/user.model';
 
 @Injectable({ providedIn: 'root' })
 export class RoomsService {
   private roomsUpdated = new Subject<Room[]>();
   private gamesUpdated = new Subject<Game[]>();
+  private allRoomsUpdated = new Subject<Room[]>();
   private gamesAllUpdated = new Subject<Game[]>();
   rooms: Room[];
   allGames: Game[];
+  allRooms: Room[];
+
   currentRoom = null;
 
-  constructor(
-    private http: HttpClient,
-    public loginService: LoginService,
-    private route: ActivatedRoute
-  ) {
-    this.getAllGames();
+  constructor(private http: HttpClient, public loginService: LoginService) {
+    this.getAllRooms();
   }
 
   // ---ROOMS---
@@ -31,8 +30,8 @@ export class RoomsService {
         'http://localhost:3000/api/rooms'
       )
       .subscribe((postData) => {
-        this.rooms = postData.rooms;
-        this.roomsUpdated.next([...this.rooms]);
+        this.allRooms = postData.rooms;
+        this.allRoomsUpdated.next([...this.allRooms]);
       });
   }
 
@@ -53,6 +52,12 @@ export class RoomsService {
       });
   }
 
+  getRoomByCode(code:String){
+    for (let room of this.allRooms) {
+      if(room.code.localeCompare(code.toString()) == 0) return room
+    }
+  }
+
   getRoomsUpdateListener() {
     return this.roomsUpdated.asObservable();
   }
@@ -67,14 +72,6 @@ export class RoomsService {
       .subscribe((responseData: any) => {
         this.rooms.push(responseData.room);
         this.roomsUpdated.next([...this.rooms]);
-      });
-  }
-
-  deleteRoom(postId: string) {
-    this.http
-      .delete('http://localhost:3000/api/rooms/' + postId)
-      .subscribe(() => {
-        console.log('Deleted!');
       });
   }
 
@@ -93,6 +90,13 @@ export class RoomsService {
 
   getAllGamesUpdateListener() {
     return this.gamesAllUpdated.asObservable();
+  }
+
+  deleteRoom(postId: string){
+    this.http.delete('http://localhost:3000/api/rooms/' + postId)
+    .subscribe(() => {
+      console.log('Deleted!');
+    });
   }
 
   getGamesForRoom(name: string) {
@@ -164,5 +168,18 @@ export class RoomsService {
       if (game.name === gameName) return game;
     }
     return null;
+  }
+
+  addUserToRoom(code: string) {
+    let newUser = this.loginService.getUsername();
+    let room = this.getRoomByCode(code);
+    console.log(room.code);
+    this.http.put<{ message: string}>('http://localhost:3000/api/rooms/' + code, {
+      room,
+      newUser
+    }).subscribe((responseData) =>{
+      console.log(responseData.message);
+      room.players.push(newUser);
+      });
   }
 }

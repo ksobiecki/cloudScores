@@ -6,6 +6,7 @@ const gameImport = require('../models/game');
 const Game = gameImport.gameModel;
 const User = require('../models/user');
 const shortid = require('shortid');
+const room = require('../models/room');
 
  router.post("", (req,res, next) => {
     const room = new Room({
@@ -29,7 +30,7 @@ const shortid = require('shortid');
       });
     });
   });
-  
+
   router.get('',(req, res, next)=>{
     Room.find()
     .then(documents => {
@@ -39,7 +40,7 @@ const shortid = require('shortid');
       });
     })
   });
-  
+
   router.post('/user',(req,res,next) => {
     Room.find(req.body)
     .then(documents => {
@@ -49,6 +50,16 @@ const shortid = require('shortid');
       });
     })
   })
+
+  router.put('/:code', (req, res, next) =>{
+    Room.updateOne(
+      {code: req.params.code},
+      {$push: {players: req.body.newUser}})
+    .then( result => {
+      res.status(200).json({message: 'User added to room'});
+    })
+    .catch(err => console.log(err));
+    })
 
   router.put('/game', (req,res,next) => {
       Room.updateOne(
