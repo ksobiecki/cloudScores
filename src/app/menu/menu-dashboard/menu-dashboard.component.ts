@@ -47,4 +47,8 @@ export class MenuDashboardComponent implements OnInit {
     document.execCommand('copy');
     document.body.removeChild(tempInput);
   };
+
+  onMyStatsClick = () => {
+    this.router.navigate(['my-stats']);
+  }
 }
