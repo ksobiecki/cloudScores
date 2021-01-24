@@ -44,6 +44,7 @@ import { GamesStatsComponent } from './menu/games/games-stats/games-stats.compon
 import { GamesStatsTableComponent } from './menu/games/games-stats/games-stats-table/games-stats-table.component';
 import { MatSortModule } from '@angular/material/sort';
 import {PlayComponent} from './play/play.component';
+import {MatStepperModule} from '@angular/material/stepper';
 
 @NgModule({
   declarations: [
@@ -94,6 +95,7 @@ import {PlayComponent} from './play/play.component';
     MatPaginatorModule,
     MatCheckboxModule,
     MatSortModule,
+    MatStepperModule,
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
