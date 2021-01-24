@@ -1,5 +1,5 @@
 <div class="menu-container">
   <app-menu-dashboard></app-menu-dashboard>
   <app-games *ngIf="router.url.includes('games')"></app-games>
-  <app-game-menu *ngIf="!router.url.includes('games')"></app-game-menu>
+  <app-matches *ngIf="!router.url.includes('games')"></app-matches>
 </div>

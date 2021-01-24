@@ -12,6 +12,7 @@ export class RoomsService {
   private gamesUpdated = new Subject<Game[]>();
   private allRoomsUpdated = new Subject<Room[]>();
   private gamesAllUpdated = new Subject<Game[]>();
+  games: Game[];
   rooms: Room[];
   allGames: Game[];
   allRooms: Room[];
@@ -20,6 +21,7 @@ export class RoomsService {
 
   constructor(private http: HttpClient, public loginService: LoginService) {
     this.getAllRooms();
+    this.getAllGames();
   }
 
   // ---ROOMS---
@@ -101,28 +103,13 @@ export class RoomsService {
 
   getGamesForRoom(name: string) {
     this.http
-      .post<{ message: string }>(
-        'http://localhost:3000/api/rooms/user',
-        { room: name },
-        {
-          observe: 'body',
-          responseType: 'json',
-        }
-      )
-      .subscribe((postData: any) => {
-        console.log(postData);
-        this.rooms = postData.rooms;
-        this.roomsUpdated.next([...this.rooms]);
-      });
-
-    this.http
       .get<{ message: string; games: Game[] }>(
         'http://localhost:3000/api/games/user'
       )
       .subscribe((postData: any) => {
         console.log(postData.games);
-        this.allGames = postData.games;
-        this.gamesAllUpdated.next([...this.allGames]);
+        this.games = postData.games;
+        this.gamesUpdated.next([...this.games]);
       });
   }
 

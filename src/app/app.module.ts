@@ -31,12 +31,13 @@ import { HttpClientModule } from '@angular/common/http';
 import { SharedModule } from 'src/shared/shared.module';
 import { MenuDashboardComponent } from './menu/menu-dashboard/menu-dashboard.component';
 import { MenuComponent } from './menu/menu.component';
-import { GameMenuComponent } from './menu/game-menu/game-menu.component';
 import { MyStatsComponent } from './my-stats/my-stats.component';
 import { MyStatsTableComponent } from './my-stats/my-stats-table/my-stats-table.component';
 import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
-import {MatCheckboxModule} from '@angular/material/checkbox';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatchesComponent } from './menu/matches/matches.component';
+import { MatchesTableComponent } from './menu/matches/matches-table/matches-table.component';
 
 @NgModule({
   declarations: [
@@ -55,9 +56,10 @@ import {MatCheckboxModule} from '@angular/material/checkbox';
     SignupComponent,
     MenuComponent,
     MenuDashboardComponent,
-    GameMenuComponent,
+    MatchesComponent,
     MyStatsComponent,
-    MyStatsTableComponent
+    MyStatsTableComponent,
+    MatchesTableComponent
   ],
   imports: [
     BrowserModule,

@@ -1,0 +1,14 @@
+<div class="matches-container">
+  <h1 class="matches-header">Let's play!</h1>
+  <div class="matches-header-container">
+    <fa-icon [icon]="faHandPointRight" class="icon-left-side"></fa-icon>
+    <div class="new-match-button">
+      <button (click)="onMatchStart()">
+        <span>start new game</span>
+      </button>
+    </div>
+    <fa-icon [icon]="faHandPointLeft" class="icon-right-side"></fa-icon>
+  </div>
+  <app-matches-table></app-matches-table>
+</div>
+
