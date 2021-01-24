@@ -93,7 +93,7 @@ export class RoomsService {
       .get<{ message: string; rooms: Room[] }>(
         'http://localhost:3000/api/games'
       )
-      .subscribe((postData) => {
+      .subscribe((postData: any) => {
         console.log(postData.games);
         this.allGames = postData.games;
       });

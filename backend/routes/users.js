@@ -1,9 +1,9 @@
 const express = require('express');
 const router = express.Router();
 
-const User = require('./models/user');
+const User = require('../models/user');
 
-router.post('/api/users', (req, res, next) => {
+router.post('', (req, res, next) => {
     User.findOne(
       { email: req.body.email }
     ).then(documents => {
@@ -41,7 +41,7 @@ router.post('/api/users', (req, res, next) => {
   
   
   
-  router.post('/api/users/login', (req,res,next) => {
+  router.post('/login', (req,res,next) => {
     User.findOne(
       { email: req.body.email }
     ).then(documents => {
