@@ -29,7 +29,14 @@ export class GamesComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit(): void {
-    this.currentRoom = this.roomsService.getCurrentRoom(this.route.snapshot.params['name']);
+    this.currentRoom = this.roomsService.getRoom(
+      this.route.snapshot.params['name']
+    );
+
+    // this.games = this.roomsService.getGamesForRoom(
+    //   this.route.snapshot.params['name']
+    // );
+
     this.gamesSubscription = this.roomsService
       .getGamesForRoomUpdateListener()
       .subscribe((games: Game[]) => (this.games = games));

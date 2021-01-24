@@ -36,7 +36,10 @@ import { MyStatsComponent } from './my-stats/my-stats.component';
 import { MyStatsTableComponent } from './my-stats/my-stats-table/my-stats-table.component';
 import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { AuthInterceptor } from './auth/auth-interceptor';
 import {MatCheckboxModule} from '@angular/material/checkbox';
+
 
 @NgModule({
   declarations: [
@@ -83,7 +86,9 @@ import {MatCheckboxModule} from '@angular/material/checkbox';
     MatPaginatorModule,
     MatCheckboxModule,
   ],
-  providers: [],
+  providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
