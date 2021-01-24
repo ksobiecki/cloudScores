@@ -54,11 +54,11 @@ export class GameAddComponent implements OnInit, AfterViewInit {
   }
 
   onSubmit(form: NgForm): void {
-    const currentRoom: string = this.data.currentRoom.name;
+    const currentRoom: string = this.data.currentRoom;
     console.log(currentRoom);
     const chosenGame = this.selection.selected[0];
     chosenGame.imgUrl = chosenGame.imgUrl.substring(3);
-    console.log(chosenGame);
+    console.log('room: ', currentRoom, 'game: ', chosenGame);
     this.roomsService.addGameToRoom(currentRoom, chosenGame);
     // this.roomsService.addGame(currentRoom, game);
   }
