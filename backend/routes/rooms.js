@@ -41,10 +41,8 @@ const shortid = require('shortid');
   });
   
   router.post('/user',(req,res,next) => {
-    //console.log(req.body);
     Room.find(req.body)
     .then(documents => {
-      console.log(documents);
       return res.status(200).json({
         message: 'Get /api/rooms/user called successfully',
         rooms: documents,
@@ -52,10 +50,17 @@ const shortid = require('shortid');
     })
   })
 
+  router.put('/game', (req,res,next) => {
+      Room.updateOne(
+          {_id: req.body.room._id},
+          { $push: {games: req.body.gameName}}
+      ).then( result => {
+        res.status(200).json({message: 'Game added to room'});
+      })
+  })
+
   router.delete('/:id', (req,res,next)=>{
-    console.log('delete api/rooms/' + req.query.id);
     Room.deleteOne({_id: req.params.id}).then(result => {
-      console.log(result);
       res.status(200).json({message: 'Room deleted'});
     });
   });
