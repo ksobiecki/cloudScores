@@ -27,4 +27,30 @@ export class SignupComponent {
       this.router.navigateByUrl('/');
     }
   }
+
+  verifyInput(): void {
+    const input = (document.getElementById('passwordInput') as HTMLInputElement).value;
+    const upperInput = input.toUpperCase();
+    const lowerInput = input.toLowerCase();
+    const numbers = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'];
+    let containsNumber = false;
+    for(const num of numbers) {
+      if(input.indexOf(num) >= 0) {
+        containsNumber = true;
+      }
+    }
+    const error = document.getElementById('passwordError');
+    if(input.length < 8) {
+      error.innerHTML = 'Password must be at least 8 characters long';
+    }
+    else if(lowerInput === input) {
+      error.innerHTML = 'Password must contain at least one upper case character';
+    }
+    else if(upperInput === input) {
+      error.innerHTML = 'Password must contain at least one lower case character';
+    }
+    else if(!containsNumber) {
+      error.innerHTML = 'Password must contain at least one number';
+    }
+  }
 }
