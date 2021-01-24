@@ -22,7 +22,8 @@ export class DeleteConfirmModalComponent {
   ) {}
 
   onDeleteRoom(): void {
-    this.roomsService.deleteRoom(this.data.currentRoom._id);
+    if (this.data.isAuthor) this.roomsService.deleteRoom(this.data.currentRoom._id);
+    // else this.roomsService.
     this.router.navigate(['/rooms']);
     this.closeModal();
   }
