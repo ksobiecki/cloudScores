@@ -19,19 +19,17 @@ export class GamesComponent implements OnInit, OnDestroy {
   searchText: string = '';
   games = [];
 
+  currentGame = "Szachy";
+
   constructor(
     private roomsService: RoomsService,
     private route: ActivatedRoute,
-    public dialog: MatDialog
+    public dialog: MatDialog,
+    public router: Router
   ) {}
 
   ngOnInit(): void {
-    this.currentRoom = this.roomsService.getRoom(
-      this.route.snapshot.params['name']
-    );
-    // this.games = this.roomsService.getGamesForRoom(
-    //   this.route.snapshot.params['name']
-    // );
+    this.currentRoom = this.roomsService.getCurrentRoom(this.route.snapshot.params['name']);
     this.gamesSubscription = this.roomsService
       .getGamesForRoomUpdateListener()
       .subscribe((games: Game[]) => (this.games = games));
@@ -46,4 +44,10 @@ export class GamesComponent implements OnInit, OnDestroy {
       data: { currentRoom: this.currentRoom.name },
     });
   }
+
+  //for debuging until add game functionality is ready
+
+  // openDialog() {
+  //   this.router.navigate([this.currentRoom.name, this.currentGame]);
+  // }
 }
