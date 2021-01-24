@@ -41,6 +41,16 @@ const room = require('../models/room');
     })
   })
 
+  router.get('/:code/games', (req, res, next) => {
+    Room.find({code: req.params.code}, games)
+    .then(documents => {
+      return res.status(200).json({
+        message: 'Get games for room',
+        games: documents
+      })
+    }).catch(err => console.log(err));
+  })
+
   router.put('/:code', (req, res, next) =>{
     Room.updateOne(
       {code: req.params.code},
@@ -65,5 +75,15 @@ const room = require('../models/room');
       res.status(200).json({message: 'Room deleted'});
     });
   });
+
+  router.get('',(req, res, next)=>{
+      Room.find()
+      .then(documents => {
+        res.status(200).json({
+          message: 'Get /api/rooms called successfully',
+          rooms: documents,
+        });
+      })
+    });
 
 module.exports = router;

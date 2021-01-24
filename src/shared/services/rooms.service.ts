@@ -13,6 +13,7 @@ export class RoomsService {
   private allRoomsUpdated = new Subject<Room[]>();
   private gamesAllUpdated = new Subject<Game[]>();
   rooms: Room[];
+  games: Game[]
   allGames: Game[];
   allRooms: Room[];
 
@@ -99,30 +100,15 @@ export class RoomsService {
     });
   }
 
-  getGamesForRoom(name: string) {
-    this.http
-      .post<{ message: string }>(
-        'http://localhost:3000/api/rooms/user',
-        { room: name },
-        {
-          observe: 'body',
-          responseType: 'json',
-        }
-      )
-      .subscribe((postData: any) => {
-        console.log(postData);
-        this.rooms = postData.rooms;
-        this.roomsUpdated.next([...this.rooms]);
-      });
-
+  getGamesForRoom(code: string) {
     this.http
       .get<{ message: string; games: Game[] }>(
-        'http://localhost:3000/api/games/user'
+        'http://localhost:3000/api/rooms/' + code + 'games'
       )
       .subscribe((postData: any) => {
         console.log(postData.games);
-        this.allGames = postData.games;
-        this.gamesAllUpdated.next([...this.allGames]);
+        this.games = postData.games;
+        this.gamesUpdated.next([...this.games]);
       });
   }
 
