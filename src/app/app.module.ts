@@ -93,6 +93,7 @@ import { MatSortModule } from '@angular/material/sort';
     MatPaginatorModule,
     MatCheckboxModule,
     MatSortModule,
+
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
