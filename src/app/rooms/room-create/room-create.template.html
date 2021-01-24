@@ -24,6 +24,7 @@
         name="name"
         #name="ngModel"
         required
+        [maxLength]="12"
       />
       <mat-error *ngIf="name.invalid"
       >Name cannot be empty</mat-error
