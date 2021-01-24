@@ -6,9 +6,11 @@ const gameImport = require('../models/game');
 const Game = gameImport.gameModel;
 const User = require('../models/user');
 const shortid = require('shortid');
+const checkAuth = require('../middleware/check-auth');
 const room = require('../models/room');
 
- router.post("", (req,res, next) => {
+
+ router.post("", checkAuth, (req,res, next) => {
     const room = new Room({
       name: req.body.room.name,
       author: req.body.author,
@@ -40,13 +42,23 @@ const room = require('../models/room');
       });
     })
   });
-
-  router.post('/user',(req,res,next) => {
+  
+  router.post('/user',checkAuth, (req,res,next) => {
     Room.find(req.body)
     .then(documents => {
       return res.status(200).json({
         message: 'Get /api/rooms/user called successfully',
         rooms: documents,
+      });
+    })
+  })
+
+  router.post('/user/games', checkAuth, (req,res,next) => {
+    Room.find(req.body)
+    .then(documents => {
+      return res.status(200).json({
+        message: 'Get dupa called successfully',
+        games: documents.games,
       });
     })
   })
@@ -61,7 +73,7 @@ const room = require('../models/room');
     .catch(err => console.log(err));
     })
 
-  router.put('/game', (req,res,next) => {
+  router.put('/game', checkAuth, (req,res,next) => {
       Room.updateOne(
           {_id: req.body.room._id},
           { $push: {games: req.body.gameName}}
@@ -70,7 +82,7 @@ const room = require('../models/room');
       })
   })
 
-  router.delete('/:id', (req,res,next)=>{
+  router.delete('/:id', checkAuth, (req,res,next)=>{
     Room.deleteOne({_id: req.params.id}).then(result => {
       res.status(200).json({message: 'Room deleted'});
     });

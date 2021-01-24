@@ -38,6 +38,9 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatchesComponent } from './menu/matches/matches.component';
 import { MatchesTableComponent } from './menu/matches/matches-table/matches-table.component';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { AuthInterceptor } from './auth/auth-interceptor';
+import {MatCheckboxModule} from '@angular/material/checkbox';
 
 @NgModule({
   declarations: [
@@ -85,7 +88,9 @@ import { MatchesTableComponent } from './menu/matches/matches-table/matches-tabl
     MatPaginatorModule,
     MatCheckboxModule,
   ],
-  providers: [],
+  providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

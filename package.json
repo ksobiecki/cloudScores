@@ -29,6 +29,7 @@
     "bootstrap": "^3.4.1",
     "bootstrap3": "^3.3.5",
     "font-awesome": "^4.7.0",
+    "jsonwebtoken": "^8.5.1",
     "rxjs": "~6.6.0",
     "shortid": "^2.2.16",
     "tslib": "^2.0.0",
