@@ -19,7 +19,8 @@ export class LoginComponent {
   }
 
 
- onLogin(form: NgForm): void {
+  onLogin(form: NgForm): void {
+
     // const email = form.value.email;
     // const password = form.value.password;
     const user: User = form.value;

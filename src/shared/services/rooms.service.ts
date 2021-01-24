@@ -57,11 +57,11 @@ export class RoomsService {
     this.http
       .post<{ message: string }>('http://localhost:3000/api/rooms', {
         room,
-        author: username,
+        'author': username,
       })
-      .subscribe((responseData) => {
-        console.log(responseData.message);
-        this.rooms.push(room);
+      .subscribe((responseData: any) => {
+        console.log(responseData);
+        this.rooms.push(responseData.room);
         this.roomsUpdated.next([...this.rooms]);
       });
   }
