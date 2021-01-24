@@ -34,7 +34,8 @@ export class GamesComponent implements OnInit, OnDestroy {
     this.gamesSubscription = this.roomsService
       .getGamesForRoomUpdateListener()
       .subscribe((games: Game[]) => (this.games = games));
-  }
+      this.roomsService.getGamesForRoom(this.currentRoom.code)
+    }
 
   ngOnDestroy(): void {
     this.gamesSubscription.unsubscribe();
@@ -49,5 +50,4 @@ export class GamesComponent implements OnInit, OnDestroy {
   //for debuging until add game functionality is ready
   // openDialog() {
   //   this.router.navigate([this.currentRoom.name, this.currentGame]);
-  // }
 }

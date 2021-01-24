@@ -66,11 +66,7 @@ router.post("/login", (req, res, next) => {
         user: fetchedUser
       });
     })
-    .catch((err) => {
-      return res.status(401).json({
-        message: "Auth failed!",
-      });
-    });
+    .catch(err => console.log(err));
 });
 
 module.exports = router;
