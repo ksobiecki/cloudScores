@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
 import {
   faMedal,
@@ -7,7 +8,10 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 import { Game } from 'src/shared/models/game.model';
 import { Room } from 'src/shared/models/room.model';
+import { User } from 'src/shared/models/user.model';
+import { LoginService } from 'src/shared/services/login.service';
 import { RoomsService } from 'src/shared/services/rooms.service';
+import { DeleteConfirmModalComponent } from './delete-confirm-modal/delete-confirm-modal.component';
 
 @Component({
   selector: 'app-menu-dashboard',
@@ -19,22 +23,23 @@ export class MenuDashboardComponent implements OnInit {
   faGamepad = faGamepad;
   faTrophy = faTrophy;
 
-  // chosenGameName: string = '';
   currentGame: Game = null;
-
-  isRoomAuthor: boolean = false;
+  currentUser: User = null;
   currentRoom: Room = null;
 
   constructor(
     public roomsService: RoomsService,
+    public loginService: LoginService,
     private route: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    public dialog: MatDialog
   ) {}
 
   ngOnInit(): void {
     this.currentRoom = this.roomsService.getCurrentRoom(
       this.route.snapshot.params['name']
     );
+    this.currentUser = this.loginService.getCurrentUser();
     if (
       this.roomsService.getCurrentGame(
         this.route.snapshot.params['gameName']
@@ -61,25 +66,35 @@ export class MenuDashboardComponent implements OnInit {
   };
 
   onGamesStatsClick = () => {
-    const routeStr = this.currentRoom.name + '/' + this.currentGame.name + '/stats';
+    const routeStr =
+      this.currentRoom.name + '/' + this.currentGame.name + '/stats';
     this.router.navigate([routeStr]);
-  }
+  };
 
   onChangeRoom = () => {
     this.currentGame = null;
     this.currentRoom = null;
     this.router.navigate(['/rooms']);
     console.log(this.currentRoom, this.currentGame);
-  }
+  };
 
   onChangeGame = () => {
     this.currentGame = null;
     this.router.navigate([this.currentRoom.name, 'games']);
     console.log(this.currentRoom, this.currentGame);
-  }
+  };
 
   onDelete(roomId: string) {
-    this.roomsService.deleteRoom(roomId);
-    this.router.navigate(['/rooms']);
+    const dialogRef = this.dialog.open(DeleteConfirmModalComponent, {
+      data: {
+        currentRoom: this.currentRoom,
+        isAuthor: this.isRoomAuthor(),
+      },
+    });
   }
+
+  isRoomAuthor = () => {
+    if (this.currentRoom.author === this.currentUser.username) return true;
+    else return false;
+  };
 }

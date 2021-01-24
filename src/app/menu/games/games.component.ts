@@ -42,7 +42,6 @@ export class GamesComponent implements OnInit, OnDestroy {
   }
 
   openDialog() {
-    console.log('current room' + this.currentRoom.name);
     const dialogRef = this.dialog.open(GameAddComponent, {
       data: { currentRoom: this.currentRoom.name },
     });
