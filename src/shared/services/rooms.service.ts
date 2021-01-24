@@ -40,7 +40,7 @@ export class RoomsService {
     this.http
       .post<{ message: string }>(
         'http://localhost:3000/api/rooms/user',
-        { author: username },
+        { players: username },
         {
           observe: 'body',
           responseType: 'json',
