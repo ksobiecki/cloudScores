@@ -8,7 +8,7 @@ import { MatPaginator } from '@angular/material/paginator';
   styleUrls: ['./my-stats-table.less'],
 })
 export class MyStatsTableComponent implements AfterViewInit {
-  displayedColumns: string[] = ['game name', 'games played', 'total score', 'global ranking'];
+  displayedColumns: string[] = ['gameName', 'gamesPlayed', 'totalScore', 'globalRanking'];
   dataSource = new MatTableDataSource<MyStatsTableElement>(ELEMENT_DATA);
 
   @ViewChild(MatPaginator) paginator: MatPaginator;

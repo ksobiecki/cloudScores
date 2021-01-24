@@ -1,0 +1,2 @@
+error 404 on REQUEST
+-sprawdzić czy sciezka jest ok, w app.js czy xxxxxRoutes ma dobra sciezke /api/xxxx, a nastepnie wejsc w te routes i konkretne requesty czy zaczyna sie od '/'
