@@ -99,7 +99,7 @@ export class RoomsService {
     });
   }
 
-  getGamesForRoom(name: string) {
+  getGamesForRoom(code: string) {
     this.http
       .post<{ message: string }>(
         'http://localhost:3000/api/rooms/user/games',
@@ -117,7 +117,7 @@ export class RoomsService {
 
     this.http
       .get<{ message: string; games: Game[] }>(
-        'http://localhost:3000/api/games/user'
+        'http://localhost:3000/api/rooms/' + code + '/games'
       )
       .subscribe((postData: any) => {
         console.log(postData.games);
@@ -138,10 +138,12 @@ export class RoomsService {
 
   //tu jest chujowe nazewnictwo, czekam na dokonczenie modala
   addGameToRoom(currentRoomName: String, game: Game) {
+
     for (let room of this.rooms) {
       if (room.name === currentRoomName) {
         for (let gameName of this.allGames) {
           if (gameName.name === game.name) {
+
             this.http
               .put<{ message: string }>(
                 'http://localhost:3000/api/rooms/game',
@@ -150,6 +152,7 @@ export class RoomsService {
               .subscribe((responseData) => {
                 room.games.push(gameName);
                 this.gamesUpdated.next([...room.games]);
+                console.log(responseData.message);
               });
           }
         }
