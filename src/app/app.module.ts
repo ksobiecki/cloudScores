@@ -39,6 +39,7 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import {GamesStatsComponent} from './menu/games/games-stats/games-stats.component';
 import {GamesStatsTableComponent} from './menu/games/games-stats/games-stats-table/games-stats-table.component';
+import {MatSortModule} from '@angular/material/sort';
 
 @NgModule({
   declarations: [
@@ -86,6 +87,7 @@ import {GamesStatsTableComponent} from './menu/games/games-stats/games-stats-tab
     MatTableModule,
     MatPaginatorModule,
     MatCheckboxModule,
+    MatSortModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
