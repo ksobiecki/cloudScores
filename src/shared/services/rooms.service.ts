@@ -82,23 +82,6 @@ export class RoomsService {
   }
 
 
-  // addUserToRoom(code: String, user: User) {
-  //   for (let room of this.rooms) {
-  //     if (room === code) {
-  //       for(let gameName of this.allGames){
-  //         if(gameName.name === game.name){
-  //           this.http
-  //             .put<{ message: string }>('http://localhost:3000/api/rooms/game', {gameName, room})
-  //             .subscribe((responseData) => {
-  //                room.games.push(gameName);
-  //                this.gamesUpdated.next([...room.games]);
-  //             });
-  //         }
-  //       }
-  //     }
-  //   }
-  // }
-
   getAllGames() {
     this.http
       .get<{ message: string; rooms: Room[] }>(
