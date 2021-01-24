@@ -43,6 +43,7 @@ import { AuthInterceptor } from './auth/auth-interceptor';
 import { GamesStatsComponent } from './menu/games/games-stats/games-stats.component';
 import { GamesStatsTableComponent } from './menu/games/games-stats/games-stats-table/games-stats-table.component';
 import { MatSortModule } from '@angular/material/sort';
+import {PlayComponent} from './play/play.component';
 
 @NgModule({
   declarations: [
@@ -67,6 +68,7 @@ import { MatSortModule } from '@angular/material/sort';
     GamesStatsComponent,
     GamesStatsTableComponent,
     MatchesTableComponent,
+    PlayComponent,
   ],
   imports: [
     BrowserModule,
