@@ -6,9 +6,11 @@ const gameImport = require('../models/game');
 const Game = gameImport.gameModel;
 const User = require('../models/user');
 const shortid = require('shortid');
+const checkAuth = require('../middleware/check-auth');
 const room = require('../models/room');
 
- router.post("", (req,res, next) => {
+
+ router.post("", checkAuth, (req,res, next) => {
     const room = new Room({
       name: req.body.room.name,
       author: req.body.author,
@@ -69,9 +71,7 @@ const room = require('../models/room');
     .catch(err => console.log(err));
     })
 
-
-
-  router.delete('/:id', (req,res,next)=>{
+  router.delete('/:id', checkAuth, (req,res,next)=>{
     Room.deleteOne({_id: req.params.id}).then(result => {
       res.status(200).json({message: 'Room deleted'});
     });

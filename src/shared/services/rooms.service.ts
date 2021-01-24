@@ -4,7 +4,6 @@ import { Game } from '../models/game.model';
 import { Room } from '../models/room.model';
 import { HttpClient } from '@angular/common/http';
 import { LoginService } from './login.service';
-import { User } from '../models/user.model';
 
 @Injectable({ providedIn: 'root' })
 export class RoomsService {
@@ -12,11 +11,10 @@ export class RoomsService {
   private gamesUpdated = new Subject<Game[]>();
   private allRoomsUpdated = new Subject<Room[]>();
   private gamesAllUpdated = new Subject<Game[]>();
+  games: Game[];
   rooms: Room[];
-  games: Game[]
   allGames: Game[];
   allRooms: Room[];
-
   currentRoom = null;
 
   constructor(private http: HttpClient, public loginService: LoginService) {
@@ -102,6 +100,21 @@ export class RoomsService {
   }
 
   getGamesForRoom(code: string) {
+    this.http
+      .post<{ message: string }>(
+        'http://localhost:3000/api/rooms/user/games',
+        { name: name },
+        {
+          observe: 'body',
+          responseType: 'json',
+        }
+      )
+      .subscribe((postData: any) => {
+        console.log(postData);
+        this.games = postData.games;
+        this.gamesUpdated.next([...this.games]);
+      });
+
     this.http
       .get<{ message: string; games: Game[] }>(
         'http://localhost:3000/api/rooms/' + code + '/games'

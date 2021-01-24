@@ -20,7 +20,6 @@ export class LoginComponent {
 
   onLogin(form: NgForm): void {
     const user: User = form.value;
-    console.log(form.value);
     this.loginService.login(user).then((data) => {
       if (data === 0) {
         this.router.navigateByUrl('/rooms');
