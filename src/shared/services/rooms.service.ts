@@ -102,4 +102,12 @@ export class RoomsService {
   getGamesUpdateListener() {
     return this.gamesUpdated.asObservable();
   }
+
+  deleteRoom(postId: string){
+    this.http.delete('http://localhost:3000/api/rooms/' + postId)
+    .subscribe(() => {
+      console.log('Deleted!');
+      console.log("KURWAAAAAA")
+    });
+  }
 }

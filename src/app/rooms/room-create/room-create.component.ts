@@ -132,7 +132,7 @@ export class RoomCreateComponent {
 
   getImages(): void {
     for(let i = 1; i <= 24; i++) {
-      const imageSrc = '../../../assets/img/avatar' + i.toString() + '.png';
+      const imageSrc = '../../../assets/img/room_images/avatar' + i.toString() + '.png';
       this.images.push(imageSrc);
     }
   }

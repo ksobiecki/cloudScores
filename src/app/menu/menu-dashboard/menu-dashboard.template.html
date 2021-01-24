@@ -4,7 +4,7 @@
     <div class="room-management">
       <a [routerLink]="['/rooms']" class="change-button">change room</a>
       <span class="separator"> | </span>
-      <a href="#" class="remove-button">
+      <a [routerLink]="['/rooms']" class="remove-button" (click)="onDelete(currentRoom._id)">
         <span *ngIf="isRoomAuthor===true; else isNotRoomAuthor"
           >delete room</span
         >
@@ -15,7 +15,7 @@
     <div (click)="copyCode()" class="invite-container">
       <p>
         Click to copy invite code: <br />
-        <span>{{inviteCode}}</span>
+        <span>{{currentRoom.code}}</span>
       </p>
     </div>
   </div>

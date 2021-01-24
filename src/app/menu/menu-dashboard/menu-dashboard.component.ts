@@ -20,7 +20,6 @@ export class MenuDashboardComponent implements OnInit {
   faTrophy = faTrophy;
 
   chosenGameName: string = '';
-  inviteCode: string = 'XG4KM32P';
   isRoomAuthor: boolean = false;
   currentRoom: Room;
 
@@ -36,10 +35,14 @@ export class MenuDashboardComponent implements OnInit {
     );
   }
 
+  onDelete(roomId: string) {
+    this.roomsService.deleteRoom(roomId);
+  }
+
   copyCode = () => {
     let tempInput = document.createElement('input');
     tempInput.classList.add('hidden-input');
-    tempInput.value = this.inviteCode;
+    tempInput.value = this.currentRoom.code;
     document.body.appendChild(tempInput);
     tempInput.select();
     document.execCommand('copy');
