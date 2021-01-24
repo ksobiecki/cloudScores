@@ -43,6 +43,7 @@ import { AuthInterceptor } from './auth/auth-interceptor';
 import { GamesStatsComponent } from './menu/games/games-stats/games-stats.component';
 import { GamesStatsTableComponent } from './menu/games/games-stats/games-stats-table/games-stats-table.component';
 import { MatSortModule } from '@angular/material/sort';
+import { DeleteConfirmModalComponent } from './menu/menu-dashboard/delete-confirm-modal/delete-confirm-modal.component';
 
 @NgModule({
   declarations: [
@@ -67,6 +68,7 @@ import { MatSortModule } from '@angular/material/sort';
     GamesStatsComponent,
     GamesStatsTableComponent,
     MatchesTableComponent,
+    DeleteConfirmModalComponent
   ],
   imports: [
     BrowserModule,
