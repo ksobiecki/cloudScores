@@ -23,14 +23,20 @@ app.use((req, res, next) => {
   res.setHeader("Access-Control-Allow-Origin", "*");
   res.setHeader(
     "Access-Control-Allow-Headers",
-    "Origin, X-Requested-With, Content-Type, Accept"
+    "Origin, Entries, X-Requested-With, X-Auth-Token, Content-Type, Accept, Authorization, delete"
   );
   res.setHeader(
     "Access-Control-Allow-Methods",
-    "GET, POST, PATCH, DELETE, OPTIONS"
+    "GET, POST, PATCH, PUT, DELETE, OPTIONS"
   );
-  next();
+  if ('OPTIONS' == req.method) {
+    res.send(200);
+  }
+  else {
+    next();
+  }
 });
+
 
 app.post('/api/games', (req,res,next) => {
   const game = new Game({
@@ -155,6 +161,11 @@ app.get('/api/games',(req, res, next)=>{
   })
 });
 
-
+app.delete('api/rooms/:id', (req,res,next)=>{
+  Room.deleteOne({_id: req.params.id}).then(result => {
+    console.log(result);
+    res.status(200).json({message: 'Room deleted'});
+  });
+});
 
 module.exports = app;

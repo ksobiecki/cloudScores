@@ -36,6 +36,10 @@ export class MenuDashboardComponent implements OnInit {
     );
   }
 
+  onDelete(postId: string) {
+    this.roomsService.deleteRoom(postId);
+  }
+
   copyCode = () => {
     let tempInput = document.createElement('input');
     tempInput.classList.add('hidden-input');
