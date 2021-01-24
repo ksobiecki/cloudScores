@@ -5,8 +5,8 @@ import { HttpClient } from '@angular/common/http';
 
 @Injectable({ providedIn: 'root' })
 export class LoginService {
-  currentUser = null;
-  isUserLoggedIn = false;
+  private currentUser = null;
+  private isUserLoggedIn = false;
 
   constructor(public router: Router, private http: HttpClient) {}
 
@@ -46,9 +46,11 @@ export class LoginService {
   public getIsUserLoggedIn(): boolean {
     return this.isUserLoggedIn;
   }
+
   public getUsername(): string {
-    return this.currentUser.username;
+    if (this.currentUser !== null) return this.currentUser.username;
   }
+
   public logOut(): void {
     this.isUserLoggedIn = false;
     this.currentUser = null;
