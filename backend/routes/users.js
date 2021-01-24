@@ -3,6 +3,8 @@ const User = require("../models/user");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const user = require("../models/user");
+const checkAuth = require('../middleware/check-auth');
+const Game = require('../models/game');
 
 const router = express.Router();
 
@@ -72,5 +74,15 @@ router.post("/login", (req, res, next) => {
       });
     });
 });
+
+router.post('/mystats', checkAuth, (req,res,next) => {
+  Room.find(req. body)
+  .then(documents => {
+    return res.status(200).json({
+      message: 'Get rooms to which player contains',
+      rooms: documents
+    });
+  })
+})
 
 module.exports = router;

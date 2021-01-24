@@ -92,11 +92,18 @@ export class RoomsService {
     return this.gamesAllUpdated.asObservable();
   }
 
-  deleteRoom(postId: string){
-    this.http.delete('http://localhost:3000/api/rooms/' + postId)
+  deleteRoom(roomName: string){
+    this.http.delete('http://localhost:3000/api/rooms/' + roomName)
     .subscribe(() => {
       console.log('Deleted!');
     });
+  }
+
+  leaveRoom(roomName: string, username: string){
+    this.http.post('http://localhost:3000/api/rooms/user/leave/' + username, {roomName: roomName}
+    ).subscribe(() => {
+      console.log('Successful leave');
+    })
   }
 
   getGamesForRoom(name: string) {
@@ -172,4 +179,6 @@ export class RoomsService {
       room.players.push(newUser);
       });
   }
+
+
 }
