@@ -12,6 +12,7 @@ export class RoomsService {
   private gamesAllUpdated = new Subject<Game[]>();
   rooms: Room[];
   allGames: Game[];
+  currentRoom = null;
 
   constructor(private http: HttpClient, public loginService: LoginService) {}
 
@@ -40,7 +41,6 @@ export class RoomsService {
         }
       )
       .subscribe((postData: any) => {
-        console.log(postData);
         this.rooms = postData.rooms;
         this.roomsUpdated.next([...this.rooms]);
       });
@@ -64,10 +64,16 @@ export class RoomsService {
         'author': username,
       })
       .subscribe((responseData: any) => {
-        console.log(responseData);
         this.rooms.push(responseData.room);
         this.roomsUpdated.next([...this.rooms]);
       });
+  }
+
+  deleteRoom(postId: string){
+    this.http.delete('http://localhost:3000/api/rooms/' + postId)
+    .subscribe(() => {
+      console.log('Deleted!');
+    });
   }
 
   // ---GAMES---
@@ -78,7 +84,6 @@ export class RoomsService {
         'http://localhost:3000/api/games'
       )
       .subscribe((postData: any) => {
-        console.log(postData.games);
         this.allGames = postData.games;
         this.gamesAllUpdated.next([...this.allGames])
       });
@@ -98,25 +103,21 @@ export class RoomsService {
     return this.gamesAllUpdated.asObservable();
   }
 
-  addGame(currentRoom: Room, game: Game) {
+  //tu jest chujowe nazewnictwo, czekam na dokonczenie modala
+  addGameToRoom(currentRoomName: String, game: Game) {   
     for (let room of this.rooms) {
-      if (room === currentRoom) {
-        this.http
-          .post<{ message: string }>('http://localhost:3000/api/games', game)
-          .subscribe((responseData) => {
-            console.log(responseData.message);
-            room.games.push(game);
-            //console.log(room.games.length);
-            this.gamesUpdated.next([...room.games]);
-          });
+      if (room.name === currentRoomName) {
+        for(let gameName of this.allGames){
+          if(gameName.name === game.name){
+            this.http
+              .put<{ message: string }>('http://localhost:3000/api/rooms/game', {gameName, room})
+              .subscribe((responseData) => {
+                 room.games.push(gameName);
+                 this.gamesUpdated.next([...room.games]);
+              });
+          }
+        }
       }
     }
-  }
-
-  deleteRoom(postId: string){
-    this.http.delete('http://localhost:3000/api/rooms/' + postId)
-    .subscribe(() => {
-      console.log('Deleted!');
-    });
   }
 }
