@@ -3,11 +3,11 @@ const router = express.Router();
 
 const shortid = require('shortid');
 
-const gameImport = require('./models/game')
+const gameImport = require('../models/game')
 const Game = gameImport.gameModel;
 
   //sciagniecie wszystkich gierek
-  router.get('/api/games',(req, res, next)=>{
+  router.get('',(req, res, next)=>{
     Game.find()
     .then(documents => {
       res.status(200).json({
@@ -18,7 +18,7 @@ const Game = gameImport.gameModel;
   });
 
   //tworzenie gierki
-  router.post('/api/games', (req,res,next) => {
+  router.post('/', (req,res,next) => {
     const game = new Game({
       name: 'name',
       imgUrl: 'someURL'
