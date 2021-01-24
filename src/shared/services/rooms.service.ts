@@ -9,10 +9,14 @@ import { LoginService } from './login.service';
 export class RoomsService {
   private roomsUpdated = new Subject<Room[]>();
   private gamesUpdated = new Subject<Game[]>();
+  private allRoomsUpdated = new Subject<Room[]>();
   rooms: Room[];
   allGames: Game[];
+  allRooms: Room[];
 
-  constructor(private http: HttpClient, public loginService: LoginService) {}
+  constructor(private http: HttpClient, public loginService: LoginService) {
+    this.getAllRooms();
+  }
 
   getAllRooms() {
     this.http
@@ -20,8 +24,8 @@ export class RoomsService {
         'http://localhost:3000/api/rooms'
       )
       .subscribe((postData) => {
-        this.rooms = postData.rooms;
-        this.roomsUpdated.next([...this.rooms]);
+        this.allRooms = postData.rooms;
+        this.allRoomsUpdated.next([...this.allRooms]);
       });
   }
 
@@ -46,6 +50,13 @@ export class RoomsService {
   getRoom(name: string) {
     for (let room of this.rooms) {
       if (room.name === name) return room;
+    }
+  }
+
+  getRoomByCode(code:String){
+    console.log("FDEFAASFa");
+    for (let room of this.allRooms) {
+      if(room.code.localeCompare(code.toString())) return room
     }
   }
 
@@ -82,6 +93,19 @@ export class RoomsService {
     }
   }
 
+  addUserToRoom(code: string){
+
+    let newUser = this.loginService.currentUser;
+    let room = this.getRoomByCode(code);
+    console.log(room.code);
+    this.http.post<{ message: string}>('http://localhost:3000/api/rooms/' + code, {
+      room
+    }).subscribe((responseData) =>{
+      console.log(responseData.message);
+      room.players.push(newUser);
+      });
+  }
+
   getGamesForRoom(name: string) {
     for (let room of this.rooms) {
       if (room.name === name) return [...room.games];
@@ -107,7 +131,6 @@ export class RoomsService {
     this.http.delete('http://localhost:3000/api/rooms/' + postId)
     .subscribe(() => {
       console.log('Deleted!');
-      console.log("KURWAAAAAA")
     });
   }
 }
