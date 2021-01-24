@@ -32,6 +32,7 @@ import { SharedModule } from 'src/shared/shared.module';
 import { MenuDashboardComponent } from './menu/menu-dashboard/menu-dashboard.component';
 import { MenuComponent } from './menu/menu.component';
 import { GameMenuComponent } from './menu/game-menu/game-menu.component';
+import { MyStatsComponent } from './my-stats/my-stats.component';
 
 @NgModule({
   declarations: [
@@ -51,6 +52,7 @@ import { GameMenuComponent } from './menu/game-menu/game-menu.component';
     MenuComponent,
     MenuDashboardComponent,
     GameMenuComponent,
+    MyStatsComponent
   ],
   imports: [
     BrowserModule,

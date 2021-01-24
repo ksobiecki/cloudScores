@@ -61,7 +61,7 @@ export class RoomsService {
     this.http
       .post<{ message: string }>('http://localhost:3000/api/rooms', {
         room,
-        'author': username,
+        author: username,
       })
       .subscribe((responseData: any) => {
         console.log(responseData);
@@ -80,22 +80,42 @@ export class RoomsService {
       .subscribe((postData: any) => {
         console.log(postData.games);
         this.allGames = postData.games;
-        this.gamesAllUpdated.next([...this.allGames])
+        this.gamesAllUpdated.next([...this.allGames]);
       });
-  }
-
-  getGamesForRoom(name: string) {
-    for (let room of this.rooms) {
-      if (room.name === name) return [...room.games];
-    }
-  }
-
-  getGamesForRoomUpdateListener() {
-    return this.gamesUpdated.asObservable();
   }
 
   getAllGamesUpdateListener() {
     return this.gamesAllUpdated.asObservable();
+  }
+
+  getGamesForRoom(name: string) {
+    this.http
+      .post<{ message: string }>(
+        'http://localhost:3000/api/rooms/user',
+        { room: name },
+        {
+          observe: 'body',
+          responseType: 'json',
+        }
+      )
+      .subscribe((postData: any) => {
+        console.log(postData);
+        this.rooms = postData.rooms;
+        this.roomsUpdated.next([...this.rooms]);
+      });
+
+    this.http
+    .get<{ message: string, games: Game[] }> (
+      'http://localhost:3000/api/games/user'
+    ).subscribe((postData: any) => {
+      console.log(postData.games);
+      this.allGames = postData.games;
+      this.gamesAllUpdated.next([...this.allGames]);
+    });
+  }
+
+  getGamesForRoomUpdateListener() {
+    return this.gamesUpdated.asObservable();
   }
 
   addGame(currentRoom: Room, game: Game) {
@@ -113,10 +133,11 @@ export class RoomsService {
     }
   }
 
-  deleteRoom(postId: string){
-    this.http.delete('http://localhost:3000/api/rooms/' + postId)
-    .subscribe(() => {
-      console.log('Deleted!');
-    });
+  deleteRoom(postId: string) {
+    this.http
+      .delete('http://localhost:3000/api/rooms/' + postId)
+      .subscribe(() => {
+        console.log('Deleted!');
+      });
   }
 }
