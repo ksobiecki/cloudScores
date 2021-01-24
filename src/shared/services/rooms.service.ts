@@ -52,9 +52,9 @@ export class RoomsService {
       });
   }
 
-  getRoomByCode(code:String){
+  getRoomByCode(code: String) {
     for (let room of this.allRooms) {
-      if(room.code.localeCompare(code.toString()) == 0) return room
+      if (room.code.localeCompare(code.toString()) == 0) return room;
     }
   }
 
@@ -92,21 +92,21 @@ export class RoomsService {
     return this.gamesAllUpdated.asObservable();
   }
 
-  deleteRoom(postId: string){
-    this.http.delete('http://localhost:3000/api/rooms/' + postId)
-    .subscribe(() => {
-      console.log('Deleted!');
-    });
+  deleteRoom(postId: string) {
+    this.http
+      .delete('http://localhost:3000/api/rooms/' + postId)
+      .subscribe(() => {
+        console.log('Deleted!');
+      });
   }
 
-  getGamesForRoom(code: string) {
+  getGamesForRoom(name: string) {
     this.http
       .get<{ message: string; games: Game[] }>(
-        'http://localhost:3000/api/rooms/' + code + '/games'
+        'http://localhost:3000/api/rooms/' + name + '/games'
       )
       .subscribe((postData: any) => {
-        console.log(postData.games);
-        this.games = postData.games;
+        this.games = postData.games[0].games;
         this.gamesUpdated.next([...this.games]);
       });
   }
@@ -123,12 +123,10 @@ export class RoomsService {
 
   //tu jest chujowe nazewnictwo, czekam na dokonczenie modala
   addGameToRoom(currentRoomName: String, game: Game) {
-
     for (let room of this.rooms) {
       if (room.name === currentRoomName) {
         for (let gameName of this.allGames) {
           if (gameName.name === game.name) {
-
             this.http
               .put<{ message: string }>(
                 'http://localhost:3000/api/rooms/game',
@@ -162,12 +160,14 @@ export class RoomsService {
     let newUser = this.loginService.getUsername();
     let room = this.getRoomByCode(code);
     console.log(room.code);
-    this.http.put<{ message: string}>('http://localhost:3000/api/rooms/' + code, {
-      room,
-      newUser
-    }).subscribe((responseData) =>{
-      console.log(responseData.message);
-      room.players.push(newUser);
+    this.http
+      .put<{ message: string }>('http://localhost:3000/api/rooms/' + code, {
+        room,
+        newUser,
+      })
+      .subscribe((responseData) => {
+        console.log(responseData.message);
+        room.players.push(newUser);
       });
   }
 }

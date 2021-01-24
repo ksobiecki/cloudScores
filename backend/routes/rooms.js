@@ -43,8 +43,8 @@ const room = require('../models/room');
     })
   })
 
-  router.get('/:code/games', (req, res, next) => {
-    Room.find({code: req.params.code}, 'games')
+  router.get('/:name/games', (req, res, next) => {
+    Room.find({name: req.params.name}, 'games')
     .then(documents => {
       return res.status(200).json({
         message: 'Get games for room',
@@ -52,6 +52,7 @@ const room = require('../models/room');
       })
     }).catch(err => console.log(err));
   })
+
   router.put('/game', (req,res,next) => {
         Room.updateOne(
             {_id: req.body.room._id},
