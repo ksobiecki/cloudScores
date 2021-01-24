@@ -30,6 +30,7 @@ export class GamesComponent implements OnInit, OnDestroy {
       this.route.snapshot.params['name']
     );
     this.games = this.roomsService.getGames(this.route.snapshot.params['name']);
+    console.log(this.route.snapshot.params['name']);
     this.gamesSubscription = this.roomsService
       .getGamesUpdateListener()
       .subscribe((games: Game[]) => (this.games = games));
@@ -40,6 +41,6 @@ export class GamesComponent implements OnInit, OnDestroy {
   }
 
   openDialog() {
-    const dialogRef = this.dialog.open(GameAddComponent);
+    const dialogRef = this.dialog.open(GameAddComponent, {data: {currentRoom: this.currentRoom.name}});
   }
 }
