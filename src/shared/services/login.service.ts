@@ -28,32 +28,34 @@ export class LoginService {
   public login(user: User): Promise<number> {
     return new Promise((resolve, reject) => {
       this.http
-        .post<{ message: string, token: string, expiresIn: number, user: User }>(
-          'http://localhost:3000/api/users/login',
-          user,
-          {
-            observe: 'body',
-            responseType: 'json',
-          }
-        )
+        .post<{
+          message: string;
+          token: string;
+          expiresIn: number;
+          user: User;
+        }>('http://localhost:3000/api/users/login', user, {
+          observe: 'body',
+          responseType: 'json',
+        })
         .subscribe((response) => {
-            this.currentUser = response.user;
-            this.isUserLoggedIn = true;
-            const token = response.token;
-            this.token = token;
-            if (token){
-              const expiresInDuration = response.expiresIn;
-              this.setAuthTimer(expiresInDuration);
-              this.isAuthenticated = true;
-              this.authStatusListener.next(true);
-              const now = new Date();
-              const expirationDate = new Date(now.getTime() + expiresInDuration * 1000);
-              this.saveAuthData(token, expirationDate);
-              this.router.navigate(['/rooms']);
-            }         
-            resolve(0);
+          this.currentUser = response.user;
+          this.isUserLoggedIn = true;
+          const token = response.token;
+          this.token = token;
+          if (token) {
+            const expiresInDuration = response.expiresIn;
+            this.setAuthTimer(expiresInDuration);
+            this.isAuthenticated = true;
+            this.authStatusListener.next(true);
+            const now = new Date();
+            const expirationDate = new Date(
+              now.getTime() + expiresInDuration * 1000
+            );
+            this.saveAuthData(token, expirationDate);
+            this.router.navigate(['/rooms']);
           }
-        );
+          resolve(0);
+        });
     });
   }
 
@@ -79,19 +81,21 @@ export class LoginService {
 
   public autoAuthUser() {
     const authInformation = this.getAuthData();
-    if(!authInformation) {
+    if (!authInformation) {
       return;
     }
     const now = new Date();
     const expireTime = new Date(authInformation.expirationDate);
     const expiresIn = expireTime.getTime() - now.getTime();
-    if(expiresIn > 0) {
+    if (expiresIn > 0) {
       this.token = authInformation.token;
       this.isAuthenticated = true;
-      this.setAuthTimer(expiresIn/1000);
+      this.setAuthTimer(expiresIn / 1000);
       this.authStatusListener.next(true);
     }
-  public getCurrentUser():User{
+  }
+
+  public getCurrentUser(): User {
     return this.currentUser;
   }
 
@@ -117,7 +121,7 @@ export class LoginService {
     localStorage.setItem('expiration', expirationDate.toISOString());
   }
 
-  private clearAuthData(){
+  private clearAuthData() {
     localStorage.removeItem('token');
     localStorage.removeItem('expiration');
   }
@@ -125,13 +129,12 @@ export class LoginService {
   private getAuthData() {
     const token = localStorage.getItem('token');
     const expirationDate = localStorage.getItem('expiration');
-    if(!token || !expirationDate){
+    if (!token || !expirationDate) {
       return;
     }
     return {
       token: token,
-      expirationDate: expirationDate
-    }
+      expirationDate: expirationDate,
+    };
   }
-
 }

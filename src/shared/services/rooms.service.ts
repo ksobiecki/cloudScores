@@ -4,7 +4,6 @@ import { Game } from '../models/game.model';
 import { Room } from '../models/room.model';
 import { HttpClient } from '@angular/common/http';
 import { LoginService } from './login.service';
-import { User } from '../models/user.model';
 
 @Injectable({ providedIn: 'root' })
 export class RoomsService {
@@ -16,9 +15,7 @@ export class RoomsService {
   rooms: Room[];
   allGames: Game[];
   allRooms: Room[];
-
   currentRoom = null;
-  games: Game[];
 
   constructor(private http: HttpClient, public loginService: LoginService) {
     this.getAllRooms();
