@@ -4,6 +4,7 @@ import { Game } from '../models/game.model';
 import { Room } from '../models/room.model';
 import { HttpClient } from '@angular/common/http';
 import { LoginService } from './login.service';
+import { User } from '../models/user.model';
 
 @Injectable({ providedIn: 'root' })
 export class RoomsService {
@@ -58,9 +59,8 @@ export class RoomsService {
   }
 
   getRoomByCode(code:String){
-    console.log("FDEFAASFa");
     for (let room of this.allRooms) {
-      if(room.code.localeCompare(code.toString())) return room
+      if(room.code.localeCompare(code.toString()) == 0) return room
     }
   }
 
@@ -82,18 +82,22 @@ export class RoomsService {
   }
 
 
-  addUserToRoom(code: string){
-
-    let newUser = this.loginService.currentUser;
-    let room = this.getRoomByCode(code);
-    console.log(room.code);
-    this.http.post<{ message: string}>('http://localhost:3000/api/rooms/' + code, {
-      room
-    }).subscribe((responseData) =>{
-      console.log(responseData.message);
-      room.players.push(newUser);
-      });
-  }
+  // addUserToRoom(code: String, user: User) {
+  //   for (let room of this.rooms) {
+  //     if (room === code) {
+  //       for(let gameName of this.allGames){
+  //         if(gameName.name === game.name){
+  //           this.http
+  //             .put<{ message: string }>('http://localhost:3000/api/rooms/game', {gameName, room})
+  //             .subscribe((responseData) => {
+  //                room.games.push(gameName);
+  //                this.gamesUpdated.next([...room.games]);
+  //             });
+  //         }
+  //       }
+  //     }
+  //   }
+  // }
 
   getAllGames() {
     this.http
@@ -162,5 +166,20 @@ export class RoomsService {
         }
       }
     }
+  }
+
+
+  addUserToRoom(code: string){
+
+    let newUser = this.loginService.getUsername();
+    let room = this.getRoomByCode(code);
+    console.log(room.code);
+    this.http.put<{ message: string}>('http://localhost:3000/api/rooms/' + code, {
+      room,
+      newUser
+    }).subscribe((responseData) =>{
+      console.log(responseData.message);
+      room.players.push(newUser);
+      });
   }
 }

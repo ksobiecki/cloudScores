@@ -51,17 +51,15 @@ const room = require('../models/room');
     })
   })
 
-  router.post('/:code', (req, res, next) =>{
-    const userList = req.body.room.players;
-    Room.findById(req.params.code).then(room => {
-      room.players = userList;
-      return room.save();
-    })
-    .then(result => {
-      console.log('User joined the room');
+  router.put('/:code', (req, res, next) =>{
+    Room.updateOne(
+      {code: req.params.code},
+      {$push: {players: req.body.newUser}})
+    .then( result => {
+      res.status(200).json({message: 'User added to room'});
     })
     .catch(err => console.log(err));
-  })
+    })
 
   router.put('/game', (req,res,next) => {
       Room.updateOne(
