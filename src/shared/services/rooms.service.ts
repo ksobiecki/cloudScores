@@ -52,12 +52,6 @@ export class RoomsService {
       });
   }
 
-  getRoom(name: string) {
-    for (let room of this.rooms) {
-      if (room.name === name) return room;
-    }
-  }
-
   getRoomByCode(code:String){
     for (let room of this.allRooms) {
       if(room.code.localeCompare(code.toString()) == 0) return room
@@ -81,6 +75,7 @@ export class RoomsService {
       });
   }
 
+  // ---GAMES---
 
   getAllGames() {
     this.http
@@ -103,6 +98,7 @@ export class RoomsService {
       console.log('Deleted!');
     });
   }
+
   getGamesForRoom(name: string) {
     this.http
       .post<{ message: string }>(
@@ -120,30 +116,40 @@ export class RoomsService {
       });
 
     this.http
-    .get<{ message: string, games: Game[] }> (
-      'http://localhost:3000/api/games/user'
-    ).subscribe((postData: any) => {
-      console.log(postData.games);
-      this.allGames = postData.games;
-      this.gamesAllUpdated.next([...this.allGames]);
-    });
+      .get<{ message: string; games: Game[] }>(
+        'http://localhost:3000/api/games/user'
+      )
+      .subscribe((postData: any) => {
+        console.log(postData.games);
+        this.allGames = postData.games;
+        this.gamesAllUpdated.next([...this.allGames]);
+      });
   }
 
   getGamesForRoomUpdateListener() {
     return this.gamesUpdated.asObservable();
   }
 
+  getGame(gameName: string) {
+    for (let game of this.allGames) {
+      if (game.name === gameName) return game;
+    }
+  }
+
   //tu jest chujowe nazewnictwo, czekam na dokonczenie modala
   addGameToRoom(currentRoomName: String, game: Game) {
     for (let room of this.rooms) {
       if (room.name === currentRoomName) {
-        for(let gameName of this.allGames){
-          if(gameName.name === game.name){
+        for (let gameName of this.allGames) {
+          if (gameName.name === game.name) {
             this.http
-              .put<{ message: string }>('http://localhost:3000/api/rooms/game', {gameName, room})
+              .put<{ message: string }>(
+                'http://localhost:3000/api/rooms/game',
+                { gameName, room }
+              )
               .subscribe((responseData) => {
-                 room.games.push(gameName);
-                 this.gamesUpdated.next([...room.games]);
+                room.games.push(gameName);
+                this.gamesUpdated.next([...room.games]);
               });
           }
         }
@@ -151,9 +157,20 @@ export class RoomsService {
     }
   }
 
+  getCurrentRoom(roomName: string) {
+    for (let room of this.rooms) {
+      if (room.name === roomName) return room;
+    }
+  }
 
-  addUserToRoom(code: string){
+  getCurrentGame(gameName: string) {
+    for (let game of this.allGames) {
+      if (game.name === gameName) return game;
+    }
+    return null;
+  }
 
+  addUserToRoom(code: string) {
     let newUser = this.loginService.getUsername();
     let room = this.getRoomByCode(code);
     console.log(room.code);

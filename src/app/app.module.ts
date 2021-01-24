@@ -36,6 +36,7 @@ import { MyStatsComponent } from './my-stats/my-stats.component';
 import { MyStatsTableComponent } from './my-stats/my-stats-table/my-stats-table.component';
 import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
+import {MatCheckboxModule} from '@angular/material/checkbox';
 
 @NgModule({
   declarations: [
@@ -80,6 +81,7 @@ import { MatPaginatorModule } from '@angular/material/paginator';
     MatProgressSpinnerModule,
     MatTableModule,
     MatPaginatorModule,
+    MatCheckboxModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
