@@ -18,7 +18,7 @@ export class GamesComponent implements OnInit, OnDestroy {
   currentRoom: Room;
   searchText: string = '';
   games = [];
-  currentGame = "Szachy";
+  currentGame = 'Szachy';
 
   constructor(
     private roomsService: RoomsService,
@@ -28,14 +28,14 @@ export class GamesComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit(): void {
-    this.currentRoom = this.roomsService.getCurrentRoom(this.route.snapshot.params['name']);
+    this.currentRoom = this.roomsService.getCurrentRoom(
+      this.route.snapshot.params['name']
+    );
     this.roomsService.getGamesForRoom(this.currentRoom.name);
-
     this.gamesSubscription = this.roomsService
       .getGamesForRoomUpdateListener()
       .subscribe((games: Game[]) => (this.games = games));
-      this.roomsService.getGamesForRoom(this.currentRoom.code)
-    }
+  }
 
   ngOnDestroy(): void {
     this.gamesSubscription.unsubscribe();
