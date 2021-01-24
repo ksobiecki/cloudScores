@@ -5,7 +5,6 @@ import {
   faGamepad,
   faTrophy,
 } from '@fortawesome/free-solid-svg-icons';
-import { Game } from 'src/shared/models/game.model';
 import { Room } from 'src/shared/models/room.model';
 import { RoomsService } from 'src/shared/services/rooms.service';
 
@@ -48,4 +47,8 @@ export class MenuDashboardComponent implements OnInit {
     document.execCommand('copy');
     document.body.removeChild(tempInput);
   };
+
+  onMyStatsClick = () => {
+    this.router.navigate(['my-stats']);
+  }
 }
