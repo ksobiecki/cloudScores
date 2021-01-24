@@ -31,16 +31,6 @@ const room = require('../models/room');
     });
   });
 
-  router.get('',(req, res, next)=>{
-    Room.find()
-    .then(documents => {
-      res.status(200).json({
-        message: 'Get /api/rooms called successfully',
-        rooms: documents,
-      });
-    })
-  });
-
   router.post('/user',(req,res,next) => {
     Room.find(req.body)
     .then(documents => {

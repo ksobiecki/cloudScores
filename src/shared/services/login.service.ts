@@ -51,9 +51,6 @@ export class LoginService {
     if (this.currentUser !== null) return this.currentUser.username;
   }
 
-  public getCurrentUser():User{
-    return this.currentUser;
-  }
 
   public logOut(): void {
     this.isUserLoggedIn = false;
