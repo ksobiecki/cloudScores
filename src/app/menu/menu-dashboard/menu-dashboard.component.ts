@@ -64,6 +64,11 @@ export class MenuDashboardComponent implements OnInit {
     this.router.navigate(['my-stats']);
   };
 
+  onGamesStatsClick = () => {
+    const routeStr = this.currentRoom.name + '/' + this.currentGame.name + '/stats';
+    this.router.navigate([routeStr]);
+  }
+
   onChangeRoom = () => {
     this.currentGame = null;
     this.currentRoom = null;

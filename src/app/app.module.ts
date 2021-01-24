@@ -37,6 +37,7 @@ import { MyStatsTableComponent } from './my-stats/my-stats-table/my-stats-table.
 import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import {MatCheckboxModule} from '@angular/material/checkbox';
+import {GamesStatsComponent} from './menu/games/games-stats/games-stats.component';
 
 @NgModule({
   declarations: [
@@ -57,7 +58,8 @@ import {MatCheckboxModule} from '@angular/material/checkbox';
     MenuDashboardComponent,
     GameMenuComponent,
     MyStatsComponent,
-    MyStatsTableComponent
+    MyStatsTableComponent,
+    GamesStatsComponent,
   ],
   imports: [
     BrowserModule,
