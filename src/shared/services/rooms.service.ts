@@ -114,16 +114,6 @@ export class RoomsService {
         this.games = postData.games;
         this.gamesUpdated.next([...this.games]);
       });
-
-    this.http
-      .get<{ message: string; games: Game[] }>(
-        'http://localhost:3000/api/games/user'
-      )
-      .subscribe((postData: any) => {
-        console.log(postData.games);
-        this.games = postData.games;
-        this.gamesUpdated.next([...this.games]);
-      });
   }
 
   getGamesForRoomUpdateListener() {
