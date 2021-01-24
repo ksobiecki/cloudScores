@@ -36,8 +36,8 @@ export class MenuDashboardComponent implements OnInit {
     );
   }
 
-  onDelete(postId: string) {
-    this.roomsService.deleteRoom(postId);
+  onDelete(roomId: string) {
+    this.roomsService.deleteRoom(roomId);
   }
 
   copyCode = () => {

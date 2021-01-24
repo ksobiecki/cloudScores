@@ -161,7 +161,8 @@ app.get('/api/games',(req, res, next)=>{
   })
 });
 
-app.delete('api/rooms/:id', (req,res,next)=>{
+app.delete('/api/rooms/:id', (req,res,next)=>{
+  console.log('delete api/rooms/' + req.query.id);
   Room.deleteOne({_id: req.params.id}).then(result => {
     console.log(result);
     res.status(200).json({message: 'Room deleted'});
