@@ -31,11 +31,15 @@ import { HttpClientModule } from '@angular/common/http';
 import { SharedModule } from 'src/shared/shared.module';
 import { MenuDashboardComponent } from './menu/menu-dashboard/menu-dashboard.component';
 import { MenuComponent } from './menu/menu.component';
-import { GameMenuComponent } from './menu/game-menu/game-menu.component';
 import { MyStatsComponent } from './my-stats/my-stats.component';
 import { MyStatsTableComponent } from './my-stats/my-stats-table/my-stats-table.component';
 import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatchesComponent } from './menu/matches/matches.component';
+import { MatchesTableComponent } from './menu/matches/matches-table/matches-table.component';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { AuthInterceptor } from './auth/auth-interceptor';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import {GamesStatsComponent} from './menu/games/games-stats/games-stats.component';
 import {GamesStatsTableComponent} from './menu/games/games-stats/games-stats-table/games-stats-table.component';
@@ -58,11 +62,12 @@ import {MatSortModule} from '@angular/material/sort';
     SignupComponent,
     MenuComponent,
     MenuDashboardComponent,
-    GameMenuComponent,
+    MatchesComponent,
     MyStatsComponent,
     MyStatsTableComponent,
     GamesStatsComponent,
     GamesStatsTableComponent,
+    MatchesTableComponent
   ],
   imports: [
     BrowserModule,
@@ -89,7 +94,9 @@ import {MatSortModule} from '@angular/material/sort';
     MatCheckboxModule,
     MatSortModule,
   ],
-  providers: [],
+  providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
