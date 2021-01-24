@@ -7,6 +7,8 @@ const Game = gameImport.gameModel;
 const User = require('../models/user');
 const shortid = require('shortid');
 const checkAuth = require('../middleware/check-auth');
+const room = require('../models/room');
+
 
  router.post("", checkAuth, (req,res, next) => {
     const room = new Room({
@@ -30,7 +32,7 @@ const checkAuth = require('../middleware/check-auth');
       });
     });
   });
-  
+
   router.get('',(req, res, next)=>{
     Room.find()
     .then(documents => {
@@ -60,6 +62,16 @@ const checkAuth = require('../middleware/check-auth');
       });
     })
   })
+
+  router.put('/:code', (req, res, next) =>{
+    Room.updateOne(
+      {code: req.params.code},
+      {$push: {players: req.body.newUser}})
+    .then( result => {
+      res.status(200).json({message: 'User added to room'});
+    })
+    .catch(err => console.log(err));
+    })
 
   router.put('/game', checkAuth, (req,res,next) => {
       Room.updateOne(

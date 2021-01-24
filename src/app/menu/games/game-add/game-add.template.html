@@ -4,7 +4,7 @@
   </div>
   <form (ngSubmit)="onSubmit(form)" #form="ngForm">
     <mat-form-field class="input-field" appearance="standard">
-      <mat-label for="name">Name</mat-label>
+      <mat-label for="name">Search</mat-label>
       <input
         matInput
         type="text"
@@ -12,12 +12,42 @@
         ngModel
         name="name"
         #name="ngModel"
-        required
+        (keyup)="updateGames()"
       />
-      <mat-error *ngIf="name.invalid"
-      >Name cannot be empty</mat-error
-      >
+      <mat-error *ngIf="name.invalid">
+        Name cannot be empty
+      </mat-error>
     </mat-form-field>
+    <div class="table-container">
+      <table mat-table [dataSource]="dataSource">
+        <ng-container matColumnDef="select">
+          <th mat-header-cell *matHeaderCellDef>
+            <mat-checkbox (change)="$event ? masterToggle() : null"
+                          [checked]="selection.hasValue() && isAllSelected()"
+                          [indeterminate]="selection.hasValue() && !isAllSelected()"
+                          [aria-label]="checkboxLabel()">
+            </mat-checkbox>
+          </th>
+          <td mat-cell *matCellDef="let row">
+            <mat-checkbox (click)="$event.stopPropagation()"
+                          (change)="$event ? selection.toggle(row) : null"
+                          [checked]="selection.isSelected(row)"
+                          [aria-label]="checkboxLabel(row)">
+            </mat-checkbox>
+          </td>
+        </ng-container>
+        <ng-container matColumnDef="name">
+          <th mat-header-cell *matHeaderCellDef>name</th>
+          <td mat-cell *matCellDef="let element">{{element.name}}</td>
+        </ng-container>
+        <ng-container matColumnDef="image">
+          <th mat-header-cell *matHeaderCellDef>image</th>
+          <img style="width: 40px; height: 40px" src="{{element.imgUrl}}" mat-cell *matCellDef="let element"/>
+        </ng-container>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"
+            (click)="selection.toggle(row)"></tr>
+      </table>
+    </div>
     <!-- <mat-form-field appearance="fill">
       <mat-label class="label" for="name">Name</mat-label>
       <input
@@ -36,7 +66,8 @@
       </button>
     </div>-->
     <div class="button-container mat-dialog-actions">
-      <button mat-button mat-dialog-close type="submit" class="btn btn-success submit-button">
+      <button [disabled]="!isAnythingSelected" mat-button mat-dialog-close type="submit"
+              class="btn btn-success submit-button">
         ADD
       </button>
     </div>

@@ -91,6 +91,8 @@ export class LoginService {
       this.setAuthTimer(expiresIn/1000);
       this.authStatusListener.next(true);
     }
+  public getCurrentUser():User{
+    return this.currentUser;
   }
 
   public logOut(): void {

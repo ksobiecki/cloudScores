@@ -1,10 +1,11 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import {
   faMedal,
   faGamepad,
   faTrophy,
 } from '@fortawesome/free-solid-svg-icons';
+import { Game } from 'src/shared/models/game.model';
 import { Room } from 'src/shared/models/room.model';
 import { RoomsService } from 'src/shared/services/rooms.service';
 
@@ -18,9 +19,11 @@ export class MenuDashboardComponent implements OnInit {
   faGamepad = faGamepad;
   faTrophy = faTrophy;
 
-  chosenGameName: string = '';
+  // chosenGameName: string = '';
+  currentGame: Game = null;
+
   isRoomAuthor: boolean = false;
-  currentRoom: Room;
+  currentRoom: Room = null;
 
   constructor(
     public roomsService: RoomsService,
@@ -29,9 +32,18 @@ export class MenuDashboardComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.currentRoom = this.roomsService.getRoom(
+    this.currentRoom = this.roomsService.getCurrentRoom(
       this.route.snapshot.params['name']
     );
+    if (
+      this.roomsService.getCurrentGame(
+        this.route.snapshot.params['gameName']
+      ) !== null
+    ) {
+      this.currentGame = this.roomsService.getCurrentGame(
+        this.route.snapshot.params['gameName']
+      );
+    }
   }
 
   onDelete(roomId: string) {
@@ -47,4 +59,21 @@ export class MenuDashboardComponent implements OnInit {
     document.execCommand('copy');
     document.body.removeChild(tempInput);
   };
+
+  onMyStatsClick = () => {
+    this.router.navigate(['my-stats']);
+  };
+
+  onChangeRoom = () => {
+    this.currentGame = null;
+    this.currentRoom = null;
+    this.router.navigate(['/rooms']);
+    console.log(this.currentRoom, this.currentGame);
+  }
+
+  onChangeGame = () => {
+    this.currentGame = null;
+    this.router.navigate([this.currentRoom.name, 'games']);
+    console.log(this.currentRoom, this.currentGame);
+  }
 }

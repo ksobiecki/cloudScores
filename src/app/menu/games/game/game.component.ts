@@ -18,9 +18,7 @@ export class GameComponent {
   ) {}
 
   onGameClick() {
-    let currentRoom = this.roomsService.getRoom(
-      this.route.snapshot.params['name']
-    );
+    let currentRoom = this.roomsService.getCurrentRoom(this.route.snapshot.params['name']);
 
     this.router.navigate([currentRoom.name, this.game.name]);
   }

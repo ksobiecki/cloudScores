@@ -2,9 +2,9 @@
   <div class="info-card">
     <h2>{{currentRoom.name}}</h2>
     <div class="room-management">
-      <a [routerLink]="['/rooms']" class="change-button">change room</a>
+      <a (click)="onChangeRoom()" class="change-button">change room</a>
       <span class="separator"> | </span>
-      <a [routerLink]="['/rooms']" class="remove-button" (click)="onDelete(currentRoom._id)">
+      <a class="remove-button" (click)="onDelete(currentRoom._id)">
         <span *ngIf="isRoomAuthor===true; else isNotRoomAuthor"
           >delete room</span
         >
@@ -20,17 +20,17 @@
     </div>
   </div>
   <div class="info-card">
-    <div *ngIf="chosenGameName===''; else gameSelectedBlock" class="gameCardOff">
+    <div *ngIf="currentGame===null; else gameSelectedBlock" class="gameCardOff">
       <h2>Select a game</h2>
       <br />
       <fa-icon [icon]="faGamepad"></fa-icon>
     </div>
     <ng-template #gameSelectedBlock>
       <div class="gameCardOn">
-        <h2>Among Us</h2>
-        <a href="#" class="change-button">change game</a>
+        <h2>{{currentGame.name}}</h2>
+        <a (click)="onChangeGame()" class="change-button">change game</a>
         <img
-          src="https://android.com.pl/apps/wp-content/uploads/2020/09/amonguslogo.png"
+          src={{currentGame.imgUrl}}
           alt="game image"
         />
       </div>
@@ -38,13 +38,13 @@
   </div>
   <div class="buttons-container">
     <div class="button-container">
-      <button class="my-stats">
+      <button class="my-stats" (click)="onMyStatsClick()">
         My Stats
         <fa-icon [icon]="faMedal"></fa-icon>
       </button>
     </div>
     <div class="button-container">
-      <button class="game-stats" [disabled]="chosenGameName===''">
+      <button class="game-stats" [disabled]="currentGame===null">
         Game Stats
         <fa-icon [icon]="faTrophy"></fa-icon>
       </button>
