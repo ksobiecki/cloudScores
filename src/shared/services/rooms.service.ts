@@ -9,6 +9,7 @@ import { LoginService } from './login.service';
 export class RoomsService {
   private roomsUpdated = new Subject<Room[]>();
   private gamesUpdated = new Subject<Game[]>();
+  private gamesAllUpdated = new Subject<Game[]>();
   rooms: Room[];
   allGames: Game[];
 
@@ -96,11 +97,16 @@ export class RoomsService {
       .subscribe((postData: any) => {
         console.log(postData.games);
         this.allGames = postData.games;
+        this.gamesAllUpdated.next([...this.allGames])
       });
   }
 
-  getGamesUpdateListener() {
+  getGamesForRoomUpdateListener() {
     return this.gamesUpdated.asObservable();
+  }
+
+  getAllGamesUpdateListener() {
+    return this.gamesAllUpdated.asObservable();
   }
 
   deleteRoom(postId: string){

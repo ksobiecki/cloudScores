@@ -29,21 +29,15 @@ export class GamesComponent implements OnInit, OnDestroy {
       this.currentRoom = this.roomsService.getRoom(
       this.route.snapshot.params['name']
     );
-<<<<<<< HEAD
-    this.games = this.roomsService.getGames(this.route.snapshot.params['name']);
-    console.log(this.route.snapshot.params['name']);
-=======
     this.games = this.roomsService.getGamesForRoom(this.route.snapshot.params['name']);
->>>>>>> master
     this.gamesSubscription = this.roomsService
-      .getGamesUpdateListener()
+      .getGamesForRoomUpdateListener()
       .subscribe((games: Game[]) => (this.games = games));
   }
 
   ngOnDestroy(): void {
     this.gamesSubscription.unsubscribe();
   }
-
 
   openDialog() {
     const dialogRef = this.dialog.open(GameAddComponent, {data: {currentRoom: this.currentRoom.name}});

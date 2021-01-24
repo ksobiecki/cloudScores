@@ -22,15 +22,16 @@ export class GameAddComponent {
     @Inject(MAT_DIALOG_DATA) public data: any
   ) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.roomsService.getAllGames();
+    const allGames: Game[] = this.roomsService.allGames;
+    console.log(allGames);
+  }
 
   onSubmit(form: NgForm) {
     const currentRoom: Room = this.data.currentRoom;
-
-    // to do poprawy jak już będzie lista z wyborem gier
-    const game: Game = form.value;
-
-    this.roomsService.addGame(currentRoom, game);
+    console.log(currentRoom);
+    // this.roomsService.addGame(currentRoom, game);
   }
 
   closeModal(): void {
