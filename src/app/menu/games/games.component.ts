@@ -40,6 +40,7 @@ export class GamesComponent implements OnInit, OnDestroy {
     this.gamesSubscription.unsubscribe();
   }
 
+
   openDialog() {
     const dialogRef = this.dialog.open(GameAddComponent, {data: {currentRoom: this.currentRoom.name}});
   }
