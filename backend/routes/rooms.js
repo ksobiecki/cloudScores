@@ -42,7 +42,7 @@ const room = require('../models/room');
   })
 
   router.get('/:code/games', (req, res, next) => {
-    Room.find({code: req.params.code}, games)
+    Room.find({code: req.params.code}, 'games')
     .then(documents => {
       return res.status(200).json({
         message: 'Get games for room',
@@ -50,6 +50,14 @@ const room = require('../models/room');
       })
     }).catch(err => console.log(err));
   })
+  router.put('/game', (req,res,next) => {
+        Room.updateOne(
+            {_id: req.body.room._id},
+            { $push: {games: req.body.gameName}}
+        ).then( result => {
+          res.status(200).json({message: 'Game added to room'});
+        })
+    })
 
   router.put('/:code', (req, res, next) =>{
     Room.updateOne(
@@ -61,14 +69,7 @@ const room = require('../models/room');
     .catch(err => console.log(err));
     })
 
-  router.put('/game', (req,res,next) => {
-      Room.updateOne(
-          {_id: req.body.room._id},
-          { $push: {games: req.body.gameName}}
-      ).then( result => {
-        res.status(200).json({message: 'Game added to room'});
-      })
-  })
+
 
   router.delete('/:id', (req,res,next)=>{
     Room.deleteOne({_id: req.params.id}).then(result => {
