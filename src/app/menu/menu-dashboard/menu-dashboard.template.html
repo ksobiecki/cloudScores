@@ -44,7 +44,7 @@
       </button>
     </div>
     <div class="button-container">
-      <button class="game-stats" [disabled]="currentGame===null">
+      <button class="game-stats" (click)="onGamesStatsClick()" [disabled]="currentGame===null">
         Game Stats
         <fa-icon [icon]="faTrophy"></fa-icon>
       </button>

@@ -1,23 +1,23 @@
 <div class="table-container">
   <div class="mat-elevation-z8">
-    <table mat-table [dataSource]="dataSource">
+    <table mat-table [dataSource]="dataSource" matSort>
       <ng-container matColumnDef="gameName">
-        <th mat-header-cell *matHeaderCellDef>GameName</th>
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>GameName</th>
         <td mat-cell *matCellDef="let element">{{element.gameName}}</td>
       </ng-container>
 
       <ng-container matColumnDef="gamesPlayed">
-        <th mat-header-cell *matHeaderCellDef>GamesPlayed</th>
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>GamesPlayed</th>
         <td mat-cell *matCellDef="let element">{{element.gamesPlayed}}</td>
       </ng-container>
 
       <ng-container matColumnDef="totalScore">
-        <th mat-header-cell *matHeaderCellDef>TotalScore</th>
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>TotalScore</th>
         <td mat-cell *matCellDef="let element">{{element.totalScore}}</td>
       </ng-container>
 
       <ng-container matColumnDef="globalRanking">
-        <th mat-header-cell *matHeaderCellDef>GlobalRanking</th>
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>GlobalRanking</th>
         <td mat-cell *matCellDef="let element">{{element.globalRanking}}</td>
       </ng-container>
 
