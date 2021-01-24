@@ -46,7 +46,6 @@ export class GamesComponent implements OnInit, OnDestroy {
   // }
 
   //for debuging until add game functionality is ready
-
   openDialog() {
     this.router.navigate([this.currentRoom.name, this.currentGame]);
   }
