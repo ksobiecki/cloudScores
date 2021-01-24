@@ -57,16 +57,4 @@ export class SignupComponent {
       error.innerHTML = 'Password must contain at least one number';
     }
   }
-  verifyConfirmInput(): void {
-    const input = (document.getElementById('passwordInput') as HTMLInputElement).value;
-    const confirmInput = (document.getElementById('confirmPasswordInput') as HTMLInputElement).value;
-    console.log(input, confirmInput);
-    if(input === confirmInput) {
-      this.arePasswordsEqual = true;
-    }
-    else {
-      this.arePasswordsEqual = false;
-    }
-    console.log(this.arePasswordsEqual);
-  }
 }
