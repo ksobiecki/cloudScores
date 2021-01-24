@@ -20,6 +20,7 @@ export class RoomsService {
 
   constructor(private http: HttpClient, public loginService: LoginService) {
     this.getAllRooms();
+    this.getAllGames();
   }
 
   // ---ROOMS---
