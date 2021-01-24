@@ -2,7 +2,7 @@ const mongoose = require('mongoose')
 
 const gameSchema = mongoose.Schema({
   name: {type: String, required: true},
-  imgURL: String
+  imgUrl: String
 });
 
 module.exports = {

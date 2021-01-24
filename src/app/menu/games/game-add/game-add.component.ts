@@ -25,16 +25,19 @@ export class GameAddComponent {
   ngOnInit(): void {
     this.roomsService.getAllGames();
     const allGames: Game[] = this.roomsService.allGames;
-    console.log(allGames);
+    //console.log(allGames);
   }
 
   onSubmit(form: NgForm) {
-    const currentRoom: Room = this.data.currentRoom;
-    console.log(currentRoom);
-    // this.roomsService.addGame(currentRoom, game);
+    const currentRoom: String = this.data.currentRoom;
+    const game: Game = form.value;
+    //console.log('current room ' + currentRoom);
+    //console.log('game form ' + game.name + ' ' + game.imgUrl + ' ' + game._id);
+    this.roomsService.addGameToRoom(currentRoom, game);
   }
 
   closeModal(): void {
     const thisDialogRef = this.dialog.closeAll();
   }
+
 }
