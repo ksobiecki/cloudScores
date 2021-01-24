@@ -94,7 +94,7 @@ export class LoginService {
       this.authStatusListener.next(true);
     }
   }
-  
+
   public getCurrentUser(): User {
 
     return this.currentUser;
