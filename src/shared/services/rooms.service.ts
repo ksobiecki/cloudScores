@@ -4,6 +4,7 @@ import { Game } from '../models/game.model';
 import { Room } from '../models/room.model';
 import { HttpClient } from '@angular/common/http';
 import { LoginService } from './login.service';
+import { ActivatedRoute } from '@angular/router';
 
 @Injectable({ providedIn: 'root' })
 export class RoomsService {
@@ -14,7 +15,13 @@ export class RoomsService {
   allGames: Game[];
   currentRoom = null;
 
-  constructor(private http: HttpClient, public loginService: LoginService) {}
+  constructor(
+    private http: HttpClient,
+    public loginService: LoginService,
+    private route: ActivatedRoute
+  ) {
+    this.getAllGames();
+  }
 
   // ---ROOMS---
 
@@ -46,12 +53,6 @@ export class RoomsService {
       });
   }
 
-  getRoom(name: string) {
-    for (let room of this.rooms) {
-      if (room.name === name) return room;
-    }
-  }
-
   getRoomsUpdateListener() {
     return this.roomsUpdated.asObservable();
   }
@@ -69,11 +70,12 @@ export class RoomsService {
       });
   }
 
-  deleteRoom(postId: string){
-    this.http.delete('http://localhost:3000/api/rooms/' + postId)
-    .subscribe(() => {
-      console.log('Deleted!');
-    });
+  deleteRoom(postId: string) {
+    this.http
+      .delete('http://localhost:3000/api/rooms/' + postId)
+      .subscribe(() => {
+        console.log('Deleted!');
+      });
   }
 
   // ---GAMES---
@@ -110,34 +112,57 @@ export class RoomsService {
       });
 
     this.http
-    .get<{ message: string, games: Game[] }> (
-      'http://localhost:3000/api/games/user'
-    ).subscribe((postData: any) => {
-      console.log(postData.games);
-      this.allGames = postData.games;
-      this.gamesAllUpdated.next([...this.allGames]);
-    });
+      .get<{ message: string; games: Game[] }>(
+        'http://localhost:3000/api/games/user'
+      )
+      .subscribe((postData: any) => {
+        console.log(postData.games);
+        this.allGames = postData.games;
+        this.gamesAllUpdated.next([...this.allGames]);
+      });
   }
 
   getGamesForRoomUpdateListener() {
     return this.gamesUpdated.asObservable();
   }
 
+  getGame(gameName: string) {
+    for (let game of this.allGames) {
+      if (game.name === gameName) return game;
+    }
+  }
+
   //tu jest chujowe nazewnictwo, czekam na dokonczenie modala
-  addGameToRoom(currentRoomName: String, game: Game) {   
+  addGameToRoom(currentRoomName: String, game: Game) {
     for (let room of this.rooms) {
       if (room.name === currentRoomName) {
-        for(let gameName of this.allGames){
-          if(gameName.name === game.name){
+        for (let gameName of this.allGames) {
+          if (gameName.name === game.name) {
             this.http
-              .put<{ message: string }>('http://localhost:3000/api/rooms/game', {gameName, room})
+              .put<{ message: string }>(
+                'http://localhost:3000/api/rooms/game',
+                { gameName, room }
+              )
               .subscribe((responseData) => {
-                 room.games.push(gameName);
-                 this.gamesUpdated.next([...room.games]);
+                room.games.push(gameName);
+                this.gamesUpdated.next([...room.games]);
               });
           }
         }
       }
     }
+  }
+
+  getCurrentRoom(roomName: string) {
+    for (let room of this.rooms) {
+      if (room.name === roomName) return room;
+    }
+  }
+
+  getCurrentGame(gameName: string) {
+    for (let game of this.allGames) {
+      if (game.name === gameName) return game;
+    }
+    return null;
   }
 }
