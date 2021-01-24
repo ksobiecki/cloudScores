@@ -32,10 +32,15 @@ import { SharedModule } from 'src/shared/shared.module';
 import { MenuDashboardComponent } from './menu/menu-dashboard/menu-dashboard.component';
 import { MenuComponent } from './menu/menu.component';
 import { GameMenuComponent } from './menu/game-menu/game-menu.component';
+<<<<<<< HEAD
 import { MyStatsComponent } from './my-stats/my-stats.component';
 import { MyStatsTableComponent } from './my-stats/my-stats-table/my-stats-table.component';
 import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
+=======
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { AuthInterceptor } from './auth/auth-interceptor';
+>>>>>>> 89ab665 (Potezny webtoken)
 
 @NgModule({
   declarations: [
@@ -81,7 +86,9 @@ import { MatPaginatorModule } from '@angular/material/paginator';
     MatTableModule,
     MatPaginatorModule,
   ],
-  providers: [],
+  providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

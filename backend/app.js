@@ -8,7 +8,7 @@ const roomsRoutes = require('./routes/rooms');
 const gamesRoutes = require('./routes/games');
 const usersRoutes = require('./routes/users');
 
-const db = mongoose.connect("mongodb+srv://cloudScores_admin:ZPh5bEUem9Kk08Az@cluster.bq0o1.mongodb.net/cloudScores_db?retryWrites=true&w=majority", { useNewUrlParser: true,  useUnifiedTopology: true})
+const db = mongoose.connect("mongodb+srv://cloudScores_admin:ZPh5bEUem9Kk08Az@cluster.bq0o1.mongodb.net/cloudScores_db", { useNewUrlParser: true,  useUnifiedTopology: true})
 .then(() => {
   console.log('Connected to database!');
 })
@@ -22,7 +22,7 @@ app.use((req, res, next) => {
   res.setHeader("Access-Control-Allow-Origin", "*");
   res.setHeader(
     "Access-Control-Allow-Headers",
-    "Origin, Entries, X-Requested-With, X-Auth-Token, Content-Type, Accept, Authorization, delete"
+    "Origin, Entries, X-Requested-With, X-Auth-Token, Content-Type, Accept, authorization, delete"
   );
   res.setHeader(
     "Access-Control-Allow-Methods",

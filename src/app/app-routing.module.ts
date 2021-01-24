@@ -8,7 +8,7 @@ import {AuthGuard} from '../shared/guards/auth.guard';
 import { MyStatsComponent } from './my-stats/my-stats.component';
 
 const appRoutes: Routes = [
-  { path: '', redirectTo: '/login', pathMatch: 'full' },  //jezeli to sie znalazlo na masterze to sorka, zmiencie z powrotem na  redirectTo: '/login'
+  { path: '', redirectTo: '/login', pathMatch: 'full' }, 
   { path: 'login', component: LoginComponent },
   { path: 'signup', component: SignupComponent },
   { path: 'rooms', component: RoomsComponent, canActivate: [AuthGuard] },
