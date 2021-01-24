@@ -17,7 +17,6 @@ export class LoginService {
   constructor(public router: Router, private http: HttpClient) {}
 
   public createUser(user: User): number {
-    console.log(user);
     this.http
       .post<{ message: string }>('http://localhost:3000/api/users/signup', user)
       .subscribe((responseData) => {
