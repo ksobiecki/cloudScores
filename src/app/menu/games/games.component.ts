@@ -18,7 +18,6 @@ export class GamesComponent implements OnInit, OnDestroy {
   currentRoom: Room;
   searchText: string = '';
   games = [];
-
   currentGame = "Szachy";
 
   constructor(
@@ -31,6 +30,7 @@ export class GamesComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.currentRoom = this.roomsService.getCurrentRoom(this.route.snapshot.params['name']);
     this.roomsService.getGamesForRoom(this.currentRoom.name);
+
     this.gamesSubscription = this.roomsService
       .getGamesForRoomUpdateListener()
       .subscribe((games: Game[]) => (this.games = games));
@@ -39,7 +39,6 @@ export class GamesComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     this.gamesSubscription.unsubscribe();
   }
-
   // openDialog() {
   //   const dialogRef = this.dialog.open(GameAddComponent, {
   //     data: { currentRoom: this.currentRoom.name },
