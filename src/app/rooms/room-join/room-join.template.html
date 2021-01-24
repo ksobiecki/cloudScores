@@ -2,9 +2,10 @@
   <div class="close-button-container">
     <fa-icon size="2x" [icon]="faClose" (click)="closeModal()"></fa-icon>
   </div>
+  <h2 class="modal-header">Enter Invite Code</h2>
   <form (ngSubmit)="onSubmit(form)" #form="ngForm">
     <mat-form-field class="input-field" appearance="standard">
-      <mat-label for="id">Id</mat-label>
+      <mat-label for="id">Invite Code</mat-label>
       <input
         matInput
         type="text"
