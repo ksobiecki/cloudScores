@@ -26,10 +26,12 @@ export class GamesComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit(): void {
-      this.currentRoom = this.roomsService.getRoom(
+    this.currentRoom = this.roomsService.getRoom(
       this.route.snapshot.params['name']
     );
-    this.games = this.roomsService.getGamesForRoom(this.route.snapshot.params['name']);
+    // this.games = this.roomsService.getGamesForRoom(
+    //   this.route.snapshot.params['name']
+    // );
     this.gamesSubscription = this.roomsService
       .getGamesForRoomUpdateListener()
       .subscribe((games: Game[]) => (this.games = games));
@@ -40,6 +42,8 @@ export class GamesComponent implements OnInit, OnDestroy {
   }
 
   openDialog() {
-    const dialogRef = this.dialog.open(GameAddComponent, {data: {currentRoom: this.currentRoom.name}});
+    const dialogRef = this.dialog.open(GameAddComponent, {
+      data: { currentRoom: this.currentRoom.name },
+    });
   }
 }
