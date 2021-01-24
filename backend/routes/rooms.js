@@ -33,17 +33,7 @@ const room = require('../models/room');
     });
   });
 
-  router.get('',(req, res, next)=>{
-    Room.find()
-    .then(documents => {
-      res.status(200).json({
-        message: 'Get /api/rooms called successfully',
-        rooms: documents,
-      });
-    })
-  });
-  
-  router.post('/user',checkAuth, (req,res,next) => {
+  router.post('/user',(req,res,next) => {
     Room.find(req.body)
     .then(documents => {
       return res.status(200).json({
@@ -53,15 +43,23 @@ const room = require('../models/room');
     })
   })
 
-  router.post('/user/games', checkAuth, (req,res,next) => {
-    Room.find(req.body)
+  router.get('/:code/games', (req, res, next) => {
+    Room.find({code: req.params.code}, 'games')
     .then(documents => {
       return res.status(200).json({
-        message: 'Get dupa called successfully',
-        games: documents.games,
-      });
-    })
+        message: 'Get games for room',
+        games: documents
+      })
+    }).catch(err => console.log(err));
   })
+  router.put('/game', (req,res,next) => {
+        Room.updateOne(
+            {_id: req.body.room._id},
+            { $push: {games: req.body.gameName}}
+        ).then( result => {
+          res.status(200).json({message: 'Game added to room'});
+        })
+    })
 
   router.put('/:code', (req, res, next) =>{
     Room.updateOne(
@@ -73,19 +71,20 @@ const room = require('../models/room');
     .catch(err => console.log(err));
     })
 
-  router.put('/game', checkAuth, (req,res,next) => {
-      Room.updateOne(
-          {_id: req.body.room._id},
-          { $push: {games: req.body.gameName}}
-      ).then( result => {
-        res.status(200).json({message: 'Game added to room'});
-      })
-  })
-
   router.delete('/:id', checkAuth, (req,res,next)=>{
     Room.deleteOne({_id: req.params.id}).then(result => {
       res.status(200).json({message: 'Room deleted'});
     });
   });
+
+  router.get('',(req, res, next)=>{
+      Room.find()
+      .then(documents => {
+        res.status(200).json({
+          message: 'Get /api/rooms called successfully',
+          rooms: documents,
+        });
+      })
+    });
 
 module.exports = router;
