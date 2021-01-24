@@ -12,6 +12,7 @@ export class RoomsService {
   private gamesUpdated = new Subject<Game[]>();
   private allRoomsUpdated = new Subject<Room[]>();
   private gamesAllUpdated = new Subject<Game[]>();
+  games: Game[];
   rooms: Room[];
   allGames: Game[];
   allRooms: Room[];
@@ -123,8 +124,8 @@ export class RoomsService {
       )
       .subscribe((postData: any) => {
         console.log(postData.games);
-        this.allGames = postData.games;
-        this.gamesAllUpdated.next([...this.allGames]);
+        this.games = postData.games;
+        this.gamesUpdated.next([...this.games]);
       });
   }
 
