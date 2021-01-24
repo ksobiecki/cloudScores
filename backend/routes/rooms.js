@@ -9,14 +9,13 @@ const shortid = require('shortid');
 const checkAuth = require('../middleware/check-auth');
 const room = require('../models/room');
 
-
  router.post("", checkAuth, (req,res, next) => {
     const room = new Room({
       name: req.body.room.name,
       author: req.body.author,
       imgSrc: req.body.room.imgSrc,
       games: [],
-      players:[],
+      players:[req.body.author],
       code: shortid.generate()
     })
     room.save()
