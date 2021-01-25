@@ -24,7 +24,7 @@ export class LoginService {
           user
         )
         .subscribe((responseData) => {
-          console.log(responseData.errorCode);
+          console.log(responseData.message);
           if (responseData.errorCode === 1) {
             resolve(1);
             this.router.navigate(['/']);
