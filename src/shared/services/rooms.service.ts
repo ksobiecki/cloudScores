@@ -200,7 +200,7 @@ export class RoomsService {
       .get<{ message: string; matches: Match[] }>(
         'http://localhost:3000/api/rooms/' + roomName + '/' + gameName
       )
-      .subscribe((responseData) => {
+      .subscribe((responseData: any) => {
         console.log(responseData.message);
         console.log(responseData.matches[0].matches);
         this.matches = responseData.matches[0].matches;
