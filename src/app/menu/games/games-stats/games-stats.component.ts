@@ -18,8 +18,6 @@ export class GamesStatsComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    let currentRoom = this.roomsService.getCurrentRoom(this.route.snapshot.params['name']);
-    this.roomsService.getScoreByRoom();
     this.currentGame = this.roomsService.getGame(this.route.snapshot.params['gameName']);
     this.currentGameIcon = '../' + this.currentGame.imgUrl;
   }

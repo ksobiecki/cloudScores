@@ -90,30 +90,20 @@ router.post("/:username", (req, res, next) => {
   });
 });
 
-router.post("/stats/:game", (req, res, next) => {
+router.post("/stats/game", (req, res, next) => {
   let playerNames = [String];
   let gamesPlayed = [Number];
   let gamesWon = [Number];
   let totalScore = [Number];
   Room.find().then((result) => {
     let roomArray = result;
-    //console.log(roomArray)
     for (let room of roomArray) {
-      //console.log(room);   //room: players, name, author, games, matches, code
-      // for(let player of players){
-      //   if(!playerNames.includes(player)){
-      //     playerNames.push(player);
-      //   }
-      // }
       let matches = room.matches;
       for (let match of matches) {
-        //match: players, game(), winners
         let players = match.players;
-        //console.log('match.game.name ' + match.game.name + '     req.params.game ' + req.params.game)
-        if (match.game.name === req.params.game) {
+        if (match.game.name === req.body.name) {
           for (let player of players) {
             if (!playerNames.includes(player)) {
-              //console.log(player)
               playerNames.push(player);
               gamesPlayed.push(1);
               gamesWon.push(0);
@@ -142,7 +132,7 @@ router.post("/stats/:game", (req, res, next) => {
         }
       }
     }
-    var array = [];
+    let array = [];
     for (let i = 1; i < playerNames.length; i++){
       ///console.log(playerNames[i])
       array.push({
@@ -154,10 +144,10 @@ router.post("/stats/:game", (req, res, next) => {
     }
 
     //console.log(array);
+    res.status(200).json({
+      results: array,
+    });
   })
-  res.status(200).json({
-    results: array,
-  });
 });
 
 module.exports = router;
