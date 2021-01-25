@@ -80,6 +80,7 @@ export class PlayComponent implements OnInit {
             this.userList.push({_id: null, password: null, email: null, rooms_id: null, username: user});
           }
         }
+        this.dataSource = new MatTableDataSource<User>(this.userList);
         });
   }
   /** Whether the number of selected elements matches the total number of rows. */
