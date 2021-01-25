@@ -28,7 +28,8 @@ export class SignupComponent {
   onSignup(form: NgForm): void {
     const user: User = form.value;
     this.loginService.createUser(user).then((data) => {
-      if (data === 1) {
+      if (data === 0) { this.router.navigateByUrl('/login');
+      } else if (data === 1) {
         const dialogRef = this.dialog.open(AuthConfirmationModalComponent);
       }
     });

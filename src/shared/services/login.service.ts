@@ -24,12 +24,13 @@ export class LoginService {
           user
         )
         .subscribe(
-          (responseData) => {},
+          (responseData) => {
+            resolve(0);
+          },
           (error) => {
             resolve(1);
           }
         );
-      this.router.navigate(['/']);
     });
   }
 
