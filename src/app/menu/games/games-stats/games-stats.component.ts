@@ -11,15 +11,12 @@ import {Game} from '../../../../shared/models/game.model';
   styleUrls: ['./games-stats.less'],
 })
 export class GamesStatsComponent implements OnInit {
-  faMedal = faTimes;
-  currentRoom: Room;
   currentGame: Game;
   currentGameIcon: string;
   constructor(public roomsService: RoomsService, public route: ActivatedRoute) {
   }
 
   ngOnInit(): void {
-    this.currentRoom = this.roomsService.getCurrentRoom(this.route.snapshot.params['name']);
     this.currentGame = this.roomsService.getGame(this.route.snapshot.params['gameName']);
     this.currentGameIcon = '../' + this.currentGame.imgUrl;
   }

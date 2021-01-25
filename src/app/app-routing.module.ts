@@ -7,15 +7,17 @@ import { MenuComponent } from './menu/menu.component';
 import { AuthGuard } from '../shared/guards/auth.guard';
 import { MyStatsComponent } from './my-stats/my-stats.component';
 import {GamesStatsComponent} from './menu/games/games-stats/games-stats.component';
+import {PlayComponent} from './play/play.component';
 
 const appRoutes: Routes = [
-  { path: '', redirectTo: '/login', pathMatch: 'full' }, 
+  { path: '', redirectTo: '/login', pathMatch: 'full' },
   { path: 'login', component: LoginComponent },
   { path: 'signup', component: SignupComponent },
   { path: 'rooms', component: RoomsComponent, canActivate: [AuthGuard] },
   { path: ':name/games', component: MenuComponent, canActivate: [AuthGuard] },
   { path: ':name/:gameName', component: MenuComponent },
   { path: ':name/:gameName/stats', component: GamesStatsComponent },
+  { path: ':name/:gameName/play', component: PlayComponent },
   { path: 'my-stats', component: MyStatsComponent },
 ];
 

@@ -92,15 +92,18 @@ export class GameAddComponent implements OnInit, AfterViewInit {
 
   /** The label for the checkbox on the passed row */
   checkboxLabel(row?: Game): string {
+    if (!row) {
+      return `${this.isAllSelected() ? 'select' : 'deselect'} all`;
+    }
+    return `${this.selection.isSelected(row) ? 'deselect' : 'select'} row ${row.name}`;
+  }
+
+  onSelectionChanged(): void {
     if (this.selection.selected.length > 0) {
       this.isAnythingSelected = true;
     } else {
       this.isAnythingSelected = false;
     }
-    if (!row) {
-      return `${this.isAllSelected() ? 'select' : 'deselect'} all`;
-    }
-    return `${this.selection.isSelected(row) ? 'deselect' : 'select'} row ${row.name}`;
   }
 
   updateGames(): void {
