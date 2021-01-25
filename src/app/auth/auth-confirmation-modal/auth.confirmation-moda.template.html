@@ -1,0 +1,10 @@
+<div mat-dialog-content class="modal-container">
+  <div class="notification-container">
+    <fa-icon [icon]="faTimesCircle" class="icon-danger"></fa-icon>
+    <h3>Oh snap!</h3>
+    <p>Something went wrong during authentication process. Please try again.</p>
+  </div>
+  <div class="button-container">
+    <button class="button-red" (click)="closeModal()">OK</button>
+  </div>
+</div>

@@ -47,6 +47,7 @@ import { PlayComponent } from './play/play.component';
 import { MatStepperModule } from '@angular/material/stepper';
 import { DeleteConfirmModalComponent } from './menu/menu-dashboard/delete-confirm-modal/delete-confirm-modal.component';
 import {DragDropModule} from '@angular/cdk/drag-drop';
+import { AuthConfirmationModalComponent } from './auth/auth-confirmation-modal/auth-confirmation-modal.component';
 
 @NgModule({
   declarations: [
@@ -72,7 +73,8 @@ import {DragDropModule} from '@angular/cdk/drag-drop';
     GamesStatsTableComponent,
     MatchesTableComponent,
     PlayComponent,
-    DeleteConfirmModalComponent
+    DeleteConfirmModalComponent,
+    AuthConfirmationModalComponent
   ],
   imports: [
     BrowserModule,
