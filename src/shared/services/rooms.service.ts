@@ -205,6 +205,26 @@ export class RoomsService {
         console.log(responseData.matches[0].matches);
         this.matches = responseData.matches[0].matches;
         this.matchesUpdated.next([...this.matches]);
+        this.getMatchesFilteredByGame(roomName, gameName, this.matches)
+      });
+
+
+  }
+
+  getMatchesFilteredByGame(roomName: string, gameName: string, matches: Match[]){
+    let game = this.getGame(gameName)
+    this.http
+      .post<{ message: string; matches: Match[] }>(
+        'http://localhost:3000/api/rooms/' + roomName + '/' + gameName + '/matches'
+      , {
+        matches,
+        game
+      })
+      .subscribe((responseData: any) => {
+        console.log(responseData.message);
+        console.log(responseData.matches[0].matches);
+        this.matches = responseData.matches[0].matches;
+        this.matchesUpdated.next([...this.matches]);
       });
   }
 

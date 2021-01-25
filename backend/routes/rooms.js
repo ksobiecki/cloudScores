@@ -133,14 +133,26 @@ router.post("/user/leave/:username", (req, res, next) => {
 
     router.get('/:roomName/:gameName', (req, res, next) =>{
       Room.find({
-        name: req.params.gameName
+        name: req.params.roomName
       }, 'matches').then(documents => {
         res.status(200).json({
-          message: 'Get matches for chosen room for chosen game called successfully',
+          message: 'Get matches for chosen room called successfully',
           matches: documents,
         });
       })
       })
+
+      router.post('/:roomName/:gameName/matches', (req, res, next) =>{
+        Match.find({
+          game: req.body.game
+        }).then(documents => {
+          res.status(200).json({
+            message: 'Get matches for chosen room for chosen game called successfully',
+            matches: documents,
+          });
+        })
+        })
+
 
     router.put('/:roomId/:gameId', (req, res, next) =>{
       Room.updateOne({name: req.params.roomId},
