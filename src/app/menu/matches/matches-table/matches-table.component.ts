@@ -64,21 +64,3 @@ export interface MatchesTableElement {
   players: number;
   matchDuration: string;
 }
-
-// const ELEMENT_DATA: MatchesTableElement[] = [
-//   { date: 'Jan 24 2021', players: 3, matchDuration: '19:28:59'},
-//   { date: 'Jan 24 2021', players: 3, matchDuration: '19:28:59'},
-//   { date: 'Jan 24 2021', players: 3, matchDuration: '19:28:59'},
-//   { date: 'Jan 24 2021', players: 3, matchDuration: '19:28:59'},
-//   { date: 'Jan 24 2021', players: 3, matchDuration: '19:28:59'},
-//   { date: 'Jan 24 2021', players: 3, matchDuration: '19:28:59'},
-//   { date: 'Jan 24 2021', players: 3, matchDuration: '19:28:59'},
-//   { date: 'Jan 24 2021', players: 3, matchDuration: '19:28:59'},
-//   { date: 'Jan 24 2021', players: 3, matchDuration: '19:28:59'},
-//   { date: 'Jan 24 2021', players: 3, matchDuration: '19:28:59'},
-//   { date: 'Jan 24 2021', players: 3, matchDuration: '19:28:59'},
-//   { date: 'Jan 24 2021', players: 3, matchDuration: '19:28:59'},
-//   { date: 'Jan 24 2021', players: 3, matchDuration: '19:28:59'},
-//   { date: 'Jan 24 2021', players: 3, matchDuration: '19:28:59'},
-//   { date: 'Jan 24 2021', players: 3, matchDuration: '19:28:59'},
-// ];

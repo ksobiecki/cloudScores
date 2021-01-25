@@ -15,6 +15,7 @@ export class RoomsService {
   private allRoomsUpdated = new Subject<Room[]>();
   private gamesAllUpdated = new Subject<Game[]>();
   private allMatchesUpdated = new Subject<Match[]>();
+  private myScoreUpdated = new Subject<any[]>();
   games: Game[];
   rooms: Room[];
   matches: Match[];
@@ -264,7 +265,12 @@ export class RoomsService {
         }
       )
       .subscribe((responseData) => {
-        //console.log(responseData);
+        console.log(responseData);
+        this.myScoreUpdated.next(responseData.results);
       });
+  }
+
+  getMyScoreUpdateListener() {
+    return this.myScoreUpdated.asObservable();
   }
 }

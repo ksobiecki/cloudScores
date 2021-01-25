@@ -1,23 +1,54 @@
-import { AfterViewInit, Component, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 import {MatSort} from '@angular/material/sort';
+import { RoomsService } from 'src/shared/services/rooms.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-my-stats-table',
   templateUrl: './my-stats-table.template.html',
   styleUrls: ['./my-stats-table.less'],
 })
-export class MyStatsTableComponent implements AfterViewInit {
+export class MyStatsTableComponent implements OnInit, OnDestroy, AfterViewInit {
+  private myStatsSubscription: Subscription;
   displayedColumns: string[] = ['gameName', 'gamesPlayed', 'totalScore', 'globalRanking'];
-  dataSource = new MatTableDataSource<MyStatsTableElement>(ELEMENT_DATA);
+  ELEMENT_DATA: MyStatsTableElement[] = [];
+  dataSource = new MatTableDataSource<MyStatsTableElement>(this.ELEMENT_DATA);
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
 
+  constructor (public roomsService: RoomsService) {}
+
+  ngOnInit(): void {
+    this.roomsService.getMyScore();
+    this.myStatsSubscription = this.roomsService
+      .getMyScoreUpdateListener()
+      .subscribe(
+        (data: any[]) =>
+          (this.ELEMENT_DATA = data.map((data) => {
+            let object: MyStatsTableElement = {
+              gameName: data.gameName,
+              gamesPlayed: data.gamesPlayed,
+              totalScore: data.totalScore,
+              globalRanking: 9999
+            };
+            console.log(object);
+            return object;
+          }),
+          this.dataSource = new MatTableDataSource<MyStatsTableElement>(this.ELEMENT_DATA)
+          )
+      );
+  }
+
   ngAfterViewInit() {
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
+  }
+
+  ngOnDestroy(): void {
+    this.myStatsSubscription.unsubscribe();
   }
 }
 
@@ -27,21 +58,3 @@ export interface MyStatsTableElement {
   totalScore: number;
   globalRanking: number;
 }
-
-const ELEMENT_DATA: MyStatsTableElement[] = [
-  { gameName: 'AmongUs', gamesPlayed: 3, totalScore: 10, globalRanking: 1002 },
-  { gameName: 'AmongUs1', gamesPlayed: 3, totalScore: 10, globalRanking: 1003 },
-  { gameName: 'AmongUs2', gamesPlayed: 3, totalScore: 10, globalRanking: 1004 },
-  { gameName: 'AmongUs3', gamesPlayed: 3, totalScore: 10, globalRanking: 1005 },
-  { gameName: 'AmongUs4', gamesPlayed: 3, totalScore: 10, globalRanking: 1006 },
-  { gameName: 'AmongUs5', gamesPlayed: 3, totalScore: 10, globalRanking: 1007 },
-  { gameName: 'AmongUs6', gamesPlayed: 3, totalScore: 10, globalRanking: 1008 },
-  { gameName: 'AmongUs7', gamesPlayed: 3, totalScore: 10, globalRanking: 1009 },
-  { gameName: 'AmongUs8', gamesPlayed: 3, totalScore: 10, globalRanking: 1000 },
-  { gameName: 'AmongUs9', gamesPlayed: 3, totalScore: 10, globalRanking: 1023 },
-  { gameName: 'AmongUs10', gamesPlayed: 3, totalScore: 10, globalRanking: 1022 },
-  { gameName: 'AmongUs11', gamesPlayed: 3, totalScore: 10, globalRanking: 1032 },
-  { gameName: 'AmongUs12', gamesPlayed: 3, totalScore: 10, globalRanking: 1042 },
-  { gameName: 'AmongUs13', gamesPlayed: 3, totalScore: 10, globalRanking: 1052 },
-  { gameName: 'AmongUs14', gamesPlayed: 3, totalScore: 10, globalRanking: 1062 },
-];
