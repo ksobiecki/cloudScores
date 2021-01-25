@@ -5,7 +5,7 @@ export interface Match {
   _id: string;
   game: Game;
   duration: number;
-  date: String;
+  date: string;
   players: string[];
   winners: Winner[];
 }
