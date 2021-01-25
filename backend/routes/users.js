@@ -61,10 +61,11 @@ router.post("/login", (req, res, next) => {
         });
       }
       const token = jwt.sign(
-        { email: fetchedUser.email, userId: fetchedUser._id },
+        { email: fetchedUser.email, userId: fetchedUser._id, username: fetchedUser.username },
         "dlugi_ciag_znakow_tu_musi_byc",
         { expiresIn: "1h" }
       );
+      console.log(token);
       res.status(200).json({
         token: token,
         expiresIn: 3600,

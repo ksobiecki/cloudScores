@@ -4,7 +4,6 @@ import {Room} from '../../../../shared/models/room.model';
 import {RoomsService} from '../../../../shared/services/rooms.service';
 import {ActivatedRoute} from '@angular/router';
 import {Game} from '../../../../shared/models/game.model';
-import { LoginService } from 'src/shared/services/login.service';
 
 @Component({
   selector: 'app-games-stats',

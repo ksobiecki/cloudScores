@@ -17,6 +17,7 @@ export class RoomsService {
   private allMatchesUpdated = new Subject<Match[]>();
   private myScoreUpdated = new Subject<any[]>();
   private scoreByRoomUpdated = new Subject<any[]>();
+
   games: Game[];
   rooms: Room[];
   matches: Match[];
@@ -182,14 +183,14 @@ export class RoomsService {
   addUserToRoom(code: string) {
     let newUser = this.loginService.getUsername();
     let room = this.getRoomByCode(code);
-    //console.log(room.code);
+    console.log(room.code);
     this.http
       .put<{ message: string }>('http://localhost:3000/api/rooms/' + code, {
         room,
         newUser,
       })
       .subscribe((responseData) => {
-        //console.log(responseData.message);
+        console.log(responseData.message);
         room.players.push(newUser);
         this.rooms.push(room);
         this.roomsUpdated.next([...this.rooms]);
@@ -217,7 +218,7 @@ export class RoomsService {
         }
       )
       .subscribe((responseData) => {
-        //console.log(responseData.message);
+        console.log(responseData.message);
         room.matches.push(match);
         this.matchesUpdated.next([...room.matches]);
       });
