@@ -168,8 +168,8 @@ export class PlayComponent implements OnInit {
   onSave(): void {
     const _id = null;
     const game = this.currentGame;
-    const date = null;
     const duration = this.timeStr;
+    const date = new Date().toISOString().slice(0, 10);
     const players = this.chosenPlayers;
     const  winners: Winner[] = [];
     for (let i = 1; i <= this.chosenPlayers.length && i <= 3; i++) {
