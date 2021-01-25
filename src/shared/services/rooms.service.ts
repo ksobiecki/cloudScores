@@ -107,6 +107,7 @@ export class RoomsService {
   leaveRoom(roomName: string, username: string){
     this.http.post('http://localhost:3000/api/rooms/user/leave/' + username, {name: roomName}
     ).subscribe(() => {
+      this.getRooms();
       console.log('Successful leave');
     })
   }

@@ -6,6 +6,8 @@ export interface Match {
   game: Game;
   duration: string;
   date: String;
+  duration: number;
+  date: string;
   players: string[];
   winners: Winner[];
 }
