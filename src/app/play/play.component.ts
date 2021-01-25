@@ -149,5 +149,7 @@ export class PlayComponent implements OnInit {
     }
   }
 
-  onSave(): void {}
+  onSave(): void {
+    console.log('save');
+  }
 }
