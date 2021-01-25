@@ -148,6 +148,18 @@ router.post("/user/leave/:username", (req, res, next) => {
       })
       })
 
+      router.post('/:roomName/:gameName/matches', (req, res, next) =>{
+        Match.find({
+          game: req.body.game
+        }).then(documents => {
+          res.status(200).json({
+            message: 'Get matches for chosen room for chosen game called successfully',
+            matches: documents,
+          });
+        })
+        })
+
+
     router.put('/:roomId/:gameId', (req, res, next) =>{
       Room.updateOne({name: req.params.roomId},
         {$push: {matches: req.body.match}})
