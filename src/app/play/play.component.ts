@@ -167,5 +167,6 @@ export class PlayComponent implements OnInit {
     }
     const match: Match = {_id, game, date, duration, players, winners};
     this.roomsService.addMatchToRoom(this.currentRoom, this.currentGame, match);
+    this.onBackPressed();
   }
 }

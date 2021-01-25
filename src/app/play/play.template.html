@@ -40,7 +40,7 @@
           </div>
           <div class="button-container">
             <button (click)="onBackPressed()">Back</button>
-            <button (click)="startTimer(); getChosenPlayers()" [disabled]="!isAnythingSelected" matStepperNext>Next</button>
+            <button (click)="startTimer(); getChosenPlayers()" [disabled]="!isAnythingSelected" matStepperNext>Start</button>
           </div>
         </form>
       </mat-step>
@@ -54,7 +54,7 @@
           </div>
           <div class="button-container">
             <button (click)="pauseTimer()" matStepperPrevious>Back</button>
-            <button (click)="pauseTimer(); updateScores()" matStepperNext>Next</button>
+            <button (click)="pauseTimer(); updateScores()" matStepperNext>Finish</button>
           </div>
         </form>
       </mat-step>
