@@ -18,7 +18,11 @@ export class LoginComponent {
     public loginService: LoginService,
     public router: Router,
     public dialog: MatDialog
-  ) {}
+  ) {
+    if(this.loginService.getIsUserLoggedIn()) {
+      this.router.navigateByUrl('/rooms');
+    }
+  }
 
   onLogin(form: NgForm): void {
     const user: User = form.value;

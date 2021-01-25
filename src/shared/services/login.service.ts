@@ -12,7 +12,7 @@ export class LoginService {
   private authStatusListener = new Subject<boolean>();
 
   private currentUser = null;
-  private isUserLoggedIn = true;
+  private isUserLoggedIn = false;
 
   constructor(public router: Router, private http: HttpClient) {}
 
