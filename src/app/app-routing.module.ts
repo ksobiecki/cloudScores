@@ -15,10 +15,10 @@ const appRoutes: Routes = [
   { path: 'signup', component: SignupComponent },
   { path: 'rooms', component: RoomsComponent, canActivate: [AuthGuard] },
   { path: ':name/games', component: MenuComponent, canActivate: [AuthGuard] },
-  { path: ':name/:gameName', component: MenuComponent },
-  { path: ':name/:gameName/stats', component: GamesStatsComponent },
-  { path: ':name/:gameName/play', component: PlayComponent },
-  { path: 'my-stats', component: MyStatsComponent },
+  { path: ':name/:gameName', component: MenuComponent, canActivate: [AuthGuard] },
+  { path: ':name/:gameName/stats', component: GamesStatsComponent, canActivate: [AuthGuard] },
+  { path: ':name/:gameName/play', component: PlayComponent, canActivate: [AuthGuard] },
+  { path: 'my-stats', component: MyStatsComponent, canActivate: [AuthGuard] },
 ];
 
 @NgModule({
