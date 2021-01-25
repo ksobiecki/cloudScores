@@ -1,6 +1,7 @@
 import { OnDestroy } from '@angular/core';
 import {Component, OnInit} from '@angular/core';
 import { Subscription } from 'rxjs';
+import { User } from 'src/shared/models/user.model';
 import {LoginService} from '../../shared/services/login.service';
 
 @Component({
@@ -12,6 +13,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
   userIsAuthenticated = false
   private authListenerSubs: Subscription;
   username = 'Krzyś';
+  user: User;
   constructor(private loginService: LoginService) {}
 
   logout(): void {
@@ -26,6 +28,12 @@ export class HeaderComponent implements OnInit, OnDestroy {
     .subscribe( isAuthenticated => {
       this.userIsAuthenticated = isAuthenticated;
     });
+    this.loginService
+    .getUsernameListener()
+    .subscribe(user => {
+      this.user = user;
+      this.username = this.user.username;
+    })
   }
 
   ngOnDestroy(): void {

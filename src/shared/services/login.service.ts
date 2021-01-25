@@ -11,6 +11,7 @@ export class LoginService {
   private token: string;
   private tokenTimer: NodeJS.Timer;
   private authStatusListener = new Subject<boolean>();
+  private usernameListener = new Subject<User>();
 
   private currentUser = null;
   private isUserLoggedIn = false;
@@ -102,6 +103,10 @@ export class LoginService {
     return this.authStatusListener.asObservable();
   }
 
+  public getUsernameListener() {
+    return this.usernameListener.asObservable();
+  }
+
   public autoAuthUser() {
     const authInformation = this.getAuthData();
     // const username = localStorage.getItem('username');
@@ -160,6 +165,7 @@ export class LoginService {
       .subscribe((postData: any) => {
         console.log(postData);
         this.currentUser = postData.user;
+        this.usernameListener.next(this.currentUser);
       });
   }
 
