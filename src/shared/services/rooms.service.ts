@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs';
 import { Game } from '../models/game.model';
 import { Room } from '../models/room.model';
+import { Match } from '../models/match.model'
 import { HttpClient } from '@angular/common/http';
 import { LoginService } from './login.service';
 
@@ -9,12 +10,16 @@ import { LoginService } from './login.service';
 export class RoomsService {
   private roomsUpdated = new Subject<Room[]>();
   private gamesUpdated = new Subject<Game[]>();
+  private matchesUpdated = new Subject<Match[]>();
   private allRoomsUpdated = new Subject<Room[]>();
   private gamesAllUpdated = new Subject<Game[]>();
+  private allMatchesUpdated = new Subject<Match[]>();
   games: Game[];
   rooms: Room[];
+  matches: Match[];
   allGames: Game[];
   allRooms: Room[];
+  allMatches: Match[];
   currentRoom = null;
 
   constructor(private http: HttpClient, public loginService: LoginService) {
@@ -177,5 +182,27 @@ export class RoomsService {
       });
   }
 
+  getMatchesForRoom(roomName: string, gameName: string) { //gets all matches for chosen game in chosen room
+    this.http.get<{ message: string, matches: Match[]}>(
+      'http://localhost:3000/api/matches/' + roomName + "/" + gameName
+    )
+    .subscribe((responseData) => {
+      console.log(responseData.message);
+      console.log(responseData.matches);
+      this.matches = responseData.matches;
+      this.matchesUpdated.next([...this.matches]);
+    })
+  }
 
+  addMatchToRoom(room: Room, game: Game, match: Match){
+    this.http.put<{ message: string }>(
+      'http://localhost:3000/api/rooms/' + room.name + '/' + game.name, {
+        match:match
+      })
+    .subscribe((responseData) =>{
+        console.log( responseData.message);
+        room.matches.push(match);
+        this.matchesUpdated.next([...room.matches]);
+    })
+  }
 }
