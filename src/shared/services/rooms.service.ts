@@ -167,7 +167,7 @@ export class RoomsService {
     }
     return null;
   }
-  
+
   addUserToRoom(code: string) {
     let newUser = this.loginService.getUsername();
     let room = this.getRoomByCode(code);
@@ -199,7 +199,7 @@ export class RoomsService {
 
   addMatchToRoom(room: Room, game: Game, match: Match){
     this.http.put<{ message: string }>(
-      'http://localhost:3000/api/rooms/' + room.name + '/' + game.name, {
+      'http://localhost:3000/api/rooms/' + room.name + '/' + game._id, {
         match:match
       })
     .subscribe((responseData) =>{
