@@ -202,8 +202,8 @@ export class RoomsService {
       )
       .subscribe((responseData: any) => {
         console.log(responseData.message);
-        console.log(responseData.matches[0].matches);
-        this.matches = responseData.matches[0].matches;
+        console.log(responseData.matches);
+        this.matches = responseData.matches;
         this.matchesUpdated.next([...this.matches]);
       });
   }
