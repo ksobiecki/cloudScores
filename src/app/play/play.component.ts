@@ -28,7 +28,7 @@ export class PlayComponent implements OnInit {
   isLinear = true;
   firstFormGroup: FormGroup;
   secondFormGroup: FormGroup;
-  userList: User[] = [
+  /*userList: User[] = [
     {_id: null, password: null, email: null, rooms_id: null, username: 'Krszyś'},
     {_id: null, password: null, email: null, rooms_id: null, username: 'Pyciu'},
     {_id: null, password: null, email: null, rooms_id: null, username: 'Michał'},
@@ -37,7 +37,9 @@ export class PlayComponent implements OnInit {
     {_id: null, password: null, email: null, rooms_id: null, username: 'user3'},
     {_id: null, password: null, email: null, rooms_id: null, username: 'user4'},
     {_id: null, password: null, email: null, rooms_id: null, username: 'user5'},
-    {_id: null, password: null, email: null, rooms_id: null, username: 'user6'}];
+    {_id: null, password: null, email: null, rooms_id: null, username: 'user6'}];*/
+  userList: User[] = [];
+  usernameList: string[];
   dataSource = new MatTableDataSource<User>(this.userList);
   displayedColumns = ['select', 'username'];
   selection = new SelectionModel<User>(true, []);
@@ -68,6 +70,17 @@ export class PlayComponent implements OnInit {
       secondCtrl: ['']
     });
     this.currentUsername = this.loginService.getUsername();
+    this.roomsService.getUsersForRoom(this.currentRoom);
+    this.roomsService.getUsersInRoomUpdateListener()
+      .subscribe((users: string[]) => {
+        console.log(users);
+        this.userList = [];
+        for (const user of users) {
+          if (user !== this.currentUsername) {
+            this.userList.push({_id: null, password: null, email: null, rooms_id: null, username: user});
+          }
+        }
+        });
   }
   /** Whether the number of selected elements matches the total number of rows. */
   isAllSelected(): boolean {
@@ -163,8 +176,8 @@ export class PlayComponent implements OnInit {
   onSave(): void {
     const _id = null;
     const game = this.currentGame;
-    const date = new Date().toISOString().slice(0, 10)
-    const duration = this.time.toString();
+    const duration = this.timeStr;
+    const date = new Date().toISOString().slice(0, 10);
     const players = this.chosenPlayers;
     const  winners: Winner[] = [];
     for (let i = 1; i <= this.chosenPlayers.length && i <= 3; i++) {

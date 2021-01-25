@@ -11,6 +11,7 @@ export class RoomsService {
   private roomsUpdated = new Subject<Room[]>();
   private gamesUpdated = new Subject<Game[]>();
   private matchesUpdated = new Subject<Match[]>();
+  private usersInRoom = new Subject<String[]>();
   private allRoomsUpdated = new Subject<Room[]>();
   private gamesAllUpdated = new Subject<Game[]>();
   private allMatchesUpdated = new Subject<Match[]>();
@@ -127,6 +128,10 @@ export class RoomsService {
       });
   }
 
+  getUsersInRoomUpdateListener() {
+    return this.usersInRoom.asObservable();
+  }
+
   getGamesForRoomUpdateListener() {
     return this.gamesUpdated.asObservable();
   }
@@ -222,6 +227,7 @@ export class RoomsService {
     return this.matchesUpdated.asObservable();
   }
 
+<<<<<<< HEAD
   getUsersForRoom(room: Room) {
     this.http
       .post<{ message: string; users: string[] }>(
@@ -232,5 +238,15 @@ export class RoomsService {
         console.log(responseData.message);
         return responseData.users;
       });
+=======
+  getUsersForRoom(room: Room){
+    this.http.post<{message: string, users: string[]}>(
+      'http://localhost:3000/api/rooms/users/room', {room: room.name}
+    ).subscribe((responseData) => {
+      console.log( responseData.message);
+      this.currentRoom.players = responseData.users;
+      this.usersInRoom.next(responseData.users);
+    })
+>>>>>>> b31c94aef0c0368e9a937f560a308b9aa99493bb
   }
 }
