@@ -154,10 +154,11 @@ export class LoginService {
 
   private updateCurrentUser(username: string) {
     this.http
-      .get<{ message: string; username: string }>(
-        'http://localhost:3000/api/user/update'
+      .post<{ message: string }>(
+        'http://localhost:3000/api/users/update',{username: username}
       )
       .subscribe((postData: any) => {
+        console.log(postData);
         this.currentUser = postData.user;
       });
   }
