@@ -28,16 +28,6 @@ export class PlayComponent implements OnInit {
   isLinear = true;
   firstFormGroup: FormGroup;
   secondFormGroup: FormGroup;
-  /*userList: User[] = [
-    {_id: null, password: null, email: null, rooms_id: null, username: 'Krszyś'},
-    {_id: null, password: null, email: null, rooms_id: null, username: 'Pyciu'},
-    {_id: null, password: null, email: null, rooms_id: null, username: 'Michał'},
-    {_id: null, password: null, email: null, rooms_id: null, username: 'user1'},
-    {_id: null, password: null, email: null, rooms_id: null, username: 'user2'},
-    {_id: null, password: null, email: null, rooms_id: null, username: 'user3'},
-    {_id: null, password: null, email: null, rooms_id: null, username: 'user4'},
-    {_id: null, password: null, email: null, rooms_id: null, username: 'user5'},
-    {_id: null, password: null, email: null, rooms_id: null, username: 'user6'}];*/
   userList: User[] = [];
   usernameList: string[];
   dataSource = new MatTableDataSource<User>(this.userList);
