@@ -99,17 +99,16 @@ router.delete("/:id", checkAuth, (req, res, next) => {
   });
 });
 
-router.post("/user/leave/:username", checkAuth, (req, res, next) => {
-  let query = { name: req.body.name };
-  Room.find(query)
+router.post("/user/leave/:username", (req, res, next) => {
+  console.log(req.body.name)
+  Room.findOne({ name: req.body.name })
     .then((result) => {
       let array = result.players;
       const index = array.indexOf(req.params.username);
       if (index > -1) {
         array.splice(index, 1);
       }
-      query = ({ name: req.body.name }, { $set: { players: array } });
-      Room.updateOne(query)
+      Room.updateOne({ name: req.body.name }, { $set: { players: array } })
       .then((result) => {
         res.status(200).json({
           message: 'udalo sie wyjsc z pokoja'
