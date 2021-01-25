@@ -208,4 +208,8 @@ export class RoomsService {
         this.matchesUpdated.next([...room.matches]);
     })
   }
+
+  getMatchesForRoomUpdateListener() {
+    return this.matchesUpdated.asObservable();
+  }
 }
