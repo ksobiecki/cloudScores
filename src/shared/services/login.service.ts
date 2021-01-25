@@ -22,10 +22,8 @@ export class LoginService {
       .subscribe((responseData) => {
         console.log(responseData.message);
       });
-      console.log('end of create user');
+    console.log('end of create user');
     return 0; // user created
-
-    
   }
 
   public login(user: User): Promise<number> {
@@ -36,29 +34,34 @@ export class LoginService {
           token: string;
           expiresIn: number;
           user: User;
+          error: number;
         }>('http://localhost:3000/api/users/login', user, {
           observe: 'body',
           responseType: 'json',
         })
-        .subscribe((response) => {
-          this.currentUser = response.user;
-          this.isUserLoggedIn = true;
-          const token = response.token;
-          this.token = token;
-          if (token) {
-            const expiresInDuration = response.expiresIn;
-            this.setAuthTimer(expiresInDuration);
-            this.isAuthenticated = true;
-            this.authStatusListener.next(true);
-            const now = new Date();
-            const expirationDate = new Date(
-              now.getTime() + expiresInDuration * 1000
-            );
-            this.saveAuthData(token, expirationDate);
-            this.router.navigate(['/rooms']);
+        .subscribe(
+          (response) => {
+            this.currentUser = response.user;
+            this.isUserLoggedIn = true;
+            const token = response.token;
+            this.token = token;
+            if (token) {
+              const expiresInDuration = response.expiresIn;
+              this.setAuthTimer(expiresInDuration);
+              this.isAuthenticated = true;
+              this.authStatusListener.next(true);
+              const now = new Date();
+              const expirationDate = new Date(
+                now.getTime() + expiresInDuration * 1000
+              );
+              this.saveAuthData(token, expirationDate);
+            }
+            resolve(0);
+          },
+          (error) => {
+            resolve(1);
           }
-          resolve(0);
-        });
+        );
     });
   }
 
@@ -99,7 +102,6 @@ export class LoginService {
   }
 
   public getCurrentUser(): User {
-
     return this.currentUser;
   }
 

@@ -3,13 +3,13 @@ const User = require("../models/user");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const user = require("../models/user");
-const checkAuth = require('../middleware/check-auth');
-const Game = require('../models/game');
+const checkAuth = require("../middleware/check-auth");
+const Game = require("../models/game");
 
 const router = express.Router();
 
-router.post('/signup', (req, res, next) => {
-  console.log('signup');
+router.post("/signup", (req, res, next) => {
+  console.log("signup");
   User.findOne({ email: req.body.email }).then((documents) => {
     if (documents == null) {
       bcrypt.hash(req.body.password, 10).then((hash) => {
@@ -65,20 +65,19 @@ router.post("/login", (req, res, next) => {
       res.status(200).json({
         token: token,
         expiresIn: 3600,
-        user: fetchedUser
+        user: fetchedUser,
       });
     })
-    .catch(err => console.log(err));
+    .catch((err) => console.log(err));
 });
 
-router.post('/mystats', checkAuth, (req,res,next) => {
-  Room.find(req. body)
-  .then(documents => {
+router.post("/mystats", checkAuth, (req, res, next) => {
+  Room.find(req.body).then((documents) => {
     return res.status(200).json({
-      message: 'Get rooms to which player contains',
-      rooms: documents
+      message: "Get rooms to which player contains",
+      rooms: documents,
     });
-  })
-})
+  });
+});
 
 module.exports = router;

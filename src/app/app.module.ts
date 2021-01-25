@@ -44,6 +44,7 @@ import { GamesStatsComponent } from './menu/games/games-stats/games-stats.compon
 import { GamesStatsTableComponent } from './menu/games/games-stats/games-stats-table/games-stats-table.component';
 import { MatSortModule } from '@angular/material/sort';
 import { DeleteConfirmModalComponent } from './menu/menu-dashboard/delete-confirm-modal/delete-confirm-modal.component';
+import { AuthConfirmationModalComponent } from './auth/auth-confirmation-modal/auth-confirmation-modal.component';
 
 @NgModule({
   declarations: [
@@ -68,7 +69,8 @@ import { DeleteConfirmModalComponent } from './menu/menu-dashboard/delete-confir
     GamesStatsComponent,
     GamesStatsTableComponent,
     MatchesTableComponent,
-    DeleteConfirmModalComponent
+    DeleteConfirmModalComponent,
+    AuthConfirmationModalComponent
   ],
   imports: [
     BrowserModule,
