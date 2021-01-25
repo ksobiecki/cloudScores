@@ -8,8 +8,8 @@ const User = require("../models/user");
 const shortid = require("shortid");
 const checkAuth = require("../middleware/check-auth");
 const room = require("../models/room");
-const Match = require("../models/match");
-const Winner = require("../models/winner");
+const Match = require("../models/match")
+const Winner = require("../models/winner")
 
 router.post("", checkAuth, (req, res, next) => {
   const room = new Room({
@@ -18,7 +18,6 @@ router.post("", checkAuth, (req, res, next) => {
     imgSrc: req.body.room.imgSrc,
     games: [],
     players: [req.body.author],
-    matches: [],
     code: shortid.generate(),
   });
   room
@@ -45,36 +44,36 @@ router.get("", (req, res, next) => {
   });
 });
 
-router.post("/user", (req, res, next) => {
-  Room.find(req.body).then((documents) => {
-    return res.status(200).json({
-      message: "Get /api/rooms/user called successfully",
-      rooms: documents,
-    });
-  });
-});
-
-router.get("/:name/games", (req, res, next) => {
-  Room.find({ name: req.params.name }, "games")
-    .then((documents) => {
+  router.post('/user',(req,res,next) => {
+    Room.find(req.body)
+    .then(documents => {
       return res.status(200).json({
-        message: "Get games for room",
-        games: documents,
+        message: 'Get /api/rooms/user called successfully',
+        rooms: documents,
       });
     })
-    .catch((err) => console.log(err));
-});
+  })
 
-router.put("/game", (req, res, next) => {
-  Room.updateOne(
-    { _id: req.body.room._id },
-    { $push: { games: req.body.gameName } }
-  ).then((result) => {
-    res.status(200).json({ message: "Game added to room" });
-  });
-});
+  router.get('/:name/games', (req, res, next) => {
+    Room.find({name: req.params.name}, 'games')
+    .then(documents => {
+      return res.status(200).json({
+        message: 'Get games for room',
+        games: documents
+      })
+    }).catch(err => console.log(err));
+  })
 
-router.put("/:code", (req, res, next) => {
+  router.put('/game', (req,res,next) => {
+        Room.updateOne(
+            {_id: req.body.room._id},
+            { $push: {games: req.body.gameName}}
+        ).then( result => {
+          res.status(200).json({message: 'Game added to room'});
+        })
+    })
+
+ router.put("/:code", (req, res, next) => {
   Room.updateOne(
     { code: req.params.code },
     { $push: { players: req.body.newUser } }
@@ -82,7 +81,7 @@ router.put("/:code", (req, res, next) => {
     .then((result) => {
       res.status(200).json({ message: "User added to room" });
     })
-    .catch((err) => console.log(err));
+    .catch(err => console.log(err));
 });
 
 router.put("/game", checkAuth, (req, res, next) => {
@@ -101,7 +100,7 @@ router.delete("/:id", checkAuth, (req, res, next) => {
 });
 
 router.post("/user/leave/:username", (req, res, next) => {
-  console.log(req.body.name);
+  console.log(req.body.name)
   Room.findOne({ name: req.body.name })
     .then((result) => {
       let array = result.players;
@@ -109,13 +108,11 @@ router.post("/user/leave/:username", (req, res, next) => {
       if (index > -1) {
         array.splice(index, 1);
       }
-      Room.updateOne(
-        { name: req.body.name },
-        { $set: { players: array } }
-      ).then((result) => {
+      Room.updateOne({ name: req.body.name }, { $set: { players: array } })
+      .then((result) => {
         res.status(200).json({
-          message: "udalo sie wyjsc z pokoja",
-        });
+          message: 'udalo sie wyjsc z pokoja'
+        })
       });
     })
     .catch((err) => {
@@ -124,49 +121,44 @@ router.post("/user/leave/:username", (req, res, next) => {
     });
 });
 
-router.get("", (req, res, next) => {
-  Room.find().then((documents) => {
-    res.status(200).json({
-      message: "Get /api/rooms called successfully",
-      rooms: documents,
+  router.get('',(req, res, next)=>{
+      Room.find()
+      .then(documents => {
+        res.status(200).json({
+          message: 'Get /api/rooms called successfully',
+          rooms: documents,
+        });
+      })
     });
-  });
-});
 
-router.get("/:roomName/:gameName", (req, res, next) => {
-  Room.find(
-    {
-      name: req.params.roomName,
-    },
-    "matches"
-  ).then((documents) => {
-    res.status(200).json({
-      message:
-        "Get matches for chosen room for chosen game called successfully",
-      matches: documents,
-    });
-  });
-  // Match.find(req.params.gameName)
-  //   .then((documents) => {
-  //     res.status(200).json({
-  //       message: "Get matches for room for game",
-  //       matches: documents,
-  //     });
-  //   })
-  //   .catch((err) => console.log(err));
-});
+    router.get('/:roomName/:gameName', (req, res, next) =>{
+      Room.find({
+        name: req.params.gameName
+      }, 'matches').then(documents => {
+        res.status(200).json({
+          message: 'Get matches for chosen room for chosen game called successfully',
+          matches: documents,
+        });
+      })
+      })
 
-router.put("/:roomId/:gameId", (req, res, next) => {
-  Room.updateOne(
-    { name: req.params.roomId },
-    { $push: { matches: req.body.match } }
-  )
-    .then((result) => {
-      res.status(200).json({
-        message: "Match added to room matches",
-      });
+    router.put('/:roomId/:gameId', (req, res, next) =>{
+      Room.updateOne({_id: req.params.roomId},
+        {$push: {matches: req.body.match}})
+        .then( result => {
+          res.status(200).json({message: 'Match added to room matches'
+        })
+        .catch(err => console.log(err));
+        })
     })
-    .catch((err) => console.log(err));
-});
+
+    router.post('/users/room', (req, res, next) => {
+      Room.findOne({name: req.body.room}).then(response => {
+        res.status(200).json({
+          message: "Users for room found",
+          users: response.players
+        })
+      })
+    })
 
 module.exports = router;

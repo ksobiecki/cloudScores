@@ -200,7 +200,7 @@ export class RoomsService {
       .get<{ message: string; matches: Match[] }>(
         'http://localhost:3000/api/rooms/' + roomName + '/' + gameName
       )
-      .subscribe((responseData) => {
+      .subscribe((responseData: any) => {
         console.log(responseData.message);
         console.log(responseData.matches[0].matches);
         this.matches = responseData.matches[0].matches;
@@ -231,9 +231,8 @@ export class RoomsService {
     this.http.post<{message: string, users: string[]}>(
       'http://localhost:3000/api/rooms/users/room', {room: room.name}
     ).subscribe((responseData) => {
-      console.log( responseData.message);
-      this.currentRoom.players = responseData.users;
-      this.usersInRoom.next(responseData.users);
+      console.log( responseData.users);
+      this.usersInRoom.next([...responseData.users]);
     })
   }
 }
