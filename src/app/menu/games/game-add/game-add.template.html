@@ -30,7 +30,7 @@
           </th>
           <td mat-cell *matCellDef="let row">
             <mat-checkbox (click)="$event.stopPropagation()"
-                          (change)="$event ? selection.toggle(row) : null"
+                          (change)="$event ? selection.toggle(row) : null; onSelectionChanged()"
                           [checked]="selection.isSelected(row)"
                           [aria-label]="checkboxLabel(row)">
             </mat-checkbox>
@@ -38,14 +38,14 @@
         </ng-container>
         <ng-container matColumnDef="name">
           <th mat-header-cell *matHeaderCellDef>name</th>
-          <td mat-cell *matCellDef="let element">{{element.name}}</td>
+          <td class="game-element" mat-cell *matCellDef="let element">{{element.name}}</td>
         </ng-container>
         <ng-container matColumnDef="image">
           <th mat-header-cell *matHeaderCellDef>image</th>
-          <img style="width: 40px; height: 40px" src="{{element.imgUrl}}" mat-cell *matCellDef="let element"/>
+          <img class="game-element" style="width: 40px; height: 40px" src="{{element.imgUrl}}" mat-cell *matCellDef="let element"/>
         </ng-container>
         <tr mat-row *matRowDef="let row; columns: displayedColumns;"
-            (click)="selection.toggle(row)"></tr>
+            (click)="selection.toggle(row); onSelectionChanged()"></tr>
       </table>
     </div>
     <!-- <mat-form-field appearance="fill">

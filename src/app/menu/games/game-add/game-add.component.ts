@@ -64,9 +64,11 @@ export class GameAddComponent implements OnInit, AfterViewInit {
 
   onSubmit(form: NgForm): void {
     const currentRoom: string = this.data.currentRoom;
+    const room: Room = this.roomsService.getCurrentRoom(currentRoom)
     const chosenGame = this.selection.selected[0];
     chosenGame.imgUrl = chosenGame.imgUrl.substring(3);
     this.roomsService.addGameToRoom(currentRoom, chosenGame);
+    // this.roomsService.addMatchToRoom(room, chosenGame);
     // this.roomsService.addGame(currentRoom, game);
   }
 
@@ -90,15 +92,18 @@ export class GameAddComponent implements OnInit, AfterViewInit {
 
   /** The label for the checkbox on the passed row */
   checkboxLabel(row?: Game): string {
+    if (!row) {
+      return `${this.isAllSelected() ? 'select' : 'deselect'} all`;
+    }
+    return `${this.selection.isSelected(row) ? 'deselect' : 'select'} row ${row.name}`;
+  }
+
+  onSelectionChanged(): void {
     if (this.selection.selected.length > 0) {
       this.isAnythingSelected = true;
     } else {
       this.isAnythingSelected = false;
     }
-    if (!row) {
-      return `${this.isAllSelected() ? 'select' : 'deselect'} all`;
-    }
-    return `${this.selection.isSelected(row) ? 'deselect' : 'select'} row ${row.name}`;
   }
 
   updateGames(): void {
