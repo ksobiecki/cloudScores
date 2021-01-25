@@ -142,7 +142,6 @@ router.post("/user/leave/:username", (req, res, next) => {
           matches: documents,
         });
       })
-
       Match.find(req.params.gameName).then(documents => {
         res.status(200).json({
           message: 'Get matches for room for game',
