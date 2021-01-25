@@ -28,7 +28,7 @@ export class PlayComponent implements OnInit {
   isLinear = true;
   firstFormGroup: FormGroup;
   secondFormGroup: FormGroup;
-  userList: User[] = [
+  /*userList: User[] = [
     {_id: null, password: null, email: null, rooms_id: null, username: 'Krszyś'},
     {_id: null, password: null, email: null, rooms_id: null, username: 'Pyciu'},
     {_id: null, password: null, email: null, rooms_id: null, username: 'Michał'},
@@ -37,7 +37,8 @@ export class PlayComponent implements OnInit {
     {_id: null, password: null, email: null, rooms_id: null, username: 'user3'},
     {_id: null, password: null, email: null, rooms_id: null, username: 'user4'},
     {_id: null, password: null, email: null, rooms_id: null, username: 'user5'},
-    {_id: null, password: null, email: null, rooms_id: null, username: 'user6'}];
+    {_id: null, password: null, email: null, rooms_id: null, username: 'user6'}];*/
+  userList: User[] = [];
   dataSource = new MatTableDataSource<User>(this.userList);
   displayedColumns = ['select', 'username'];
   selection = new SelectionModel<User>(true, []);
@@ -68,6 +69,10 @@ export class PlayComponent implements OnInit {
       secondCtrl: ['']
     });
     this.currentUsername = this.loginService.getUsername();
+    const usernameList: string[] = this.roomsService.getUsersForRoom(this.currentRoom);
+    for (const username of usernameList) {
+      if (username != this.currentUsername)
+    }
   }
   /** Whether the number of selected elements matches the total number of rows. */
   isAllSelected(): boolean {
@@ -164,7 +169,7 @@ export class PlayComponent implements OnInit {
     const _id = null;
     const game = this.currentGame;
     const date = null;
-    const duration = this.time;
+    const duration = this.timeStr;
     const players = this.chosenPlayers;
     const  winners: Winner[] = [];
     for (let i = 1; i <= this.chosenPlayers.length && i <= 3; i++) {
