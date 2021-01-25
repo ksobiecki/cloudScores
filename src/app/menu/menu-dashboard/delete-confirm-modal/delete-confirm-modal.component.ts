@@ -24,6 +24,7 @@ export class DeleteConfirmModalComponent {
   ) {}
 
   onDeleteRoom(): void {
+    console.log(this.loginService.getCurrentUser().username);
     if (this.data.isAuthor) this.roomsService.deleteRoom(this.data.currentRoom._id);
     else this.roomsService.leaveRoom(this.data.currentRoom.name, this.loginService.getCurrentUser().username);
     this.router.navigate(['/rooms']);
