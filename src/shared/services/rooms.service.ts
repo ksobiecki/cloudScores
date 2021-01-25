@@ -52,9 +52,9 @@ export class RoomsService {
       });
   }
 
-  getRoomByCode(code:String){
+  getRoomByCode(code: String) {
     for (let room of this.allRooms) {
-      if(room.code.localeCompare(code.toString()) == 0) return room
+      if (room.code.localeCompare(code.toString()) == 0) return room;
     }
   }
 
@@ -108,17 +108,11 @@ export class RoomsService {
 
   getGamesForRoom(name: string) {
     this.http
-      .post<{ message: string }>(
-        'http://localhost:3000/api/rooms/user/games',
-        { name: name },
-        {
-          observe: 'body',
-          responseType: 'json',
-        }
+      .get<{ message: string; games: Game[] }>(
+        'http://localhost:3000/api/rooms/' + name + '/games'
       )
       .subscribe((postData: any) => {
-        console.log(postData);
-        this.games = postData.games;
+        this.games = postData.games[0].games;
         this.gamesUpdated.next([...this.games]);
       });
   }
@@ -147,6 +141,7 @@ export class RoomsService {
               .subscribe((responseData) => {
                 room.games.push(gameName);
                 this.gamesUpdated.next([...room.games]);
+                console.log(responseData.message);
               });
           }
         }
@@ -171,12 +166,14 @@ export class RoomsService {
     let newUser = this.loginService.getUsername();
     let room = this.getRoomByCode(code);
     console.log(room.code);
-    this.http.put<{ message: string}>('http://localhost:3000/api/rooms/' + code, {
-      room,
-      newUser
-    }).subscribe((responseData) =>{
-      console.log(responseData.message);
-      room.players.push(newUser);
+    this.http
+      .put<{ message: string }>('http://localhost:3000/api/rooms/' + code, {
+        room,
+        newUser,
+      })
+      .subscribe((responseData) => {
+        console.log(responseData.message);
+        room.players.push(newUser);
       });
   }
 

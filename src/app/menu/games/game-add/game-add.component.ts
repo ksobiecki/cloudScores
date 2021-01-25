@@ -21,8 +21,10 @@ import {MatCheckbox} from '@angular/material/checkbox';
 export class GameAddComponent implements OnInit, AfterViewInit {
   faClose = faTimes;
   allGames: Game[] = [];
+  addedGames: Game[] = [];
   games: Game[] = [];
-  gameSubscription: Subscription;
+  allGameSubscription: Subscription;
+  addedGameSubscription: Subscription;
   dataSource = new MatTableDataSource<Game>(this.games);
   displayedColumns = ['select', 'name', 'image'];
   selection = new SelectionModel<Game>(false, []);
@@ -43,10 +45,17 @@ export class GameAddComponent implements OnInit, AfterViewInit {
 
   ngOnInit(): void {
     this.roomsService.getAllGames();
-    this.gameSubscription = this.roomsService
+    this.allGameSubscription = this.roomsService
       .getAllGamesUpdateListener()
       .subscribe((games: Game[]) => {
         this.allGames = games;
+        // this.updateGames(); nie wiem czy potrzebujesz 2 razy to wywolywac
+      });
+    this.roomsService.getGamesForRoom(this.data.currentRoom);
+    this.addedGameSubscription = this.roomsService
+      .getGamesForRoomUpdateListener()
+      .subscribe((games: Game[]) => {
+        this.addedGames = games;
         this.updateGames();
       });
     const allGames: Game[] = this.roomsService.allGames;
@@ -95,7 +104,8 @@ export class GameAddComponent implements OnInit, AfterViewInit {
   updateGames(): void {
     const input = (document.getElementById('name') as HTMLInputElement).value.toLowerCase();
     this.games = [];
-    const allGamesCopy = this.allGames.map(obj => ({...obj}));
+    const allGamesCopy = this.allGames.map(obj => ({...obj}))
+      .sort((a: Game, b: Game) => a.name.localeCompare(b.name));
     for (const game of allGamesCopy) {
       game.imgUrl = '../' + game.imgUrl;
       if (input === '' || game.name.toLowerCase().indexOf(input) === 0) {
