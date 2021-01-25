@@ -40,29 +40,38 @@
           </div>
           <div class="button-container">
             <button (click)="onBackPressed()">Back</button>
-            <button [disabled]="!isAnythingSelected" matStepperNext>Next</button>
+            <button (click)="startTimer(); getChosenPlayers()" [disabled]="!isAnythingSelected" matStepperNext>Next</button>
           </div>
         </form>
       </mat-step>
-      <mat-step [stepControl]="secondFormGroup" label="Fill out your address">
+      <mat-step [stepControl]="secondFormGroup" label="Play">
         <form [formGroup]="secondFormGroup">
-          <mat-form-field>
-            <mat-label>Address</mat-label>
-            <input matInput formControlName="secondCtrl" placeholder="Ex. 1 Main St, New York, NY"
-                   required>
-          </mat-form-field>
+          <ng-template matStepLabel>Play</ng-template>
+          <div class="step-container">
+            <div class="table-container timer-container">
+              <h1 class="timer">{{timeStr}}</h1>
+            </div>
+          </div>
           <div class="button-container">
-            <button matStepperPrevious>Back</button>
-            <button matStepperNext>Next</button>
+            <button (click)="pauseTimer()" matStepperPrevious>Back</button>
+            <button (click)="pauseTimer(); updateScores()" matStepperNext>Next</button>
           </div>
         </form>
       </mat-step>
       <mat-step>
-        <ng-template matStepLabel>Done</ng-template>
-        <p>You are now done.</p>
+        <ng-template matStepLabel>Scores</ng-template>
+        <div class="step-container">
+          <h1>Scoreboard</h1>
+          <div class="table-container scores-container">
+            <div cdkDropList class="example-list" (cdkDropListDropped)="drop($event)">
+              <div class="example-box" *ngFor="let score of scores" cdkDrag>{{score}}</div>
+            </div>
+          </div>
+          <h5>Rearrange the scores according to the result of your game</h5>
+        </div>
         <div class="button-container">
           <button matStepperPrevious>Back</button>
-          <button (click)="stepper.reset()">Reset</button>
+          <button (click)="onSave()">Save</button>
         </div>
       </mat-step>
     </mat-horizontal-stepper>

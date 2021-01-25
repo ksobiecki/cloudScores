@@ -8,6 +8,8 @@ import {User} from '../../shared/models/user.model';
 import {SelectionModel} from '@angular/cdk/collections';
 import {MatStepper} from '@angular/material/stepper';
 import {Location} from '@angular/common';
+import {TimeInterval} from 'rxjs';
+import {CdkDragDrop, moveItemInArray} from '@angular/cdk/drag-drop';
 
 @Component({
   selector: 'app-play',
@@ -23,11 +25,23 @@ export class PlayComponent implements OnInit {
   userList: User[] = [
     {_id: null, password: null, email: null, rooms_id: null, username: 'Krszyś'},
     {_id: null, password: null, email: null, rooms_id: null, username: 'Pyciu'},
-    {_id: null, password: null, email: null, rooms_id: null, username: 'Michał'}];
+    {_id: null, password: null, email: null, rooms_id: null, username: 'Michał'},
+    {_id: null, password: null, email: null, rooms_id: null, username: 'user1'},
+    {_id: null, password: null, email: null, rooms_id: null, username: 'user2'},
+    {_id: null, password: null, email: null, rooms_id: null, username: 'user3'},
+    {_id: null, password: null, email: null, rooms_id: null, username: 'user4'},
+    {_id: null, password: null, email: null, rooms_id: null, username: 'user5'},
+    {_id: null, password: null, email: null, rooms_id: null, username: 'user6'}];
   dataSource = new MatTableDataSource<User>(this.userList);
   displayedColumns = ['select', 'username'];
   selection = new SelectionModel<User>(true, []);
   isAnythingSelected = false;
+  chosenPlayers: string[];
+  scores: string[];
+  time: number;
+  timeStr: string;
+  isTimerPaused = true;
+  interval;
   constructor(public roomsService: RoomsService,
               public route: ActivatedRoute,
               // tslint:disable-next-line:variable-name
@@ -42,7 +56,7 @@ export class PlayComponent implements OnInit {
       firstCtrl: ['']
     });
     this.secondFormGroup = this._formBuilder.group({
-      secondCtrl: ['', Validators.required]
+      secondCtrl: ['']
     });
   }
   /** Whether the number of selected elements matches the total number of rows. */
@@ -78,4 +92,62 @@ export class PlayComponent implements OnInit {
   onBackPressed(): void {
     this._location.back();
   }
+
+  getChosenPlayers(): void {
+    this.chosenPlayers = [];
+    for(const user of this.selection.selected) {
+      this.chosenPlayers.push(user.username);
+    }
+  }
+
+  startTimer(): void {
+    this.time = 0;
+    this.timeStr = '00:00:00';
+    this.isTimerPaused = false;
+    this.interval = setInterval(() => {
+      this.time++;
+      this.updateTimeStr();
+    }, 1000);
+  }
+
+  updateTimeStr(): void {
+    const hours = Math.floor(this.time / 3600);
+    // const minutes = this.time - (hours * 3600) % 60;
+    const minutes = Math.floor((this.time % 3600) / 60);
+    // const seconds = this.time - ((hours * 3600) + (minutes * 60));
+    const seconds = (this.time % 3600) % 60;
+    let hoursStr = hours.toString();
+    let minutesStr = minutes.toString();
+    let secondsStr = seconds.toString();
+    if (hoursStr.length === 1) {
+      hoursStr = '0' + hoursStr;
+    }
+    if (minutesStr.length === 1) {
+      minutesStr = '0' + minutesStr;
+    }
+    if (secondsStr.length === 1) {
+      secondsStr = '0' + secondsStr;
+    }
+    this.timeStr = hoursStr + ':' + minutesStr + ':' + secondsStr;
+  }
+
+  pauseTimer(): void {
+    this.isTimerPaused = false;
+    clearInterval(this.interval);
+  }
+
+  drop(event: CdkDragDrop<string[]>): void {
+    moveItemInArray(this.chosenPlayers, event.previousIndex, event.currentIndex);
+    this.updateScores();
+  }
+
+  updateScores(): void {
+    this.scores = [];
+    for (let i = 1; i <= this.chosenPlayers.length; i++) {
+      const text = i.toString() + '. ' + this.chosenPlayers[i-1];
+      this.scores.push(text);
+    }
+  }
+
+  onSave(): void {}
 }
