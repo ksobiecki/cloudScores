@@ -97,17 +97,16 @@ router.delete("/:id", checkAuth, (req, res, next) => {
   });
 });
 
-router.post("/user/leave/:username", checkAuth, (req, res, next) => {
-  let query = { name: req.body.name };
-  Room.find(query)
+router.put("/user/leave/:username", checkAuth, (req, res, next) => {
+  let query = { 'name': req.body.name };
+  Room.findOne(query)
     .then((result) => {
       let array = result.players;
       const index = array.indexOf(req.params.username);
       if (index > -1) {
         array.splice(index, 1);
       }
-      query = ({ name: req.body.name }, { $set: { players: array } });
-      Room.updateOne(query)
+      Room.updateOne({ name: req.body.name },{$set: {players: array}})
       .then((result) => {
         res.status(200).json({
           message: 'udalo sie wyjsc z pokoja'
@@ -116,7 +115,7 @@ router.post("/user/leave/:username", checkAuth, (req, res, next) => {
     })
     .catch((err) => {
       console.log(err);
-      res.status(402).json({ message: "Unable to leave room" });
+      res.status(407).json({ message: "Unable to leave room" });
     });
 });
 

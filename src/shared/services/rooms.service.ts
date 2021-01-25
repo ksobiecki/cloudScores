@@ -53,8 +53,10 @@ export class RoomsService {
   }
 
   getRoomByCode(code: String) {
+    //console.log(code);
     for (let room of this.allRooms) {
-      if (room.code.localeCompare(code.toString()) == 0) return room;
+      console.log('room code ' + room.code);
+      if (room.code === code) return room;
     }
   }
 
@@ -92,18 +94,23 @@ export class RoomsService {
     return this.gamesAllUpdated.asObservable();
   }
 
-  deleteRoom(roomName: string){
-    this.http.delete('http://localhost:3000/api/rooms/' + roomName)
-    .subscribe(() => {
-      //console.log('Deleted!');
-    });
+  deleteRoom(roomName: string) {
+    this.http
+      .delete('http://localhost:3000/api/rooms/' + roomName)
+      .subscribe(() => {
+        console.log('Deleted!');
+      });
   }
 
-  leaveRoom(roomName: string, username: string){
-    this.http.post('http://localhost:3000/api/rooms/user/leave/' + username, {roomName: roomName}
-    ).subscribe(() => {
-      console.log('Successful leave');
-    })
+  leaveRoom(roomName: string, username: string) {
+    this.http
+      .put('http://localhost:3000/api/rooms/user/leave/' + username, {
+        name: roomName,
+      })
+      .subscribe(() => {
+        this.getRooms();
+        console.log('Successful leave');  
+      });
   }
 
   getGamesForRoom(name: string) {
@@ -174,8 +181,8 @@ export class RoomsService {
       .subscribe((responseData) => {
         console.log(responseData.message);
         room.players.push(newUser);
+        this.rooms.push(room);
+        this.roomsUpdated.next([...this.rooms]);
       });
   }
-
-
 }

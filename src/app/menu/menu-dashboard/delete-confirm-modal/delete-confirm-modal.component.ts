@@ -4,6 +4,7 @@ import { faTimes, faTimesCircle } from '@fortawesome/free-solid-svg-icons';
 import { RoomsService } from 'src/shared/services/rooms.service';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Router } from '@angular/router';
+import { LoginService } from 'src/shared/services/login.service';
 
 @Component({
   selector: 'app-delete-confirm-modal',
@@ -16,13 +17,15 @@ export class DeleteConfirmModalComponent {
 
   constructor(
     private roomsService: RoomsService,
+    private loginService: LoginService,
     public dialog: MatDialog,
     private router: Router,
     @Inject(MAT_DIALOG_DATA) public data: any
   ) {}
 
   onDeleteRoom(): void {
-    this.roomsService.deleteRoom(this.data.currentRoom._id);
+    if (this.data.isAuthor) this.roomsService.deleteRoom(this.data.currentRoom.name);
+    else this.roomsService.leaveRoom(this.data.currentRoom.name, this.loginService.getCurrentUser().username);
     this.router.navigate(['/rooms']);
     this.closeModal();
   }
