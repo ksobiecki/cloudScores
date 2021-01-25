@@ -14,7 +14,7 @@ export class LoginService {
   private usernameListener = new Subject<User>();
 
   private currentUser = null;
-  private isUserLoggedIn = false;
+  // private isUserLoggedIn = false;
 
   constructor(public router: Router, private http: HttpClient) {}
 
@@ -51,7 +51,7 @@ export class LoginService {
         .subscribe(
           (response) => {
             this.currentUser = response.user;
-            this.isUserLoggedIn = true;
+            // this.isUserLoggedIn = true;
             const token = response.token;
             this.token = token;
             if (token) {
@@ -83,16 +83,23 @@ export class LoginService {
         });
   }
 
-  public getIsUserLoggedIn(): boolean {
+  /*public getIsUserLoggedIn(): boolean {
     return this.isUserLoggedIn;
-  }
+  }*/
 
   public getIsAuth() {
     return this.isAuthenticated;
   }
 
   public getUsername(): string {
-    if (this.currentUser !== null) return this.currentUser.username;
+    if (this.currentUser !== null) {
+      return this.currentUser.username;
+    }
+    else {
+      const username = localStorage.getItem('username');
+      this.updateCurrentUser(username);
+      return username;
+    }
   }
 
   public getToken() {
@@ -133,7 +140,7 @@ export class LoginService {
     this.token = null;
     this.isAuthenticated = false;
     this.authStatusListener.next(false);
-    this.isUserLoggedIn = false;
+    // this.isUserLoggedIn = false;
     this.currentUser = null;
     clearTimeout(this.tokenTimer);
     this.clearAuthData();

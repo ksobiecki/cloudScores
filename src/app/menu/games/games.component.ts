@@ -31,10 +31,10 @@ export class GamesComponent implements OnInit, OnDestroy {
     this.currentRoom = this.roomsService.getCurrentRoom(
       this.route.snapshot.params['name']
     );
-    this.roomsService.getGamesForRoom(this.currentRoom.name);
     this.gamesSubscription = this.roomsService
       .getGamesForRoomUpdateListener()
       .subscribe((games: Game[]) => (this.games = games));
+    this.roomsService.getGamesForRoom(this.currentRoom.name);
   }
 
   ngOnDestroy(): void {

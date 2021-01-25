@@ -20,7 +20,7 @@ export class SignupComponent {
     public router: Router,
     public dialog: MatDialog
   ) {
-    if (this.loginService.getIsUserLoggedIn() === true) {
+    if (this.loginService.getIsAuth() === true) {
       router.navigateByUrl('/rooms');
     }
   }

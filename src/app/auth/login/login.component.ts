@@ -19,7 +19,7 @@ export class LoginComponent {
     public router: Router,
     public dialog: MatDialog
   ) {
-    if(this.loginService.getIsUserLoggedIn()) {
+    if(this.loginService.getIsAuth()) {
       this.router.navigateByUrl('/rooms');
     }
   }

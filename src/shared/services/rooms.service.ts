@@ -121,6 +121,7 @@ export class RoomsService {
   }
 
   getGamesForRoom(name: string) {
+    console.log('halooooooooooooooooooooooooooooooooooooooooooo')
     this.http
       .get<{ message: string; games: Game[] }>(
         'http://localhost:3000/api/rooms/' + name + '/games'
@@ -168,9 +169,23 @@ export class RoomsService {
   }
 
   getCurrentRoom(roomName: string) {
-    for (let room of this.rooms) {
-      if (room.name === roomName) return room;
-    }
+    let username = this.loginService.getUsername();
+    this.http
+      .post<{ message: string }>(
+        'http://localhost:3000/api/rooms/user',
+        { players: username },
+        {
+          observe: 'body',
+          responseType: 'json',
+        }
+      )
+      .subscribe((postData: any) => {
+        this.rooms = postData.rooms;
+        this.roomsUpdated.next([...this.rooms]);
+        for (let room of this.rooms) {
+          if (room.name === roomName) return room;
+      }
+      });
   }
 
   getCurrentGame(gameName: string) {
