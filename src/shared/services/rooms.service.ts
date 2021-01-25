@@ -167,7 +167,7 @@ export class RoomsService {
     }
     return null;
   }
-
+  
   addUserToRoom(code: string) {
     let newUser = this.loginService.getUsername();
     let room = this.getRoomByCode(code);

@@ -18,6 +18,7 @@ router.post("", checkAuth, (req, res, next) => {
     imgSrc: req.body.room.imgSrc,
     games: [],
     players: [req.body.author],
+    matches:[],
     code: shortid.generate(),
   });
   room
