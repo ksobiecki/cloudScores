@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 import { RoomsService } from 'src/shared/services/rooms.service';
@@ -11,7 +11,7 @@ import { Match } from 'src/shared/models/match.model';
   templateUrl: './matches-table.template.html',
   styleUrls: ['./matches-table.less'],
 })
-export class MatchesTableComponent implements OnInit, AfterViewInit {
+export class MatchesTableComponent implements OnInit, OnDestroy, AfterViewInit {
   private matchesSubscription: Subscription;
   displayedColumns: string[] = ['date', 'players', 'matchDuration'];
   ELEMENT_DATA: MatchesTableElement[] = [];
@@ -42,13 +42,20 @@ export class MatchesTableComponent implements OnInit, AfterViewInit {
               players: data.players.length,
               matchDuration: data.duration.toString(),
             };
+            console.log(object);
             return object;
-          }))
+          }),
+          this.dataSource = new MatTableDataSource<MatchesTableElement>(this.ELEMENT_DATA)
+          )
       );
   }
 
   ngAfterViewInit() {
     this.dataSource.paginator = this.paginator;
+  }
+
+  ngOnDestroy(): void {
+    this.matchesSubscription.unsubscribe();
   }
 }
 

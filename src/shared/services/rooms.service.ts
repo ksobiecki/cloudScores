@@ -193,12 +193,12 @@ export class RoomsService {
     //gets all matches for chosen game in chosen room
     this.http
       .get<{ message: string; matches: Match[] }>(
-        'http://localhost:3000/api/matches/' + roomName + '/' + gameName
+        'http://localhost:3000/api/rooms/' + roomName + '/' + gameName
       )
       .subscribe((responseData) => {
         console.log(responseData.message);
-        console.log(responseData.matches);
-        this.matches = responseData.matches;
+        console.log(responseData.matches[0].matches);
+        this.matches = responseData.matches[0].matches;
         this.matchesUpdated.next([...this.matches]);
       });
   }
