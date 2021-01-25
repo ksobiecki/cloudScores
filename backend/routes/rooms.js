@@ -8,6 +8,8 @@ const User = require("../models/user");
 const shortid = require("shortid");
 const checkAuth = require("../middleware/check-auth");
 const room = require("../models/room");
+const Match = require("../models/match")
+const Winner = require("../models/winner")
 
 router.post("", checkAuth, (req, res, next) => {
   const room = new Room({
@@ -129,5 +131,34 @@ router.post("/user/leave/:username", checkAuth, (req, res, next) => {
         });
       })
     });
+
+    router.get('/:roomName/:gameName', (req, res, next) =>{
+      Room.findOne({
+        roomName: req.params.name,
+        gameName: req.params.gameName
+      }, 'matches').then(documents => {
+        res.status(200).json({
+          message: 'Get matches for chosen room for chosen game called successfully',
+          matches: documents,
+        });
+      })
+
+      Match.find(req.params.gameName).then(documents => {
+        res.status(200).json({
+          message: 'Get matches for room for game',
+          matches:documents
+        })
+      }).catch(err => console.log(err));
+      })
+
+    router.put('/:roomId/:gameId', (req, res, next) =>{
+      Room.updateOne({_id: req.params.roomId},
+        {$push: {matches: req.body.match}})
+        .then( result => {
+          res.status(200).json({message: 'Match added to room matches'
+        })
+        .catch(err => console.log(err));
+        })
+    })
 
 module.exports = router;
