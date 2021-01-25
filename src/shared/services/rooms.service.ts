@@ -199,13 +199,22 @@ export class RoomsService {
 
   addMatchToRoom(room: Room, game: Game, match: Match){
     this.http.put<{ message: string }>(
-      'http://localhost:3000/api/rooms/' + room.name + '/' + game._id, {
-        match:match
+      'http://localhost:3000/api/rooms/' + room.name + '/' + game.name, {
+        match: match
       })
     .subscribe((responseData) =>{
         console.log( responseData.message);
         room.matches.push(match);
         this.matchesUpdated.next([...room.matches]);
+    })
+  }
+
+  getUsersForRoom(room: Room){
+    this.http.post<{message: string, users: string[]}>(
+      'http://localhost:3000/api/rooms/users/room', {room: room.name}
+    ).subscribe((responseData) => {
+      console.log( responseData.message);
+      return responseData.users;
     })
   }
 }

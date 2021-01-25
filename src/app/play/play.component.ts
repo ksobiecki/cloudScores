@@ -13,6 +13,7 @@ import {CdkDragDrop, moveItemInArray} from '@angular/cdk/drag-drop';
 import {Match} from '../../shared/models/match.model';
 import {Winner} from '../../shared/models/winner.model';
 import {Room} from '../../shared/models/room.model';
+import {LoginService} from '../../shared/services/login.service';
 
 @Component({
   selector: 'app-play',
@@ -23,6 +24,7 @@ export class PlayComponent implements OnInit {
   currentGame: Game;
   currentRoom: Room;
   currentGameIcon: string;
+  currentUsername: string;
   isLinear = true;
   firstFormGroup: FormGroup;
   secondFormGroup: FormGroup;
@@ -50,7 +52,9 @@ export class PlayComponent implements OnInit {
               public route: ActivatedRoute,
               // tslint:disable-next-line:variable-name
               private _formBuilder: FormBuilder,
+              // tslint:disable-next-line:variable-name
               public _location: Location,
+              public loginService: LoginService,
               ) {
   }
   ngOnInit(): void {
@@ -63,6 +67,7 @@ export class PlayComponent implements OnInit {
     this.secondFormGroup = this._formBuilder.group({
       secondCtrl: ['']
     });
+    this.currentUsername = this.loginService.getUsername();
   }
   /** Whether the number of selected elements matches the total number of rows. */
   isAllSelected(): boolean {
@@ -100,6 +105,7 @@ export class PlayComponent implements OnInit {
 
   getChosenPlayers(): void {
     this.chosenPlayers = [];
+    this.chosenPlayers.push(this.currentUsername);
     for(const user of this.selection.selected) {
       this.chosenPlayers.push(user.username);
     }
@@ -158,7 +164,7 @@ export class PlayComponent implements OnInit {
     const _id = null;
     const game = this.currentGame;
     const date = new Date().toISOString().slice(0, 10)
-    const duration = this.time;
+    const duration = this.time.toString();
     const players = this.chosenPlayers;
     const  winners: Winner[] = [];
     for (let i = 1; i <= this.chosenPlayers.length && i <= 3; i++) {
@@ -167,5 +173,6 @@ export class PlayComponent implements OnInit {
     }
     const match: Match = {_id, game, date, duration, players, winners};
     this.roomsService.addMatchToRoom(this.currentRoom, this.currentGame, match);
+    this.onBackPressed();
   }
 }
