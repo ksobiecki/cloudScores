@@ -23,7 +23,7 @@ router.post("/signup", (req, res, next) => {
           .then(() => {
             res.status(201).json({
               message: "User added successfully",
-              errorCode: 1,
+              errorCode: 0,
             });
           })
           .catch(() => {

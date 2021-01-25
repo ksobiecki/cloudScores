@@ -27,8 +27,8 @@ export class LoginService {
           console.log(responseData.errorCode);
           if (responseData.errorCode === 1) {
             resolve(1);
-            this.router.navigate(['/']);
           }
+          this.router.navigate(['/']);
         });
     });
   }
