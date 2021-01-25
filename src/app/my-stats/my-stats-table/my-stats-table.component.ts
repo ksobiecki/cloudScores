@@ -34,7 +34,6 @@ export class MyStatsTableComponent implements OnInit, OnDestroy, AfterViewInit {
               totalScore: data.totalScore,
               globalRanking: 9999
             };
-            console.log(object);
             return object;
           }),
           this.dataSource = new MatTableDataSource<MyStatsTableElement>(this.ELEMENT_DATA)
