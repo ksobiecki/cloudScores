@@ -43,7 +43,10 @@ import { AuthInterceptor } from './auth/auth-interceptor';
 import { GamesStatsComponent } from './menu/games/games-stats/games-stats.component';
 import { GamesStatsTableComponent } from './menu/games/games-stats/games-stats-table/games-stats-table.component';
 import { MatSortModule } from '@angular/material/sort';
+import { PlayComponent } from './play/play.component';
+import { MatStepperModule } from '@angular/material/stepper';
 import { DeleteConfirmModalComponent } from './menu/menu-dashboard/delete-confirm-modal/delete-confirm-modal.component';
+import {DragDropModule} from '@angular/cdk/drag-drop';
 
 @NgModule({
   declarations: [
@@ -68,6 +71,7 @@ import { DeleteConfirmModalComponent } from './menu/menu-dashboard/delete-confir
     GamesStatsComponent,
     GamesStatsTableComponent,
     MatchesTableComponent,
+    PlayComponent,
     DeleteConfirmModalComponent
   ],
   imports: [
@@ -94,6 +98,8 @@ import { DeleteConfirmModalComponent } from './menu/menu-dashboard/delete-confir
     MatPaginatorModule,
     MatCheckboxModule,
     MatSortModule,
+    MatStepperModule,
+    DragDropModule,
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
