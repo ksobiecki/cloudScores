@@ -87,4 +87,16 @@ router.post("/mystats", checkAuth, (req, res, next) => {
   });
 });
 
+router.post("/update", (req,res,next) => {
+  User.findOne({username: req.body.username}).then(response => {
+    res.status(200).json({
+      user: response
+    })
+  }).catch(err => {
+    res.status(400).json({
+      message: err
+    })
+  })
+})
+
 module.exports = router;
