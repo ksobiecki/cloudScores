@@ -23,7 +23,7 @@ router.post("/signup", (req, res, next) => {
           .then(() => {
             res.status(201).json({
               message: "User added successfully",
-              errorCode: 0,
+              errorCode: 1,
             });
           })
           .catch(() => {
@@ -41,17 +41,6 @@ router.post("/signup", (req, res, next) => {
     }
   });
 });
-
-router.get("/:username", (req, res, next) =>{
-  User.findOne({username: req.params.username})
-  .then((response) => {
-    res.status(200).json({
-      message: "Get user by usernam succesful",
-      user: response
-    })
-  })
-})
-
 
 router.post("/login", (req, res, next) => {
   let fetchedUser;

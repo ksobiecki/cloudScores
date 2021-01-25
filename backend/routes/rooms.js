@@ -54,7 +54,6 @@ router.get("", checkAuth, (req, res, next) => {
     })
   })
 
-
   router.get('/:name/games', checkAuth, (req, res, next) => {
     Room.find({name: req.params.name}, 'games')
     .then(documents => {
@@ -121,7 +120,6 @@ router.post("/user/leave/:username", checkAuth, (req, res, next) => {
       res.status(402).json({ message: "Unable to leave room" });
     });
 });
-
 
   router.get('', checkAuth, (req, res, next)=>{
       Room.find()
