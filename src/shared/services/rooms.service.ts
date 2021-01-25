@@ -202,27 +202,6 @@ export class RoomsService {
       )
       .subscribe((responseData: any) => {
         console.log(responseData.message);
-        console.log(responseData.matches[0].matches);
-        this.matches = responseData.matches[0].matches;
-        this.matchesUpdated.next([...this.matches]);
-        this.getMatchesFilteredByGame(roomName, gameName, this.matches)
-      });
-
-
-  }
-
-  getMatchesFilteredByGame(roomName: string, gameName: string, matches: Match[]){
-    let game = this.getGame(gameName)
-    this.http
-      .post<{ message: string; matches: Match[] }>(
-        'http://localhost:3000/api/rooms/' + roomName + '/' + gameName + '/matches'
-      , {
-        matches,
-        game
-      })
-      .subscribe((responseData: any) => {
-        console.log(responseData.message);
-        console.log(responseData.matches[0].matches);
         this.matches = responseData.matches[0].matches;
         this.matchesUpdated.next([...this.matches]);
       });
@@ -247,12 +226,31 @@ export class RoomsService {
     return this.matchesUpdated.asObservable();
   }
 
-  getUsersForRoom(room: Room){
-    this.http.post<{message: string, users: string[]}>(
-      'http://localhost:3000/api/rooms/users/room', {room: room.name}
-    ).subscribe((responseData) => {
-      console.log( responseData.users);
-      this.usersInRoom.next([...responseData.users]);
-    })
+  getUsersForRoom(room: Room) {
+    this.http
+      .post<{ message: string; users: string[] }>(
+        'http://localhost:3000/api/rooms/users/room',
+        { room: room.name }
+      )
+      .subscribe((responseData) => {
+        console.log(responseData.users);
+        this.usersInRoom.next([...responseData.users]);
+      });
+  }
+
+  getMyScore() {
+    let username = this.loginService.getUsername();
+    this.http
+      .post<{ message: string; results: any }>(
+        'http://localhost:3000/api/games/' + username,
+        { players: username },
+        {
+          observe: 'body',
+          responseType: 'json',
+        }
+      )
+      .subscribe((responseData) => {
+        console.log(responseData);
+      });
   }
 }
