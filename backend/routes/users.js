@@ -5,7 +5,7 @@ const jwt = require("jsonwebtoken");
 const user = require("../models/user");
 const checkAuth = require("../middleware/check-auth");
 const Game = require("../models/game");
-const Room = require('../models/room');
+const Room = require("../models/room");
 
 const router = express.Router();
 
@@ -61,11 +61,14 @@ router.post("/login", (req, res, next) => {
         });
       }
       const token = jwt.sign(
-        { email: fetchedUser.email, userId: fetchedUser._id, username: fetchedUser.username },
+        {
+          email: fetchedUser.email,
+          userId: fetchedUser._id,
+          username: fetchedUser.username,
+        },
         "dlugi_ciag_znakow_tu_musi_byc",
         { expiresIn: "1h" }
       );
-      console.log(token);
       res.status(200).json({
         token: token,
         expiresIn: 3600,
@@ -80,7 +83,6 @@ router.post("/mystats", checkAuth, (req, res, next) => {
     players: req.body.username,
     matches: { players: req.body.username },
   }).then((response) => {
-    console.log(response);
     return res.status(200).json({
       message: "mystats",
       rooms: response,
