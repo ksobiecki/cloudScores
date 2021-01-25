@@ -18,11 +18,11 @@ export class RoomJoinComponent {
   onSubmit(form: NgForm): void {
     const code: string = form.value.id;
     console.log(code);
-    this.formSubmitted = true;
+    // this.formSubmitted = true;
     this.roomsService.addUserToRoom(code);
-    setTimeout(() => {
+    // setTimeout(() => {
       const thisDialogRef = this.dialog.closeAll();
-    }, 3000);
+    // }, 3000);
   }
 
   closeModal(): void {
