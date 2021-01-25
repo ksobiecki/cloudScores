@@ -10,6 +10,9 @@ import {MatStepper} from '@angular/material/stepper';
 import {Location} from '@angular/common';
 import {TimeInterval} from 'rxjs';
 import {CdkDragDrop, moveItemInArray} from '@angular/cdk/drag-drop';
+import {Match} from '../../shared/models/match.model';
+import {Winner} from '../../shared/models/winner.model';
+import {Room} from '../../shared/models/room.model';
 
 @Component({
   selector: 'app-play',
@@ -18,6 +21,7 @@ import {CdkDragDrop, moveItemInArray} from '@angular/cdk/drag-drop';
 })
 export class PlayComponent implements OnInit {
   currentGame: Game;
+  currentRoom: Room;
   currentGameIcon: string;
   isLinear = true;
   firstFormGroup: FormGroup;
@@ -50,6 +54,7 @@ export class PlayComponent implements OnInit {
               ) {
   }
   ngOnInit(): void {
+    this.currentRoom = this.roomsService.getCurrentRoom(this.route.snapshot.params['name']);
     this.currentGame = this.roomsService.getGame(this.route.snapshot.params['gameName']);
     this.currentGameIcon = '../' + this.currentGame.imgUrl;
     this.firstFormGroup = this._formBuilder.group({
@@ -149,5 +154,18 @@ export class PlayComponent implements OnInit {
     }
   }
 
-  onSave(): void {}
+  onSave(): void {
+    const _id = null;
+    const game = this.currentGame;
+    const date = null;
+    const duration = this.time;
+    const players = this.chosenPlayers;
+    const  winners: Winner[] = [];
+    for (let i = 1; i <= this.chosenPlayers.length && i <= 3; i++) {
+      const winner: Winner = { place: i, player: this.chosenPlayers[i - 1] };
+      winners.push(winner);
+    }
+    const match: Match = {_id, game, date, duration, players, winners};
+    this.roomsService.addMatchToRoom(this.currentRoom, this.currentGame, match);
+  }
 }
