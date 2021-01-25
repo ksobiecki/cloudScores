@@ -24,6 +24,41 @@ shr-fallback {
   }
 }
 
+.button-container {
+  width: 100%;
+  text-align: center;
+}
+
+button {
+  background-color: #f16e00;
+  color: white;
+  margin-top: 20px;
+  margin-left: 10px;
+  margin-right: 10px;
+  font-size: large;
+  outline: none;
+  width: 100px;
+  height: 50px;
+  border-radius: 10px;
+  border: none;
+  &:active {
+    background-color: #e05d00;
+    box-shadow: 0 5px #666;
+    transform: translateY(4px);
+  }
+  &:disabled {
+    opacity: 0.75;
+  }
+
+  &:hover {
+    background-color: #e05d00;
+  }
+
+  &:disabled:hover {
+    background-color: #f16e00;
+  }
+}
+
 img {
   height: 70px;
   width: 70px;
@@ -33,6 +68,40 @@ img {
 
 .stepper-container {
   max-width: 900px;
+  height: 500px;
   margin-left: auto;
   margin-right: auto;
+}
+
+.step-container {
+  background-color: white;
+  margin-right: auto;
+  margin-left: auto;
+  width: 400px;
+  padding: 30px;
+  border-radius: 20px;
+}
+
+.table-container {
+  width: 300px;
+  height: 300px;
+  overflow-y: auto;
+  margin-left: auto;
+  margin-right: auto;
+  border-style: solid;
+  border-color: #666666;
+  border-radius: 10px;
+  border-width: 2px;
+}
+table {
+  width: 100%;
+  margin-right: auto;
+  margin-left: auto;
+}
+h1 {
+  text-align: center;
+}
+
+::ng-deep .mat-horizontal-stepper-header{
+  pointer-events: none !important;
 }
