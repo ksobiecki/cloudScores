@@ -3,6 +3,7 @@ import { User } from '../models/user.model';
 import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { Subject } from 'rxjs';
+import {Game} from '../models/game.model';
 
 @Injectable({ providedIn: 'root' })
 export class LoginService {
@@ -151,9 +152,21 @@ export class LoginService {
     localStorage.removeItem('expiration');
   }
 
+  private updateCurrentUser(username: string) {
+    this.http
+      .get<{ message: string; username: string }>(
+        'http://localhost:3000/api/user/update'
+      )
+      .subscribe((postData: any) => {
+        this.currentUser = postData.user;
+      });
+  }
+
   private getAuthData() {
     const token = localStorage.getItem('token');
     const expirationDate = localStorage.getItem('expiration');
+    const username = localStorage.getItem('username');
+    this.updateCurrentUser(username);
     if (!token || !expirationDate) {
       return;
     }
