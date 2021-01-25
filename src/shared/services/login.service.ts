@@ -103,8 +103,8 @@ export class LoginService {
 
   public autoAuthUser() {
     const authInformation = this.getAuthData();
-    const username = localStorage.getItem('username');
-    this.currentUser = this.getUserByUsername(username);
+    // const username = localStorage.getItem('username');
+    // this.currentUser = this.getUserByUsername(username);
     if (!authInformation) {
       return;
     }
