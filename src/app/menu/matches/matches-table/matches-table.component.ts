@@ -19,19 +19,32 @@ export class MatchesTableComponent implements OnInit, AfterViewInit {
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
-  constructor (private roomsService: RoomsService, public route: ActivatedRoute) {}
+  constructor(
+    private roomsService: RoomsService,
+    public route: ActivatedRoute
+  ) {}
 
   ngOnInit(): void {
-    const currentGame = this.roomsService.getCurrentGame(this.route.snapshot.params['gameName']);
-    const currentRoom = this.roomsService.getCurrentRoom(this.route.snapshot.params['name']);
+    const currentGame = this.roomsService.getCurrentGame(
+      this.route.snapshot.params['gameName']
+    );
+    const currentRoom = this.roomsService.getCurrentRoom(
+      this.route.snapshot.params['name']
+    );
     this.roomsService.getMatchesForRoom(currentRoom.name, currentGame.name);
     this.matchesSubscription = this.roomsService
       .getMatchesForRoomUpdateListener()
-      .subscribe((matches: Match[]) => (this.ELEMENT_DATA = matches.map((data)=>{
-        let object: MatchesTableElement = { date: data.date, players: data.players.length, matchDuration: data.duration.toString() };
-        console.log(object);
-        return object;
-      })));
+      .subscribe(
+        (matches: Match[]) =>
+          (this.ELEMENT_DATA = matches.map((data) => {
+            let object: MatchesTableElement = {
+              date: data.date,
+              players: data.players.length,
+              matchDuration: data.duration.toString(),
+            };
+            return object;
+          }))
+      );
   }
 
   ngAfterViewInit() {
