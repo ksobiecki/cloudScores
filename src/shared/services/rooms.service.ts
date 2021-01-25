@@ -201,8 +201,7 @@ export class RoomsService {
         'http://localhost:3000/api/rooms/' + roomName + '/' + gameName
       )
       .subscribe((responseData: any) => {
-        console.log(responseData.message);
-        this.matches = responseData.matches[0].matches;
+        this.matches = responseData.matches;
         this.matchesUpdated.next([...this.matches]);
       });
   }
