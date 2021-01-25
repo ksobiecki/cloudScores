@@ -49,7 +49,7 @@ export class GameAddComponent implements OnInit, AfterViewInit {
       .getAllGamesUpdateListener()
       .subscribe((games: Game[]) => {
         this.allGames = games;
-        // this.updateGames(); nie wiem czy potrzebujesz 2 razy to wywolywac
+        this.updateGames();
       });
     this.roomsService.getGamesForRoom(this.data.currentRoom);
     this.addedGameSubscription = this.roomsService
@@ -111,6 +111,7 @@ export class GameAddComponent implements OnInit, AfterViewInit {
     if ((document.getElementById('name') as HTMLInputElement) != null) {
       input = (document.getElementById('name') as HTMLInputElement).value.toLowerCase();
     }
+    console.log('input', input);
     this.games = [];
     const allGamesCopy = this.allGames.map(obj => ({...obj}))
       .sort((a: Game, b: Game) => a.name.localeCompare(b.name));
@@ -121,6 +122,7 @@ export class GameAddComponent implements OnInit, AfterViewInit {
         }
       }
     }
+    console.log('allGamesCopy', allGamesCopy);
     for (const game of allGamesCopy) {
       game.imgUrl = '../' + game.imgUrl;
       if (input === '' || game.name.toLowerCase().indexOf(input) === 0) {
