@@ -147,7 +147,15 @@ export class LoginService {
     }
     return {
       token: token,
-      expirationDate: expirationDate,
+      expirationDate: expirationDate
     };
+  }
+
+  getUserByUsername(username: string) {
+    this.http.get<{ message: string, user: User }>(
+      'http://localhost:3000/api/users/' + username)
+      .subscribe((user) =>{
+        return user.user
+      })
   }
 }
