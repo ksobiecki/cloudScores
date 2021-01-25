@@ -107,7 +107,10 @@ export class GameAddComponent implements OnInit, AfterViewInit {
   }
 
   updateGames(): void {
-    const input = (document.getElementById('name') as HTMLInputElement).value.toLowerCase();
+    let input = '';
+    if ((document.getElementById('name') as HTMLInputElement) != null) {
+      input = (document.getElementById('name') as HTMLInputElement).value.toLowerCase();
+    }
     this.games = [];
     const allGamesCopy = this.allGames.map(obj => ({...obj}))
       .sort((a: Game, b: Game) => a.name.localeCompare(b.name));
@@ -124,6 +127,7 @@ export class GameAddComponent implements OnInit, AfterViewInit {
         this.games.push(game);
       }
     }
+    console.log(this.games);
     this.dataSource = new MatTableDataSource<Game>(this.games);
   }
 }
