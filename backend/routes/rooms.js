@@ -44,6 +44,7 @@ router.get("", (req, res, next) => {
   });
 });
 
+
   router.post('/user',(req,res,next) => {
     Room.find(req.body)
     .then(documents => {
@@ -53,6 +54,7 @@ router.get("", (req, res, next) => {
       });
     })
   })
+
 
   router.get('/:name/games', (req, res, next) => {
     Room.find({name: req.params.name}, 'games')
@@ -120,16 +122,6 @@ router.post("/user/leave/:username", (req, res, next) => {
       res.status(402).json({ message: "Unable to leave room" });
     });
 });
-
-  router.get('',(req, res, next)=>{
-      Room.find()
-      .then(documents => {
-        res.status(200).json({
-          message: 'Get /api/rooms called successfully',
-          rooms: documents,
-        });
-      })
-    });
 
     router.get('/:roomName/:gameName', (req, res, next) =>{
       Room.find({

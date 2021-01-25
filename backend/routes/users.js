@@ -42,6 +42,17 @@ router.post("/signup", (req, res, next) => {
   });
 });
 
+router.get("/:username", (req, res, next) =>{
+  User.findOne({username: req.params.username})
+  .then((response) => {
+    res.status(200).json({
+      message: "Get user by usernam succesful",
+      user: response
+    })
+  })
+})
+
+
 router.post("/login", (req, res, next) => {
   let fetchedUser;
   User.findOne({ email: req.body.email })
