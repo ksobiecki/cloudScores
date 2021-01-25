@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { faMedal } from '@fortawesome/free-solid-svg-icons';
 import { LoginService } from 'src/shared/services/login.service';
-import { RoomsService } from 'src/shared/services/rooms.service';
 
 
 @Component({
@@ -11,10 +10,10 @@ import { RoomsService } from 'src/shared/services/rooms.service';
 })
 export class MyStatsComponent implements OnInit{
 
-  constructor(private loginService: LoginService, private roomsService: RoomsService) {}
+  constructor(private loginService: LoginService) {}
 
   ngOnInit(): void {
-    this.roomsService.getMyScore();
+    this.loginService.getMyStats();
   }
   faMedal = faMedal;
 }

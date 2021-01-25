@@ -72,6 +72,15 @@ export class LoginService {
     });
   }
 
+  public getMyStats(): void {
+    this.http
+        .post(
+          'http://localhost:3000/api/users/mystats', {username: this.getCurrentUser().username}
+        ).subscribe(result => {
+          console.log(result);
+        });
+  }
+
   public getIsUserLoggedIn(): boolean {
     return this.isUserLoggedIn;
   }
