@@ -17,7 +17,8 @@
     </li>
     <li class="col-xs-12 col-md-6">
       <button class="button delete-button" (click)="onDeleteRoom()">
-        Delete room
+        <span *ngIf="this.data.isAuthor; else NotAuthorB">Delete room</span>
+        <ng-template #NotAuthorB><span>Leave room</span></ng-template>
       </button>
     </li>
   </ul>
