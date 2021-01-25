@@ -39,6 +39,7 @@ export class PlayComponent implements OnInit {
     {_id: null, password: null, email: null, rooms_id: null, username: 'user5'},
     {_id: null, password: null, email: null, rooms_id: null, username: 'user6'}];*/
   userList: User[] = [];
+  usernameList: string[];
   dataSource = new MatTableDataSource<User>(this.userList);
   displayedColumns = ['select', 'username'];
   selection = new SelectionModel<User>(true, []);
@@ -69,10 +70,17 @@ export class PlayComponent implements OnInit {
       secondCtrl: ['']
     });
     this.currentUsername = this.loginService.getUsername();
-    const usernameList: string[] = this.roomsService.getUsersForRoom(this.currentRoom);
-    for (const username of usernameList) {
-      if (username != this.currentUsername)
-    }
+    this.roomsService.getUsersForRoom(this.currentRoom);
+    this.roomsService.getUsersInRoomUpdateListener()
+      .subscribe((users: string[]) => {
+        console.log(users);
+        this.userList = [];
+        for (const user of users) {
+          if (user !== this.currentUsername) {
+            this.userList.push({_id: null, password: null, email: null, rooms_id: null, username: user});
+          }
+        }
+        });
   }
   /** Whether the number of selected elements matches the total number of rows. */
   isAllSelected(): boolean {
