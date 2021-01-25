@@ -227,18 +227,6 @@ export class RoomsService {
     return this.matchesUpdated.asObservable();
   }
 
-<<<<<<< HEAD
-  getUsersForRoom(room: Room) {
-    this.http
-      .post<{ message: string; users: string[] }>(
-        'http://localhost:3000/api/rooms/users/room',
-        { room: room.name }
-      )
-      .subscribe((responseData) => {
-        console.log(responseData.message);
-        return responseData.users;
-      });
-=======
   getUsersForRoom(room: Room){
     this.http.post<{message: string, users: string[]}>(
       'http://localhost:3000/api/rooms/users/room', {room: room.name}
@@ -247,6 +235,5 @@ export class RoomsService {
       this.currentRoom.players = responseData.users;
       this.usersInRoom.next(responseData.users);
     })
->>>>>>> b31c94aef0c0368e9a937f560a308b9aa99493bb
   }
 }
