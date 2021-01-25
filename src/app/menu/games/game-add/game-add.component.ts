@@ -111,6 +111,13 @@ export class GameAddComponent implements OnInit, AfterViewInit {
     this.games = [];
     const allGamesCopy = this.allGames.map(obj => ({...obj}))
       .sort((a: Game, b: Game) => a.name.localeCompare(b.name));
+    for (const addedGame of this.addedGames) {
+      for (const game of allGamesCopy) {
+        if(addedGame.name === game.name) {
+          allGamesCopy.splice(allGamesCopy.indexOf(game), 1);
+        }
+      }
+    }
     for (const game of allGamesCopy) {
       game.imgUrl = '../' + game.imgUrl;
       if (input === '' || game.name.toLowerCase().indexOf(input) === 0) {
