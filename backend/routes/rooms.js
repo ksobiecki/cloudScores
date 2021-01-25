@@ -135,8 +135,8 @@ router.post("/user/leave/:username", (req, res, next) => {
       Room.find({
         name: req.params.roomName
       }, 'matches').then(documents => {
-        console.log(documents[0].matches)
-        console.log(req.params.gameName)
+        //console.log(documents[0].matches)
+        //console.log(req.params.gameName)
         let matchList = []
          for( const element of documents[0].matches)
            if( element.game.name === req.params.gameName)

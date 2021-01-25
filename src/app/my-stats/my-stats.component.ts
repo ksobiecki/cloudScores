@@ -14,7 +14,6 @@ export class MyStatsComponent implements OnInit{
   constructor(private loginService: LoginService, private roomsService: RoomsService) {}
 
   ngOnInit(): void {
-    this.loginService.getMyStats();
     this.roomsService.getMyScore();
   }
   faMedal = faMedal;
