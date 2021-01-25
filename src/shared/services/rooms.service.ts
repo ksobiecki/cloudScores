@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs';
 import { Game } from '../models/game.model';
 import { Room } from '../models/room.model';
-import { Match } from '../models/match.model'
+import { Match } from '../models/match.model';
 import { HttpClient } from '@angular/common/http';
 import { LoginService } from './login.service';
 
@@ -97,19 +97,23 @@ export class RoomsService {
     return this.gamesAllUpdated.asObservable();
   }
 
-  deleteRoom(roomName: string){
-    this.http.delete('http://localhost:3000/api/rooms/' + roomName)
-    .subscribe(() => {
-      console.log('Deleted!');
-    });
+  deleteRoom(roomName: string) {
+    this.http
+      .delete('http://localhost:3000/api/rooms/' + roomName)
+      .subscribe(() => {
+        console.log('Deleted!');
+      });
   }
 
-  leaveRoom(roomName: string, username: string){
-    this.http.post('http://localhost:3000/api/rooms/user/leave/' + username, {name: roomName}
-    ).subscribe(() => {
-      this.getRooms();
-      console.log('Successful leave');
-    })
+  leaveRoom(roomName: string, username: string) {
+    this.http
+      .post('http://localhost:3000/api/rooms/user/leave/' + username, {
+        name: roomName,
+      })
+      .subscribe(() => {
+        this.getRooms();
+        console.log('Successful leave');
+      });
   }
 
   getGamesForRoom(name: string) {
@@ -185,31 +189,48 @@ export class RoomsService {
       });
   }
 
-  getMatchesForRoom(roomName: string, gameName: string) { //gets all matches for chosen game in chosen room
-    this.http.get<{ message: string, matches: Match[]}>(
-      'http://localhost:3000/api/matches/' + roomName + "/" + gameName
-    )
-    .subscribe((responseData) => {
-      console.log(responseData.message);
-      console.log(responseData.matches);
-      this.matches = responseData.matches;
-      this.matchesUpdated.next([...this.matches]);
-    })
+  getMatchesForRoom(roomName: string, gameName: string) {
+    //gets all matches for chosen game in chosen room
+    this.http
+      .get<{ message: string; matches: Match[] }>(
+        'http://localhost:3000/api/matches/' + roomName + '/' + gameName
+      )
+      .subscribe((responseData) => {
+        console.log(responseData.message);
+        console.log(responseData.matches);
+        this.matches = responseData.matches;
+        this.matchesUpdated.next([...this.matches]);
+      });
   }
 
-  addMatchToRoom(room: Room, game: Game, match: Match){
-    this.http.put<{ message: string }>(
-      'http://localhost:3000/api/rooms/' + room.name + '/' + game.name, {
-        match:match
-      })
-    .subscribe((responseData) =>{
-        console.log( responseData.message);
+  addMatchToRoom(room: Room, game: Game, match: Match) {
+    this.http
+      .put<{ message: string }>(
+        'http://localhost:3000/api/rooms/' + room.name + '/' + game.name,
+        {
+          match: match,
+        }
+      )
+      .subscribe((responseData) => {
+        console.log(responseData.message);
         room.matches.push(match);
         this.matchesUpdated.next([...room.matches]);
-    })
+      });
   }
 
   getMatchesForRoomUpdateListener() {
     return this.matchesUpdated.asObservable();
+  }
+
+  getUsersForRoom(room: Room) {
+    this.http
+      .post<{ message: string; users: string[] }>(
+        'http://localhost:3000/api/rooms/users/room',
+        { room: room.name }
+      )
+      .subscribe((responseData) => {
+        console.log(responseData.message);
+        return responseData.users;
+      });
   }
 }
