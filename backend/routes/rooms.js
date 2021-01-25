@@ -143,14 +143,16 @@ router.post("/user/leave/:username", (req, res, next) => {
       })
 
     router.put('/:roomId/:gameId', (req, res, next) =>{
-      Room.updateOne({_id: req.params.roomId},
+      Room.updateOne({name: req.params.roomId},
         {$push: {matches: req.body.match}})
         .then( result => {
-          res.status(200).json({message: 'Match added to room matches'
+          res.status(200).json({
+            message: 'Match added to room matches'
+          })
         })
         .catch(err => console.log(err));
-        })
-    })
+      })
+
 
     router.post('/users/room', (req, res, next) => {
       Room.findOne({name: req.body.room}).then(response => {
