@@ -7,7 +7,7 @@ const winnerSchema = winnerImport.winnerSchema;
 
 const matchSchema = mongoose.Schema({
   game: {type: gameSchema, required:true},
-  duration: {type: Number, required: true},
+  duration: {type: String, required: true},
   date: {type: String, required: true},
   players: {type: [String], required: true},
   winners: {type: [winnerSchema], required: true}

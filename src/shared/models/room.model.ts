@@ -1,5 +1,5 @@
-import { Game } from './game.model';
-import { Match } from './match.model';
+import { Game } from './game.model'
+import { Match } from './match.model'
 
 export interface Room {
   _id: string;
