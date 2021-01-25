@@ -5,9 +5,7 @@
       <a (click)="onChangeRoom()" class="change-button">change room</a>
       <span class="separator"> | </span>
       <a class="remove-button" (click)="onDelete(currentRoom._id)">
-        <span *ngIf="isRoomAuthor===true; else isNotRoomAuthor"
-          >delete room</span
-        >
+        <span *ngIf="isRoomAuthor() ; else isNotRoomAuthor">delete room</span>
         <ng-template #isNotRoomAuthor> <span>leave room</span> </ng-template>
       </a>
     </div>
@@ -29,10 +27,7 @@
       <div class="gameCardOn">
         <h2>{{currentGame.name}}</h2>
         <a (click)="onChangeGame()" class="change-button">change game</a>
-        <img
-          src={{currentGame.imgUrl}}
-          alt="game image"
-        />
+        <img src="{{currentGame.imgUrl}}" alt="game image" />
       </div>
     </ng-template>
   </div>
@@ -44,7 +39,11 @@
       </button>
     </div>
     <div class="button-container">
-      <button class="game-stats" (click)="onGamesStatsClick()" [disabled]="currentGame===null">
+      <button
+        class="game-stats"
+        (click)="onGamesStatsClick()"
+        [disabled]="currentGame===null"
+      >
         Game Stats
         <fa-icon [icon]="faTrophy"></fa-icon>
       </button>

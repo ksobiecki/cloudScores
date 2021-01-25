@@ -21,8 +21,10 @@ import {MatCheckbox} from '@angular/material/checkbox';
 export class GameAddComponent implements OnInit, AfterViewInit {
   faClose = faTimes;
   allGames: Game[] = [];
+  addedGames: Game[] = [];
   games: Game[] = [];
-  gameSubscription: Subscription;
+  allGameSubscription: Subscription;
+  addedGameSubscription: Subscription;
   dataSource = new MatTableDataSource<Game>(this.games);
   displayedColumns = ['select', 'name', 'image'];
   selection = new SelectionModel<Game>(false, []);
@@ -43,10 +45,17 @@ export class GameAddComponent implements OnInit, AfterViewInit {
 
   ngOnInit(): void {
     this.roomsService.getAllGames();
-    this.gameSubscription = this.roomsService
+    this.allGameSubscription = this.roomsService
       .getAllGamesUpdateListener()
       .subscribe((games: Game[]) => {
         this.allGames = games;
+        // this.updateGames(); nie wiem czy potrzebujesz 2 razy to wywolywac
+      });
+    this.roomsService.getGamesForRoom(this.data.currentRoom);
+    this.addedGameSubscription = this.roomsService
+      .getGamesForRoomUpdateListener()
+      .subscribe((games: Game[]) => {
+        this.addedGames = games;
         this.updateGames();
       });
     const allGames: Game[] = this.roomsService.allGames;

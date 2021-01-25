@@ -43,8 +43,9 @@ import { AuthInterceptor } from './auth/auth-interceptor';
 import { GamesStatsComponent } from './menu/games/games-stats/games-stats.component';
 import { GamesStatsTableComponent } from './menu/games/games-stats/games-stats-table/games-stats-table.component';
 import { MatSortModule } from '@angular/material/sort';
-import {PlayComponent} from './play/play.component';
-import {MatStepperModule} from '@angular/material/stepper';
+import { PlayComponent } from './play/play.component';
+import { MatStepperModule } from '@angular/material/stepper';
+import { DeleteConfirmModalComponent } from './menu/menu-dashboard/delete-confirm-modal/delete-confirm-modal.component';
 
 @NgModule({
   declarations: [
@@ -70,6 +71,7 @@ import {MatStepperModule} from '@angular/material/stepper';
     GamesStatsTableComponent,
     MatchesTableComponent,
     PlayComponent,
+    DeleteConfirmModalComponent
   ],
   imports: [
     BrowserModule,
