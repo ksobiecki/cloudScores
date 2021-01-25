@@ -107,6 +107,7 @@ export class RoomsService {
   leaveRoom(roomName: string, username: string){
     this.http.post('http://localhost:3000/api/rooms/user/leave/' + username, {roomName: roomName}
     ).subscribe(() => {
+      this.getAllRooms();
       console.log('Successful leave');
     })
   }
@@ -179,6 +180,8 @@ export class RoomsService {
       .subscribe((responseData) => {
         console.log(responseData.message);
         room.players.push(newUser);
+        this.rooms.push(room);
+        this.roomsUpdated.next([...this.rooms]);
       });
   }
 
