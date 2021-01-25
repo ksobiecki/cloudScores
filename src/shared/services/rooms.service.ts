@@ -15,6 +15,7 @@ export class RoomsService {
   private allRoomsUpdated = new Subject<Room[]>();
   private gamesAllUpdated = new Subject<Game[]>();
   private allMatchesUpdated = new Subject<Match[]>();
+  private myScoreUpdated = new Subject<any[]>();
   games: Game[];
   rooms: Room[];
   matches: Match[];
@@ -180,14 +181,14 @@ export class RoomsService {
   addUserToRoom(code: string) {
     let newUser = this.loginService.getUsername();
     let room = this.getRoomByCode(code);
-    console.log(room.code);
+    //console.log(room.code);
     this.http
       .put<{ message: string }>('http://localhost:3000/api/rooms/' + code, {
         room,
         newUser,
       })
       .subscribe((responseData) => {
-        console.log(responseData.message);
+        //console.log(responseData.message);
         room.players.push(newUser);
         this.rooms.push(room);
         this.roomsUpdated.next([...this.rooms]);
@@ -215,7 +216,7 @@ export class RoomsService {
         }
       )
       .subscribe((responseData) => {
-        console.log(responseData.message);
+        //console.log(responseData.message);
         room.matches.push(match);
         this.matchesUpdated.next([...room.matches]);
       });
@@ -225,12 +226,51 @@ export class RoomsService {
     return this.matchesUpdated.asObservable();
   }
 
-  getUsersForRoom(room: Room){
-    this.http.post<{message: string, users: string[]}>(
-      'http://localhost:3000/api/rooms/users/room', {room: room.name}
-    ).subscribe((responseData) => {
-      console.log( responseData.users);
-      this.usersInRoom.next([...responseData.users]);
-    })
+  getUsersForRoom(room: Room) {
+    this.http
+      .post<{ message: string; users: string[] }>(
+        'http://localhost:3000/api/rooms/users/room',
+        { room: room.name }
+      )
+      .subscribe((responseData) => {
+        //console.log(responseData.users);
+        this.usersInRoom.next([...responseData.users]);
+      });
+  }
+
+  getScoreByRoom(game: Game){
+    let currentGame = game.name;
+    this.http
+      .post<{ message: string; results: any }>(
+        'http://localhost:3000/api/games/stats/' + currentGame,
+        {
+          observe: 'body',
+          responseType: 'json',
+        }
+      )
+      .subscribe((responseData) => {
+        //console.log(responseData);
+      });
+  }
+
+  getMyScore() {
+    let username = this.loginService.getUsername();
+    this.http
+      .post<{ message: string; results: any }>(
+        'http://localhost:3000/api/games/' + username,
+        { players: username },
+        {
+          observe: 'body',
+          responseType: 'json',
+        }
+      )
+      .subscribe((responseData) => {
+        console.log(responseData);
+        this.myScoreUpdated.next(responseData.results);
+      });
+  }
+
+  getMyScoreUpdateListener() {
+    return this.myScoreUpdated.asObservable();
   }
 }

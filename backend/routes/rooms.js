@@ -135,8 +135,8 @@ router.post("/user/leave/:username", checkAuth, (req, res, next) => {
       Room.find({
         name: req.params.roomName
       }, 'matches').then(documents => {
-        console.log(documents[0].matches)
-        console.log(req.params.gameName)
+        //console.log(documents[0].matches)
+        //console.log(req.params.gameName)
         let matchList = []
          for( const element of documents[0].matches)
            if( element.game.name === req.params.gameName)
@@ -148,7 +148,20 @@ router.post("/user/leave/:username", checkAuth, (req, res, next) => {
       })
       })
 
+
     router.put('/:roomId/:gameId', checkAuth, (req, res, next) =>{
+        Match.find({
+          game: req.body.game
+        }).then(documents => {
+          res.status(200).json({
+            message: 'Get matches for chosen room for chosen game called successfully',
+            matches: documents,
+          });
+        })
+        })
+
+
+    router.put('/:roomId/:gameId', (req, res, next) =>{
       Room.updateOne({name: req.params.roomId},
         {$push: {matches: req.body.match}})
         .then( result => {
