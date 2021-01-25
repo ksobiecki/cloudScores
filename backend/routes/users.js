@@ -23,17 +23,20 @@ router.post("/signup", (req, res, next) => {
           .then(() => {
             res.status(201).json({
               message: "User added successfully",
+              errorCode: 1
             });
           })
           .catch(() => {
             res.status(401).json({
               message: "Unable to add user",
+              errorCode: 1
             });
           });
       });
     } else {
       res.status(402).json({
         message: "User already exists",
+        errorCode: 1
       });
     }
   });

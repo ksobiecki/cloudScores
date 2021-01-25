@@ -16,14 +16,21 @@ export class LoginService {
 
   constructor(public router: Router, private http: HttpClient) {}
 
-  public createUser(user: User): number {
-    this.http
-      .post<{ message: string }>('http://localhost:3000/api/users/signup', user)
-      .subscribe((responseData) => {
-        console.log(responseData.message);
-      });
-    console.log('end of create user');
-    return 0; // user created
+  public createUser(user: User) {
+    return new Promise((resolve, reject) => {
+      this.http
+        .post<{ message: string; errorCode: number }>(
+          'http://localhost:3000/api/users/signup',
+          user
+        )
+        .subscribe((responseData) => {
+          console.log(responseData.errorCode);
+          if (responseData.errorCode === 1) {
+            resolve(1);
+            this.router.navigate(['/']);
+          }
+        });
+    });
   }
 
   public login(user: User): Promise<number> {
