@@ -6,6 +6,7 @@ const shortid = require('shortid');
 const gameImport = require('../models/game')
 const Game = gameImport.gameModel;
 const checkAuth = require("../middleware/check-auth");
+const Room = require('../models/room')
 
   //sciagniecie wszystkich gierek
   router.get('', checkAuth, (req, res, next)=>{
@@ -109,13 +110,13 @@ router.post("/stats/game", (req, res, next) => {
               gamesWon.push(0);
               totalScore.push(0);
             } else {
-              gamesPlayed[playerNames.indexOf[player]]++;
+              gamesPlayed[playerNames.indexOf(player)]++;
             }
           }
           let winners = match.winners;
           for(let winner of winners){
             for(let play of playerNames){
-              if(winner.name == play){
+              if(winner.player == play){
                 if(winner.place == 1){
                   gamesWon[playerNames.indexOf(play)]++;
                   totalScore[playerNames.indexOf(play)]+=100;
