@@ -12,7 +12,7 @@ export class LoginService {
   private authStatusListener = new Subject<boolean>();
 
   private currentUser = null;
-  private isUserLoggedIn = false;
+  private isUserLoggedIn = true;
 
   constructor(public router: Router, private http: HttpClient) {}
 
@@ -61,7 +61,7 @@ export class LoginService {
               const expirationDate = new Date(
                 now.getTime() + expiresInDuration * 1000
               );
-              this.saveAuthData(token, expirationDate);
+              this.saveAuthData(token, expirationDate, response.user.username);
             }
             resolve(0);
           },
@@ -103,6 +103,8 @@ export class LoginService {
 
   public autoAuthUser() {
     const authInformation = this.getAuthData();
+    const username = localStorage.getItem('username');
+    this.currentUser = this.getUserByUsername(username);
     if (!authInformation) {
       return;
     }
@@ -138,9 +140,10 @@ export class LoginService {
     }, duration * 1000);
   }
 
-  private saveAuthData(token: string, expirationDate: Date) {
+  private saveAuthData(token: string, expirationDate: Date, username: string) {
     localStorage.setItem('token', token);
     localStorage.setItem('expiration', expirationDate.toISOString());
+    localStorage.setItem('username', username);
   }
 
   private clearAuthData() {

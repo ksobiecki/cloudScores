@@ -5,9 +5,10 @@ const shortid = require('shortid');
 
 const gameImport = require('../models/game')
 const Game = gameImport.gameModel;
+const checkAuth = require("../middleware/check-auth");
 
   //sciagniecie wszystkich gierek
-  router.get('',(req, res, next)=>{
+  router.get('', checkAuth, (req, res, next)=>{
     Game.find()
     .then(documents => {
       res.status(200).json({
@@ -18,7 +19,7 @@ const Game = gameImport.gameModel;
   });
 
   //tworzenie gierki
-  router.post('/', (req,res,next) => {
+  router.post('/', checkAuth, (req,res,next) => {
     const game = new Game({
       name: 'name',
       imgUrl: 'someURL'

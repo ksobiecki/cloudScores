@@ -19,9 +19,9 @@ export class LoginComponent {
     public router: Router,
     public dialog: MatDialog
   ) {
-    if (this.loginService.getIsUserLoggedIn() === true) {
+    /*if (this.loginService.getIsUserLoggedIn() === true) {
       router.navigateByUrl('/rooms');
-    }
+    }*/
   }
 
   onLogin(form: NgForm): void {
