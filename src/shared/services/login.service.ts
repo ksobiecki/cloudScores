@@ -23,13 +23,13 @@ export class LoginService {
           'http://localhost:3000/api/users/signup',
           user
         )
-        .subscribe((responseData) => {
-          console.log(responseData.message);
-          if (responseData.errorCode === 1) {
+        .subscribe(
+          (responseData) => {},
+          (error) => {
             resolve(1);
-            this.router.navigate(['/']);
           }
-        });
+        );
+      this.router.navigate(['/']);
     });
   }
 
@@ -74,11 +74,12 @@ export class LoginService {
 
   public getMyStats(): void {
     this.http
-        .post(
-          'http://localhost:3000/api/users/mystats', {username: this.getCurrentUser().username}
-        ).subscribe(result => {
-          console.log(result);
-        });
+      .post('http://localhost:3000/api/users/mystats', {
+        username: this.getCurrentUser().username,
+      })
+      .subscribe((result) => {
+        console.log(result);
+      });
   }
 
   public getIsUserLoggedIn(): boolean {
